@@ -1,1 +1,32 @@
-[{"id":"example-001","publish_at":"2026-10-10T04:30:00Z","approved":false,"status":"draft","caption":"Your caption here.\n\n#darwixai #bfsi","images":["posts/example-001/01.jpg","posts/example-001/02.jpg"]},{"id":"real-time-pd-001","publish_at":"2026-10-07T19:50:00Z","approved":true,"status":"draft","caption":"A PD report, written while the borrower is still talking.\n\nA housing-finance PD visit runs about 25 minutes. Writing it up takes a median of 52 more, and 1 in 3 reports comes back to the officer. Real-Time PD changes the order of the work.\n\nDarwix listens to the discussion in Hindi, English or Hinglish, fills the 61-field PD form live, ties every value to the sentence that produced it, keeps conflicting answers side by side for the officer to settle, and hands credit a draft that carries its own evidence.\n\nCredit decisions stay with the credit team.\n\nWant to see Real-Time PD on your PD workflow? Link in bio.\n\n#DarwixAI #HousingFinance #BFSI #PersonalDiscussion #LendingOps #CreditUnderwriting #AIinBFSI","images":["posts/real-time-pd-001/01.jpg","posts/real-time-pd-001/02.jpg","posts/real-time-pd-001/03.jpg","posts/real-time-pd-001/04.jpg","posts/real-time-pd-001/05.jpg","posts/real-time-pd-001/06.jpg","posts/real-time-pd-001/07.jpg","posts/real-time-pd-001/08.jpg"]}]
+[
+  {
+    "id": "example-001",
+    "publish_at": "2026-10-10T04:30:00Z",
+    "approved": false,
+    "status": "draft",
+    "caption": "Your caption here.\n\n#darwixai #bfsi",
+    "images": [
+      "posts/example-001/01.jpg",
+      "posts/example-001/02.jpg"
+    ]
+  },
+  {
+    "id": "real-time-pd-001",
+    "publish_at": "2026-10-07T19:50:00Z",
+    "approved": true,
+    "status": "published",
+    "caption": "A PD report, written while the borrower is still talking.\n\nA housing-finance PD visit runs about 25 minutes. Writing it up takes a median of 52 more, and 1 in 3 reports comes back to the officer. Real-Time PD changes the order of the work.\n\nDarwix listens to the discussion in Hindi, English or Hinglish, fills the 61-field PD form live, ties every value to the sentence that produced it, keeps conflicting answers side by side for the officer to settle, and hands credit a draft that carries its own evidence.\n\nCredit decisions stay with the credit team.\n\nWant to see Real-Time PD on your PD workflow? Link in bio.\n\n#DarwixAI #HousingFinance #BFSI #PersonalDiscussion #LendingOps #CreditUnderwriting #AIinBFSI",
+    "images": [
+      "posts/real-time-pd-001/01.jpg",
+      "posts/real-time-pd-001/02.jpg",
+      "posts/real-time-pd-001/03.jpg",
+      "posts/real-time-pd-001/04.jpg",
+      "posts/real-time-pd-001/05.jpg",
+      "posts/real-time-pd-001/06.jpg",
+      "posts/real-time-pd-001/07.jpg",
+      "posts/real-time-pd-001/08.jpg"
+    ],
+    "media_id": "17969569449345213",
+    "published_at": "2026-10-07T20:01:09.297Z"
+  }
+]
