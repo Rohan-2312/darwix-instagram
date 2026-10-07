@@ -33,7 +33,7 @@
     "id": "housing-ei-001",
     "publish_at": "2026-10-07T20:00:00Z",
     "approved": true,
-    "status": "draft",
+    "status": "published",
     "caption": "One shop. Four different monthly sales figures.\n\nIn a housing-finance case the LOS says one number, the borrower says another, and the bank, GST and supplier records say a third. Credit ends up reconciling by hand.\n\nEvidence Intelligence reads the PD conversation as evidence, checks every fact against every source, rebuilds income, EMIs and own contribution, and raises only the findings that matter. Every value keeps its source. Every adopted value is chosen by a reviewer and recorded.\n\nCredit decisions stay with the credit team.\n\nWant to see Evidence Intelligence on your PD workflow? Link in bio.\n\n#DarwixAI #HousingFinance #BFSI #EvidenceIntelligence #LendingOps #CreditUnderwriting #AIinBFSI",
     "images": [
       "posts/housing-ei-001/01.jpg",
@@ -44,6 +44,8 @@
       "posts/housing-ei-001/06.jpg",
       "posts/housing-ei-001/07.jpg",
       "posts/housing-ei-001/08.jpg"
-    ]
+    ],
+    "media_id": "18127633801848296",
+    "published_at": "2026-10-07T20:33:45.810Z"
   }
 ]
