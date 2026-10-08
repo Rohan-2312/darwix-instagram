@@ -1,0 +1,795 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"></head><body><title>Darwix Instagram Studio</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700&family=Inter:wght@500;600&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+/* Layout: the design team's console. Full-width page, white header with tabs, 14px-radius hairline cards, one indigo accent, Manrope + Inter pills + JetBrains Mono for times. */
+:root{
+  --bg:#FAFAFB; --surface:#FFFFFF; --sunken:#F4F5F9; --tint:#EEEFFF; --track:#EDEEF6;
+  --ink:#141416; --ink2:#515153; --ink3:#686868; --ink4:#8A92A8; --label:#6B7185;
+  --line:#E6E7F0; --line2:#DBDBDC; --line3:#C5CADF; --hair:#F1F1F1; --hair2:#F8F8F8; --strong:#949395;
+  --brand:#565ADD; --brand-ink:#4344B8; --brand-hover:#4F4FE8; --on-brand:#FFFFFF;
+  --ok:#17AA2E; --err:#D93A3A;
+  --rev-bg:#FFF5DB; --rev-fg:#7A5300; --rev-dot:#C98A00;
+  --ok-bg:#E7F6EA; --ok-fg:#0F6A1D;
+  --sch-bg:#EEEFFF; --sch-fg:#4344B8; --sch-dot:#565ADD;
+  --pub-bg:#F1F1F1; --pub-fg:#494848; --pln-bg:#EDEEF6; --pln-fg:#6B7185;
+  --fail-bg:#FCEBEB; --fail-fg:#A82828; --ban-bg:#FDF3F3; --ban-line:#F3CFCF;
+  --shadow:0 1px 2px rgba(14,19,48,.12); --shadow2:0 2px 8px rgba(14,19,48,.06);
+  color-scheme:light;
+  --font:Manrope,system-ui,-apple-system,"Segoe UI",sans-serif; --pill:Inter,Manrope,system-ui,sans-serif; --mono:"JetBrains Mono",ui-monospace,Menlo,Consolas,monospace;
+}
+*{box-sizing:border-box}
+html,body{margin:0}
+body{background:var(--bg);color:var(--ink2);font:400 13.5px/1.5 var(--font);-webkit-font-smoothing:antialiased}
+button,input,select,textarea{font:inherit;color:inherit}
+button{cursor:pointer}
+a{color:var(--brand);text-underline-offset:2px}
+:focus-visible{outline:2px solid var(--brand);outline-offset:2px;border-radius:6px}
+.i{display:inline-block;flex:0 0 auto;background:currentColor;-webkit-mask:var(--u) center/contain no-repeat;mask:var(--u) center/contain no-repeat}
+.i.ig{background:radial-gradient(circle at 30% 107%,#FDF497 0%,#FDF497 5%,#FD5949 45%,#D6249F 60%,#285AEB 90%)}
+.hd{background:var(--surface);border-bottom:1px solid var(--line);padding:20px 32px 0;display:flex;flex-direction:column;gap:16px;position:sticky;top:env(safe-area-inset-top,0px);z-index:20}
+.crumbs{display:flex;align-items:center;gap:8px;font:500 12.5px var(--font);color:var(--ink3)}
+.crumbs .sl{color:var(--line3)}.crumbs b{color:var(--ink2);font-weight:600}
+.hrow{display:flex;align-items:flex-end;justify-content:space-between;gap:16px;flex-wrap:wrap}
+h1{margin:0;font:700 28px/38px var(--font);letter-spacing:-.7px;color:var(--ink);text-wrap:balance}
+.sub{margin:0;font:400 13.5px/21px var(--font);color:var(--ink3);text-wrap:pretty}
+.sub b{color:var(--ink2);font-weight:600}
+.hact{display:flex;align-items:center;gap:12px;flex-wrap:wrap}
+.tabs{display:flex;gap:4px;overflow-x:auto;margin-bottom:-1px;scrollbar-width:none}
+.tab{display:flex;align-items:center;gap:8px;padding:10px 14px 12px;font:600 13.5px var(--font);white-space:nowrap;color:var(--ink3);background:none;border:0;border-bottom:2px solid transparent}
+.tab:hover{color:var(--ink)}
+.tab[aria-selected=true]{color:var(--brand-ink);border-bottom-color:var(--brand)}
+.count{font:600 11px var(--mono);background:var(--rev-bg);color:var(--rev-fg);padding:2px 6px;border-radius:999px}
+.page{padding:28px 32px 64px;display:flex;flex-direction:column;gap:24px;width:100%}
+@media(max-width:700px){.hd{padding:16px 16px 0}.page{padding:20px 16px 56px}h1{font-size:24px;line-height:32px}}
+/* buttons */
+.btn{height:36px;padding:0 14px;border-radius:10px;border:1px solid var(--line2);background:var(--surface);font:600 13px var(--font);color:var(--ink2);display:inline-flex;align-items:center;justify-content:center;gap:8px;white-space:nowrap;text-decoration:none}
+.btn:hover{background:var(--hair2)}
+.btn.lg{height:44px;padding:0 18px;font-size:14px}
+.btn.pri{background:var(--brand);border-color:var(--brand);color:var(--on-brand);box-shadow:var(--shadow)}
+.btn.pri:hover{background:var(--brand-hover)}
+.btn.sm{height:32px;padding:0 10px;border-radius:8px;border-color:transparent;background:transparent;font-size:12.5px;gap:6px}
+.btn.sm:hover{background:var(--sunken)}
+.btn.sm.pri{background:var(--brand);padding:0 12px}.btn.sm.pri:hover{background:var(--brand-hover)}
+.btn.sm.out{border-color:var(--strong);background:var(--surface)}
+.btn.sm.tx,.btn.tx{color:var(--brand);border-color:transparent;background:transparent}
+.btn.tx:hover{background:var(--tint)}
+.btn.out{border-color:var(--strong)}
+.btn.danger{color:var(--err);border-color:var(--err)}
+.btn:disabled{opacity:.5;cursor:not-allowed}
+.btn.ic{width:32px;padding:0}
+/* cards */
+.sec,.card{background:var(--surface);border:1px solid var(--line);border-radius:14px}
+.card.pad,.sec.pad{padding:24px}
+.sec-h,.cardhead{display:flex;align-items:center;gap:10px;padding:16px 18px;border-bottom:1px solid var(--hair)}
+.sec-h h2,.cardhead h2{margin:0;font:700 15px var(--font);color:var(--ink)}
+.sec-h small,.cardhead small{font:400 12px var(--font);color:var(--ink3)}
+.sec-h .mono{font:500 12px var(--mono);color:var(--ink3)}
+.sec-h .btn:last-child,.cardhead .btn:last-child,.cardhead .row:last-child{margin-left:auto}
+.ri{display:flex;align-items:center;gap:12px;padding:12px 18px;border-bottom:1px solid var(--hair2)}
+.ri:last-child{border-bottom:0}
+.ri .tt{flex:1;min-width:0;display:flex;flex-direction:column;gap:3px}
+.ri .t1{font:600 13.5px var(--font);color:var(--ink);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.ri .t2{font:400 12.5px var(--font);color:var(--ink3);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.lb{width:32px;height:32px;border-radius:8px;background:var(--surface);border:1px solid var(--line);display:flex;align-items:center;justify-content:center;flex:0 0 32px}
+.lb.s28{width:28px;height:28px;flex-basis:28px}
+.lbl,.eyebrow{font:700 11.5px var(--font);letter-spacing:1.6px;text-transform:uppercase;color:var(--label)}
+.empty{display:flex;flex-direction:column;align-items:center;gap:8px;padding:32px 18px;text-align:center;color:var(--ink3);font-size:12.5px}
+.empty b{font:600 14px var(--font);color:var(--ink)}
+.empty .ring{width:44px;height:44px;border-radius:50%;display:flex;align-items:center;justify-content:center}
+.mono{font-family:var(--mono);font-variant-numeric:tabular-nums}
+.row{display:flex;gap:10px;align-items:center;flex-wrap:wrap}
+.spacer{flex:1}
+.wrapflex{display:flex;gap:20px;flex-wrap:wrap;align-items:stretch}
+.wrapflex>section{min-width:0}
+/* pills */
+.pill{display:inline-flex;align-items:center;gap:6px;height:22px;padding:0 8px;border-radius:999px;font:600 11.5px var(--pill);white-space:nowrap;align-self:flex-start}
+.pill i{width:6px;height:6px;border-radius:50%;background:currentColor;flex:0 0 6px}
+.s-review{background:var(--rev-bg);color:var(--rev-fg)}.s-review i{background:var(--rev-dot)}
+.s-scheduled,.s-publishing{background:var(--sch-bg);color:var(--sch-fg)}.s-scheduled i,.s-publishing i{background:var(--sch-dot)}
+.s-published{background:var(--pub-bg);color:var(--pub-fg)}
+.s-failed{background:var(--fail-bg);color:var(--fail-fg)}.s-failed i{background:var(--err)}
+.s-planned{background:var(--pln-bg);color:var(--pln-fg)}
+.s-ok{background:var(--ok-bg);color:var(--ok-fg)}.s-ok i{background:var(--ok)}
+.chip{align-self:flex-start;display:inline-flex;align-items:center;height:22px;padding:0 8px;border-radius:999px;font:600 11.5px var(--pill);white-space:nowrap}
+.q-high{background:var(--ok-bg);color:var(--ok-fg)}.q-med{background:var(--rev-bg);color:var(--rev-fg)}.q-low{background:var(--fail-bg);color:var(--fail-fg)}
+.fchip{display:inline-flex;align-items:center;gap:6px;height:32px;padding:0 12px;border-radius:999px;font:500 13px var(--pill);background:var(--surface);color:var(--ink2);border:1px solid var(--line2);white-space:nowrap}
+.fchip em{font:500 11.5px var(--mono);font-style:normal;color:var(--ink3)}
+.fchip[aria-pressed=true]{background:var(--tint);color:var(--brand-ink);border-color:var(--line3)}
+.fchip[aria-pressed=true] em{color:var(--brand-ink)}
+.fgroup{display:flex;gap:8px;align-items:center;flex-wrap:wrap}
+.flab{font:700 10px var(--pill);letter-spacing:1.4px;text-transform:uppercase;color:var(--label);width:64px}
+/* banners */
+.banner{display:flex;align-items:center;gap:16px;flex-wrap:wrap;padding:14px 16px;border-radius:14px;border:1px solid}
+.banner.err{background:var(--ban-bg);border-color:var(--ban-line)}
+.banner.info{background:var(--tint);border-color:var(--line3)}
+.banner .bt{flex:1;min-width:220px;display:flex;flex-direction:column;gap:2px}
+.banner b{font:700 14px var(--font);color:var(--ink)}
+.banner span.m{font:400 13px var(--font);color:var(--ink2)}
+/* journey */
+.jgrid{display:grid;grid-template-columns:repeat(6,minmax(92px,1fr));min-width:600px}
+.js{display:flex;flex-direction:column;gap:8px;min-width:0;padding-right:8px;background:none;border:0;text-align:left;font:inherit}
+.js .rl{display:flex;align-items:center}
+.ring{width:32px;height:32px;border-radius:50%;flex:0 0 32px;display:flex;align-items:center;justify-content:center;font:700 12px var(--font);background:var(--surface);color:var(--ink4);border:1px solid var(--line3)}
+.js.done .ring{background:var(--ok);color:#fff;border:none}
+.js.cur .ring{color:var(--brand);border:2px solid var(--brand)}
+.js.err .ring{background:var(--fail-bg);color:var(--err);border:2px solid var(--err)}
+.hl{height:2px;flex:1;min-width:12px;margin:0 8px;border-radius:1px;background:var(--line)}
+.js.done .hl{background:var(--ok)}
+.js .lab{font:600 13.5px/20px var(--font);color:var(--ink)}.js.up .lab{font-weight:500;color:var(--ink3)}
+.js .met{font:400 12px/18px var(--font);color:var(--ink3);overflow-wrap:anywhere}
+.jbar{height:4px;border-radius:2px;background:var(--track);overflow:hidden;margin-right:12px}
+.jbar>i{display:block;height:100%;background:var(--brand)}.js.err .jbar>i{background:var(--err)}.js.done .jbar>i{background:var(--ok)}
+.pbar{width:220px;max-width:100%;height:6px;border-radius:3px;background:var(--track);overflow:hidden}.pbar>i{display:block;height:100%;background:var(--brand)}
+.ntgrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:14px;border-top:1px solid var(--hair);padding-top:18px}
+.tile{background:var(--bg);border:1px solid var(--line);border-radius:14px}
+.wait{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px}
+.wait button{display:flex;flex-direction:column;gap:6px;padding:10px 12px;border-radius:10px;background:var(--bg);border:0;text-align:left;min-width:0}
+.wait button:hover{background:var(--sunken)}
+.wait b{font:600 18px var(--mono);color:var(--ink)}.wait span.l{font:500 12px/16px var(--font);color:var(--ink2)}
+.big{font:700 28px/38px var(--font);letter-spacing:-.7px;color:var(--ink)}
+/* platform cards */
+.pgrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:12px}
+.pc{background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:16px;display:flex;flex-direction:column;gap:14px;text-align:left}
+button.pc:hover{border-color:var(--line3);box-shadow:var(--shadow2)}
+.pc.dim{opacity:.55}
+.pc .ft{display:flex;align-items:center;gap:8px;font:400 12px var(--font);color:var(--ink3);border-top:1px solid var(--hair);padding-top:12px}
+.dot{width:6px;height:6px;border-radius:50%;flex:0 0 6px;background:var(--ok)}.dot.bad{background:var(--err)}.dot.off{background:var(--line3)}
+.run{display:flex;align-items:center;gap:12px;padding:11px 18px;border-bottom:1px solid var(--hair2)}
+.run:last-child{border-bottom:0}
+.led{width:8px;height:8px;border-radius:50%;flex:0 0 8px}.led.ok{background:var(--ok)}.led.bad{background:var(--err)}.led.run{background:var(--brand)}
+/* posts */
+.pgrid3{display:grid;grid-template-columns:repeat(auto-fill,minmax(340px,1fr));gap:20px;align-items:start}
+.post{padding:18px;display:flex;flex-direction:column;gap:14px}
+.post .cap{white-space:pre-wrap;color:var(--ink2);font-size:13.5px;line-height:21px;max-height:9.5em;overflow:hidden}
+.post .cap .tg{color:var(--brand)}
+.strip{display:flex;gap:8px;overflow-x:auto}
+.strip img,.strip .ph{height:110px;aspect-ratio:4/5;border-radius:10px;border:1px solid var(--line);flex:0 0 auto;background:repeating-linear-gradient(135deg,var(--sunken) 0 6px,var(--track) 6px 12px)}
+.ph{display:flex;align-items:flex-end;justify-content:center;padding:8px;font:400 10px var(--mono);color:var(--label)}
+.post .ft{display:flex;align-items:center;gap:6px;border-top:1px solid var(--hair);padding-top:12px;flex-wrap:wrap}
+/* forms */
+label.f{display:flex;flex-direction:column;gap:6px;font:700 11.5px var(--font);letter-spacing:1.6px;text-transform:uppercase;color:var(--ink2)}
+input[type=text],input[type=password],input[type=datetime-local],select{height:44px;width:100%;border:0;border-radius:12px;background:var(--sunken);padding:0 14px;font:400 13.5px var(--font);color:var(--ink2);text-transform:none;letter-spacing:0;outline:none}
+textarea{width:100%;min-height:96px;resize:vertical;border:0;border-radius:12px;background:var(--sunken);padding:14px;font:400 13.5px/21px var(--font);color:var(--ink2);text-transform:none;letter-spacing:0;outline:none}
+input:focus,select:focus,textarea:focus{outline:2px solid var(--brand);outline-offset:2px}
+select{width:auto;height:36px;padding:0 10px}
+.form{display:grid;grid-template-columns:1fr 1fr;gap:16px}.form .full{grid-column:1/-1}
+@media(max-width:700px){.form{grid-template-columns:1fr}}
+.hint{font:400 12.5px/19px var(--font);color:var(--ink3);letter-spacing:0;text-transform:none}
+.stack{display:flex;flex-direction:column;gap:24px}
+.secb{padding:20px 24px;display:flex;flex-direction:column;gap:16px}
+.stepper{display:flex;align-items:center;gap:12px;flex-wrap:wrap;font:600 13px var(--font);color:var(--ink3)}
+.stepper .ring{width:24px;height:24px;flex-basis:24px;font-size:11px}
+.stepper .on{color:var(--ink)}.stepper .hl{max-width:80px;margin:0}
+/* calendar */
+.cal{display:grid;grid-template-columns:repeat(7,minmax(0,1fr))}
+.cal .dh{padding:10px 8px;font:700 11px var(--font);letter-spacing:1.4px;color:var(--label);border-bottom:1px solid var(--hair);background:var(--bg)}
+.cal .day{min-height:108px;padding:8px;display:flex;flex-direction:column;gap:4px;border-right:1px solid var(--hair);border-bottom:1px solid var(--hair);background:var(--surface);min-width:0}
+.cal .day:nth-child(7n){border-right:0}
+.cal .day.out{background:var(--bg)}
+.cal .day .n{font:500 12px var(--mono);color:var(--ink3)}
+.cal .day.today .n{color:#fff;background:var(--brand);border-radius:999px;align-self:flex-start;padding:1px 7px}
+.ev{display:flex;gap:6px;align-items:center;min-width:0;padding:4px 6px;border-radius:6px;font:500 11.5px var(--font);border:0;text-align:left;width:100%}
+.ev span{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+@media(max-width:700px){.cal .day{min-height:72px;padding:4px}.ev{font-size:10px}}
+/* pipeline counters */
+.pipe{display:grid;grid-template-columns:repeat(auto-fit,minmax(130px,1fr));gap:12px}
+.pipe .sec{padding:12px 14px;display:flex;flex-direction:column;gap:2px}
+.pipe b{font:600 22px var(--mono);color:var(--ink)}.pipe span{font:500 12px var(--font);color:var(--ink3);display:flex;gap:6px;align-items:center}
+/* insights */
+.kpis{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:16px}
+.kpi{padding:18px 20px;display:flex;flex-direction:column;gap:6px}
+.kpi b{font:700 28px/36px var(--font);letter-spacing:-.7px;color:var(--ink)}
+.tbl{width:100%;border-collapse:collapse;font-size:13px}
+.tbl th{text-align:left;font:700 11px var(--font);letter-spacing:1.4px;text-transform:uppercase;color:var(--label);padding:10px 18px;border-bottom:1px solid var(--hair);background:var(--bg)}
+.tbl td{padding:12px 18px;border-bottom:1px solid var(--hair2);color:var(--ink2)}
+.tbl td.num,.tbl th.num{text-align:right;font-family:var(--mono);font-variant-numeric:tabular-nums}
+.scroll{overflow-x:auto}
+.bars{display:flex;align-items:flex-end;gap:12px;height:150px;padding:8px 18px 14px}
+.bars div{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:flex-end;gap:6px;height:100%;min-width:0}
+.bars i{display:block;width:100%;max-width:56px;background:var(--brand);border-radius:6px 6px 0 0;min-height:3px}
+.bars span{font:500 11px var(--mono);color:var(--ink3)}.bars em{font:600 12px var(--mono);font-style:normal;color:var(--ink)}
+.mode{display:inline-flex;align-items:center;gap:6px;height:28px;border-radius:999px;padding:0 12px;font:600 12px var(--pill)}
+.mode.live{background:var(--ok-bg);color:var(--ok-fg)}.mode.demo{background:var(--rev-bg);color:var(--rev-fg)}
+.mode::before{content:"";width:6px;height:6px;border-radius:50%;background:currentColor}
+/* drawer */
+.scrim{position:fixed;inset:0;background:rgba(10,12,30,.5);z-index:50;display:flex;justify-content:flex-end}
+.drawer{background:var(--bg);width:min(1100px,100%);height:100%;overflow:auto;display:flex;flex-direction:column;padding-bottom:env(safe-area-inset-bottom,0px)}
+.dhead{display:flex;justify-content:space-between;align-items:center;gap:12px;padding:14px 24px;background:var(--surface);border-bottom:1px solid var(--line);position:sticky;top:0;z-index:2;flex-wrap:wrap}
+.dbody{display:grid;grid-template-columns:minmax(0,400px) minmax(0,1fr);gap:24px;padding:24px}
+@media(max-width:900px){.dbody{grid-template-columns:1fr}}
+.phone{background:var(--surface);border:1px solid var(--line);border-radius:18px;overflow:hidden;box-shadow:var(--shadow2)}
+.phone .ph2{display:flex;align-items:center;gap:10px;padding:10px 12px}
+.avatar{width:32px;height:32px;border-radius:50%;background:#fff;border:1px solid var(--line);display:grid;place-items:center;flex:0 0 32px}
+.avatar img{width:20px;height:20px}
+.phone canvas{width:100%;aspect-ratio:4/5;display:block;background:#fff}
+.dots{display:flex;gap:4px;justify-content:center;padding:8px}
+.dots i{width:6px;height:6px;border-radius:50%;background:var(--line2)}.dots i.on{background:var(--brand)}
+.phone .pcap{padding:4px 12px 14px;font-size:13px;white-space:pre-wrap;color:var(--ink2);max-height:170px;overflow:auto}
+.slc{border:1px solid var(--line);border-radius:12px;padding:12px;background:var(--surface);display:flex;flex-direction:column;gap:8px}
+.slc.on{border-color:var(--brand);background:var(--tint)}
+.toast{position:fixed;left:50%;transform:translateX(-50%);bottom:calc(20px + env(safe-area-inset-bottom,0px));background:var(--ink);color:var(--bg);padding:10px 16px;border-radius:10px;font:600 13px var(--font);z-index:90;box-shadow:var(--shadow2);max-width:calc(100% - 32px)}
+@media (prefers-reduced-motion:no-preference){.drawer{animation:in .18s ease-out}@keyframes in{from{transform:translateX(24px);opacity:.6}to{transform:none;opacity:1}}}
+</style>
+
+
+<div id="app"></div>
+<canvas id="work" width="1080" height="1350" hidden></canvas>
+
+<script>
+/* =====================================================================
+   Darwix Instagram Studio
+   One file. Runs as a static page (GitHub Pages) against the same repo the
+   publisher uses. Without a GitHub token it runs in sample-data mode.
+   ===================================================================== */
+const LOGO = "data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMzciIGhlaWdodD0iMzciIHZpZXdCb3g9IjAgMCAzNyAzNyIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPHBhdGggZmlsbC1ydWxlPSJldmVub2RkIiBjbGlwLXJ1bGU9ImV2ZW5vZGQiIGQ9Ik0xOC45NjY1IDQuNzU2NjNDMTkuNTA3MyA0LjQyMTAzIDIwLjExOTMgNC4xMjQyMyAyMC42OTQxIDMuOTI2MjNDMjEuODc4NSAzLjUxOTAzIDIyLjMyOTcgMy42ODEwMyAyMi40MDk3IDMuNDYyNjNMMjMuNDEzNyAwLjY5ODYzMUMyMi43MjgxIDAuNjA5NDMxIDIxLjEzOTcgMS4wMzMwMyAyMC4zNzIxIDEuMzE1ODNDMTcuMjAwMSAyLjQ4MzAzIDE1LjEzMjkgNC45ODYyMyAxMy45MzY1IDcuODU3MDNDMTMuMjAyNSA5LjYxNzQzIDEyLjk0MjkgMTEuMzQyNiAxMi45MTI1IDEzLjIxNUMxMi44MDY1IDE0LjQ4NDYgMTMuMzA2MSAxNy4xMjA2IDE0LjE2NjUgMTkuMDU1QzE0LjExOTMgMTguNTI3OCAxMy44NTMzIDE3LjY2MDIgMTMuNzY0MSAxNy4wNTE0QzEzLjM3MDEgMTMuODcwNiAxMy45NjczIDEwLjUwNjYgMTUuNzA1NyA3Ljk0NzgzQzE2LjU1ODkgNi42OTI2MyAxNy41MTI5IDUuNjU3MDMgMTguOTY2NSA0Ljc1NjYzWiIgZmlsbD0iIzU2NUFERCI+PC9wYXRoPgo8cGF0aCBmaWxsLXJ1bGU9ImV2ZW5vZGQiIGNsaXAtcnVsZT0iZXZlbm9kZCIgZD0iTTIzLjcyNTUgNS44NTc2MkMyNC4zNDgzIDUuNzI4NDIgMjUuMDI0NyA1LjY1OTYyIDI1LjYzMzUgNS42NzEyMkMyNi44ODU1IDUuNjk0ODIgMjcuMjUzOSA2LjAwMjAyIDI3LjQwMzUgNS44MjQwMkMyOC4wMzM5IDUuMDczNjIgMjguNjY0NyA0LjMyMzIyIDI5LjI5NDcgMy41NzI4MkMyOC42ODE5IDMuMjUzNjIgMjcuMDQ1MSAzLjEwNjQyIDI2LjIyNjMgMy4xMDg0MkMyMi44NDY3IDMuMTE2MDIgMjAuMDQ2MyA0Ljc1NzYyIDE3LjkzNjcgNy4wNDMyMkMxNi42NDMxIDguNDQ0ODIgMTUuODA3MSA5Ljk3NjAyIDE1LjEzNTUgMTEuNzI0OEMxNC42MDAzIDEyLjg4MDQgMTQuMTY1MSAxNS41MjggMTQuMzA5MSAxNy42NEMxNC40NDU5IDE3LjEyODQgMTQuNDk0MyAxNi4yMjI0IDE0LjYxODcgMTUuNjJDMTUuMzQwNyAxMi40OTc2IDE3LjA1NjMgOS41NDI0MiAxOS41NjcxIDcuNzM2MDJDMjAuNzk5OSA2Ljg0OTYyIDIyLjA1MDcgNi4yMDQ4MiAyMy43MjU1IDUuODU3NjJaIiBmaWxsPSIjNTY1QUREIj48L3BhdGg+CjxwYXRoIGZpbGwtcnVsZT0iZXZlbm9kZCIgY2xpcC1ydWxlPSJldmVub2RkIiBkPSJNMjcuODgwOCA4LjY5OTMyQzI4LjUwNiA4LjgxNDEyIDI5LjE1ODQgOS4wMDU3MiAyOS43MTggOS4yNDQ5MkMzMC44Njg4IDkuNzM5MzIgMzEuMDk0IDEwLjE2MjUgMzEuMyAxMC4wNTM3QzMyLjE2NjggOS41OTY1MiAzMy4wMzM2IDkuMTM4OTIgMzMuOSA4LjY4MTMyQzMzLjQ1MjggOC4xNTQ1MiAzMS45OTIgNy40MDEzMiAzMS4yMzI4IDcuMDk0NTJDMjguMDk5MiA1LjgyODkyIDI0Ljg4NjggNi4yOTQ1MiAyMi4wNzE2IDcuNjE2OTJDMjAuMzQ1MiA4LjQyNzcyIDE4Ljk5MzYgOS41MzEzMiAxNy43MTM2IDEwLjg5ODFDMTYuNzgyIDExLjc2NjkgMTUuMzgxNiAxNC4wNTUzIDE0LjcxODggMTYuMDY2MUMxNS4wMzg4IDE1LjY0NDEgMTUuNDI0NCAxNC44MjI5IDE1Ljc2NjggMTQuMzExN0MxNy42MTIgMTEuNjkxMyAyMC4zMTQgOS42MDA1MiAyMy4zMjEyIDguODcyOTJDMjQuNzk2NCA4LjUxNjEyIDI2LjE5ODggOC4zOTAxMiAyNy44ODA4IDguNjk5MzJaIiBmaWxsPSIjNTY1QUREIj48L3BhdGg+CjxwYXRoIGZpbGwtcnVsZT0iZXZlbm9kZCIgY2xpcC1ydWxlPSJldmVub2RkIiBkPSJNMzAuNjQzNSAxMi42NTY0QzMxLjE5NjcgMTIuOTcxNiAzMS43NDk1IDEzLjM2NjggMzIuMTk4MyAxMy43Nzc2QzMzLjEyMjMgMTQuNjIzNiAzMy4xOTU1IDE1LjA5NjggMzMuNDI1MSAxNS4wNjI0QzM0LjM5NDcgMTQuOTE2NCAzNS4zNjM1IDE0Ljc3IDM2LjMzMzEgMTQuNjI0QzM2LjA4MzUgMTMuOTc5NiAzNC45NTMxIDEyLjc4NjQgMzQuMzM3NSAxMi4yNDY4QzMxLjc5NjcgMTAuMDE4NCAyOC42MDk5IDkuMzk4ODUgMjUuNTE2MyA5LjcxOTI1QzIzLjYxOTEgOS45MTU2NSAyMS45NzkxIDEwLjUxMiAyMC4zMTk5IDExLjM4MDRDMTkuMTUzOSAxMS44OTMyIDE3LjA3NzUgMTMuNTkyNCAxNS43ODkxIDE1LjI3MjRDMTYuMjI5OSAxNC45Nzg4IDE2Ljg2NTEgMTQuMzMwOCAxNy4zNTY3IDEzLjk2MTJDMTkuOTYyNyAxMi4wOTU2IDIzLjIwMzUgMTEuMDEyNCAyNi4yODE5IDExLjMxNjhDMjcuNzkyNyAxMS40NjY4IDI5LjE1NzkgMTEuODA5NiAzMC42NDM1IDEyLjY1NjRaIiBmaWxsPSIjNTY1QUREIj48L3BhdGg+CjxwYXRoIGZpbGwtcnVsZT0iZXZlbm9kZCIgY2xpcC1ydWxlPSJldmVub2RkIiBkPSJNMzEuODI2IDE3LjYwMzJDMzIuMjE0IDE4LjEwOCAzMi41NzEyIDE4LjY4NjggMzIuODI2IDE5LjIzODhDMzMuMzUwNCAyMC4zNzY0IDMzLjIzNDQgMjAuODQxNiAzMy40NiAyMC44OTg4QzM0LjQxIDIxLjEzOTIgMzUuMzYgMjEuMzc5NiAzNi4zMSAyMS42MTk2QzM2LjMzMDQgMjAuOTI4OCAzNS43NDkyIDE5LjM5MTIgMzUuMzkwOCAxOC42NTU2QzMzLjkxMDQgMTUuNjE3MiAzMS4yMTIgMTMuODEyOCAyOC4yMzUyIDEyLjkxMDRDMjYuNDEgMTIuMzU3MiAyNC42NjcyIDEyLjI3MjggMjIuODAxMiAxMi40MzEyQzIxLjUyOCAxMi40NTI4IDE4Ljk1NTYgMTMuMjE1MiAxNy4xMTcyIDE0LjI2NTZDMTcuNjM3MiAxNC4xNjYgMTguNDczNiAxMy44MTQgMTkuMDcwNCAxMy42NjM2QzIyLjE5NDggMTIuOTUyIDI1LjYwMjQgMTMuMjA3NiAyOC4zMjMyIDE0LjY4MDRDMjkuNjU3NiAxNS40MDI4IDMwLjc4NCAxNi4yNDggMzEuODI2IDE3LjYwMzJaIiBmaWxsPSIjNTY1QUREIj48L3BhdGg+CjxwYXRoIGZpbGwtcnVsZT0iZXZlbm9kZCIgY2xpcC1ydWxlPSJldmVub2RkIiBkPSJNMzEuMTczOCAyMi40NTQ0QzMxLjM2MzQgMjMuMDYxMiAzMS40OTgyIDIzLjcyOCAzMS41NDY2IDI0LjMzNDRDMzEuNjQ1OCAyNS41ODMyIDMxLjM3NjYgMjUuOTc5NiAzMS41NjgyIDI2LjExMDhDMzIuMzc3IDI2LjY2NDggMzMuMTg1NCAyNy4yMTg4IDMzLjk5NDIgMjcuNzcyNEMzNC4yNTE4IDI3LjEzMDggMzQuMjM3NCAyNS40ODcyIDM0LjE1NTQgMjQuNjcyOEMzMy44MTU4IDIxLjMxMDQgMzEuOTA3IDE4LjY4NTIgMjkuNDI1IDE2LjgxQzI3LjkwMyAxNS42NjA0IDI2LjI5NzQgMTQuOTc4OCAyNC40OTEgMTQuNDgyOEMyMy4yODgyIDE0LjA2MzIgMjAuNjExIDEzLjg5MDQgMTguNTIzNCAxNC4yNDA4QzE5LjA0NTggMTQuMzI2OCAxOS45NTIyIDE0LjI4NTYgMjAuNTY0MiAxNC4zNTA0QzIzLjc0MjIgMTQuNzYyNCAyNi44NTE0IDE2LjE3OTIgMjguODk1OCAxOC41MDA4QzI5Ljg5OSAxOS42NCAzMC42NjQyIDIwLjgyMiAzMS4xNzM4IDIyLjQ1NDRaIiBmaWxsPSIjNTY1QUREIj48L3BhdGg+CjxwYXRoIGZpbGwtcnVsZT0iZXZlbm9kZCIgY2xpcC1ydWxlPSJldmVub2RkIiBkPSJNMjguNzIzNCAyNi44NzM1QzI4LjY2ODYgMjcuNTA2NyAyOC41NDAyIDI4LjE3NTEgMjguMzU0NiAyOC43NTQzQzI3Ljk3MTggMjkuOTQ3MSAyNy41NzIyIDMwLjIxMTUgMjcuNjk5OCAzMC40MDU5QzI4LjIzNzggMzEuMjI1NSAyOC43NzU0IDMyLjA0NDcgMjkuMzEzIDMyLjg2MzlDMjkuNzk0NiAzMi4zNjg3IDMwLjQwNjIgMzAuODQyNyAzMC42Mzk0IDMwLjA1NzlDMzEuNjAyMiAyNi44MTg3IDMwLjgzMzQgMjMuNjY0NyAyOS4yNDk4IDIwLjk4NzVDMjguMjc4NiAxOS4zNDYzIDI3LjA1MTQgMTguMTA1OSAyNS41Njk0IDE2Ljk2MTFDMjQuNjE2MiAxNi4xMTU5IDIyLjIwNDYgMTQuOTM5NSAyMC4xNDA2IDE0LjQ3MDdDMjAuNTkxIDE0Ljc0ODcgMjEuNDQ1NCAxNS4wNTQ3IDIxLjk4NjYgMTUuMzQ3MUMyNC43NzA2IDE2LjkzNTEgMjcuMTA4MiAxOS40MjY3IDI4LjExNzggMjIuMzUwN0MyOC42MTM0IDIzLjc4NTkgMjguODcxOCAyNS4xNjk5IDI4LjcyMzQgMjYuODczNVoiIGZpbGw9IiM1NjVBREQiPjwvcGF0aD4KPHBhdGggZmlsbC1ydWxlPSJldmVub2RkIiBjbGlwLXJ1bGU9ImV2ZW5vZGQiIGQ9Ik0yNS4wNDc2IDI5Ljk4MjJDMjQuNzg3MiAzMC41NjI2IDI0LjQ0NjggMzEuMTUxNCAyNC4wODEyIDMxLjYzNzRDMjMuMzI4IDMyLjYzODYgMjIuODYzMiAzMi43NTcgMjIuOTIgMzIuOTgyNkMyMy4xNTg0IDMzLjkzMyAyMy4zOTc2IDM0Ljg4MzQgMjMuNjM2IDM1LjgzNDJDMjQuMjUzNiAzNS41MjQyIDI1LjMzMjQgMzQuMjgzOCAyNS44MTA0IDMzLjYxOThDMjcuNzg0IDMwLjg3NjIgMjguMDk0NCAyNy42NDQ2IDI3LjQ3OCAyNC41OTYyQzI3LjEgMjIuNzI2NiAyNi4zNDg4IDIxLjE1MTggMjUuMzI1MiAxOS41ODM4QzI0LjcwMjQgMTguNDcyNiAyMi44MTE2IDE2LjU2OTQgMjEuMDE1NiAxNS40NDgyQzIxLjM1IDE1Ljg1ODYgMjIuMDU2IDE2LjQyODYgMjIuNDcwOCAxNi44ODI2QzI0LjU3ODQgMTkuMjk3IDI1Ljk2ODQgMjIuNDE4MiAyNS45NjEyIDI1LjUxMThDMjUuOTU3NiAyNy4wMjk4IDI1Ljc0NzIgMjguNDIxOCAyNS4wNDc2IDI5Ljk4MjJaIiBmaWxsPSIjNTY1QUREIj48L3BhdGg+CjxwYXRoIGZpbGwtcnVsZT0iZXZlbm9kZCIgY2xpcC1ydWxlPSJldmVub2RkIiBkPSJNMjAuMjUxMSAzMS42MjI1QzE5Ljc4NzkgMzIuMDU4OSAxOS4yNDc1IDMyLjQ3MTcgMTguNzIzNSAzMi43ODA1QzE3LjY0MzkgMzMuNDE2MSAxNy4xNjk5IDMzLjM0NzcgMTcuMTM1MSAzMy41Nzc3QzE2Ljk5MTEgMzQuNTQ3MyAxNi44NDcxIDM1LjUxNjUgMTYuNzAzMSAzNi40ODYxQzE3LjM5MjMgMzYuNDM2NSAxOC44NjQzIDM1LjcwNDkgMTkuNTYwNyAzNS4yNzQ1QzIyLjQzNTUgMzMuNDk3NyAyMy45NjExIDMwLjYzMjUgMjQuNTYxMSAyNy41ODA1QzI0LjkyOTEgMjUuNzA5MyAyNC44Mzk1IDIzLjk2NjkgMjQuNDk1MSAyMi4xMjU3QzI0LjM0NjMgMjAuODYwNSAyMy4zMjk5IDE4LjM3NzMgMjIuMTAxMSAxNi42NTMzQzIyLjI1MjMgMTcuMTYwOSAyMi42ODU5IDE3Ljk1ODEgMjIuODk1MSAxOC41MzY1QzIzLjkxNTkgMjEuNTc0OSAyNC4wMDIzIDI0Ljk5MDEgMjIuODA5MSAyNy44NDQ1QzIyLjIyMzkgMjkuMjQ0OSAyMS40OTU1IDMwLjQ1MDEgMjAuMjUxMSAzMS42MjI1WiIgZmlsbD0iIzU2NUFERCI+PC9wYXRoPgo8cGF0aCBmaWxsLXJ1bGU9ImV2ZW5vZGQiIGNsaXAtcnVsZT0iZXZlbm9kZCIgZD0iTTE1LjM1NjIgMzEuNDM0NUMxNC43NzAyIDMxLjY4MzcgMTQuMTIwNiAzMS44ODM3IDEzLjUyMjIgMzEuOTkyMUMxMi4yODk0IDMyLjIxNDUgMTEuODY4MiAzMS45ODYxIDExLjc1NjIgMzIuMTkwMUMxMS4yODU0IDMzLjA0OTMgMTAuODE0NiAzMy45MDkzIDEwLjM0MzggMzQuNzY4NUMxMS4wMDc4IDM0Ljk2MTMgMTIuNjQxOCAzNC43ODQxIDEzLjQ0NDIgMzQuNjIxN0MxNi43NTU4IDMzLjk0OTcgMTkuMTc5NCAzMS43OTA1IDIwLjc5OSAyOS4xMzQxQzIxLjc5MTggMjcuNTA2MSAyMi4zMTEgMjUuODQwNSAyMi42MjUgMjMuOTk0MUMyMi45MjMgMjIuNzU1NyAyMi44Mjk4IDIwLjA3NDEgMjIuMjczNCAxOC4wMzEyQzIyLjI0MDIgMTguNTYwMSAyMi4zNzEgMTkuNDU3NyAyMi4zNjcgMjAuMDczM0MyMi4yNzI2IDIzLjI3NjUgMjEuMTcxNCAyNi41MTA5IDE5LjA2MzggMjguNzc1N0MxOC4wMjk4IDI5Ljg4NjkgMTYuOTI5NCAzMC43NjUzIDE1LjM1NjIgMzEuNDM0NVoiIGZpbGw9IiM1NjVBREQiPjwvcGF0aD4KPHBhdGggZmlsbC1ydWxlPSJldmVub2RkIiBjbGlwLXJ1bGU9ImV2ZW5vZGQiIGQ9Ik0xMC43MDQ1IDI5LjQwMjlDMTAuMDY4MSAyOS40MDg5IDkuMzkwODggMjkuMzQ0NSA4Ljc5Njg4IDI5LjIxNDlDNy41NzMyOCAyOC45NDc3IDcuMjcxNjggMjguNTc0OSA3LjA5MDA4IDI4LjcyMDVDNi4zMjU2OCAyOS4zMzM3IDUuNTYxMjggMjkuOTQ2OSA0Ljc5Njg4IDMwLjU2MDVDNS4zMzYwOCAzMC45OTI1IDYuOTEzMjggMzEuNDU1NyA3LjcxNjA4IDMxLjYxMzNDMTEuMDMyOSAzMi4yNjMzIDE0LjA5OTMgMzEuMTk3NyAxNi42MTMzIDI5LjM2NjFDMTguMTU0OSAyOC4yNDMzIDE5LjI3MzMgMjYuOTAzNyAyMC4yNzEzIDI1LjMxOTdDMjEuMDIxNyAyNC4yOTA1IDIxLjk2MzMgMjEuNzc3NyAyMi4yMzMzIDE5LjY3NzdDMjEuOTk5NyAyMC4xNTMzIDIxLjc3NjEgMjEuMDMyOSAyMS41MzY1IDIxLjU5OTNDMjAuMjIwOSAyNC41MjE3IDE3Ljk2MzcgMjcuMDg2MSAxNS4xNDg5IDI4LjM2OTNDMTMuNzY3MyAyOC45OTkzIDEyLjQxNDEgMjkuMzg4NSAxMC43MDQ1IDI5LjQwMjlaIiBmaWxsPSIjNTY1QUREIj48L3BhdGg+CjxwYXRoIGZpbGwtcnVsZT0iZXZlbm9kZCIgY2xpcC1ydWxlPSJldmVub2RkIiBkPSJNNy4yNzI1IDI2LjAyOTRDNi42Njk3IDI1LjgyNTQgNi4wNTEzIDI1LjU0MjYgNS41MzI1IDI1LjIyNUM0LjQ2NDkgMjQuNTcwNiA0LjMwMjEgMjQuMTE5NCA0LjA4MjkgMjQuMTk3QzMuMTU5MyAyNC41MjU0IDIuMjM2MSAyNC44NTMgMS4zMTI1IDI1LjE4MTRDMS42Nzk3IDI1Ljc2NyAzLjAxNzMgMjYuNzIyNiAzLjcyNDEgMjcuMTM1QzYuNjQyOSAyOC44Mzg2IDkuODg5MyAyOC44NDAyIDEyLjg2NTMgMjcuOTM1OEMxNC42OTA1IDI3LjM4MTggMTYuMTg2NSAyNi40ODQyIDE3LjY1MDEgMjUuMzE1OEMxOC42OTY1IDI0LjU4OTQgMjAuNDExNyAyMi41MjYyIDIxLjM1NjUgMjAuNjMxOEMyMC45ODAxIDIxLjAwMzggMjAuNDc5NyAyMS43NjEgMjAuMDY3MyAyMi4yMTc0QzE3Ljg2NDEgMjQuNTQ1OCAxNC44ODk3IDI2LjIyNjIgMTEuODA5MyAyNi41MTM0QzEwLjI5ODEgMjYuNjU0MiA4Ljg5MjEgMjYuNTc3NCA3LjI3MjUgMjYuMDI5NFoiIGZpbGw9IiM1NjVBREQiPjwvcGF0aD4KPHBhdGggZmlsbC1ydWxlPSJldmVub2RkIiBjbGlwLXJ1bGU9ImV2ZW5vZGQiIGQ9Ik01LjE5MTIgMjEuNDIxNkM0LjcxMTIgMjEuMDA0IDQuMjQ2OCAyMC41MDc2IDMuODg3MiAyMC4wMTY0QzMuMTQ4IDE5LjAwNTYgMy4xNjkyIDE4LjUyNjQgMi45MzcyIDE4LjUxNTZDMS45NTc2IDE4LjQ2ODQgMC45Nzg4IDE4LjQyMTIgMCAxOC4zNzRDMC4xMTc2IDE5LjA1NDggMC45OTE2IDIwLjQ0NjggMS40ODkyIDIxLjA5NzJDMy41NDIgMjMuNzgxNiA2LjU0NDggMjUuMDE1NiA5LjY0MTIgMjUuMzA5MkMxMS41NCAyNS40OSAxMy4yNjQ4IDI1LjIyNzYgMTUuMDYyNCAyNC43MDI4QzE2LjMwNjQgMjQuNDI4OCAxOC42NzY0IDIzLjE3MTYgMjAuMjcgMjEuNzc4QzE5Ljc4IDIxLjk3ODggMTkuMDMgMjIuNDg5MiAxOC40NzQ4IDIyLjc1NDhDMTUuNTUzMiAyNC4wNzE2IDEyLjE2MzIgMjQuNDk2OCA5LjIwNDQgMjMuNTkyNEM3Ljc1MjggMjMuMTQ4OCA2LjQ4MTYgMjIuNTQzNiA1LjE5MTIgMjEuNDIxNloiIGZpbGw9IiM1NjVBREQiPjwvcGF0aD4KPHBhdGggZmlsbC1ydWxlPSJldmVub2RkIiBjbGlwLXJ1bGU9ImV2ZW5vZGQiIGQ9Ik00LjkyMzc5IDE2LjUzNDVDNC42MTc3OSAxNS45NzY5IDQuMzUyOTkgMTUuMzUwNSA0LjE4NTM5IDE0Ljc2NTNDMy44NDA5OSAxMy41NjEzIDQuMDI2NTkgMTMuMTE4OSAzLjgxMjE5IDEzLjAyODVDMi45MDk3OSAxMi42NDU3IDIuMDA3MzkgMTIuMjYzMyAxLjEwNDk5IDExLjg4MDlDMC45Nzk3OTQgMTIuNTYwNSAxLjMxOTM5IDE0LjE2ODkgMS41NjEzOSAxNC45NTA1QzIuNTYwOTkgMTguMTc4OSA0Ljk1MjE5IDIwLjM3NDUgNy43NTY1OSAyMS43MjA1QzkuNDc2MTkgMjIuNTQ1MyAxMS4xODU0IDIyLjg5NTMgMTMuMDUzNCAyMy4wMjMzQzE0LjMxNTggMjMuMTk2MSAxNi45NzQyIDIyLjgzNDkgMTguOTUxNCAyMi4wNzczQzE4LjQyMjIgMjIuMDk2OSAxNy41NDE4IDIyLjMxNjkgMTYuOTI5NCAyMi4zNzQ1QzEzLjczMjYgMjIuNjAwOSAxMC40MDQyIDIxLjgyODUgNy45NDAxOSAxOS45NTgxQzYuNzMwOTkgMTkuMDQwMSA1Ljc0NjU5IDE4LjAzMzMgNC45MjM3OSAxNi41MzQ1WiIgZmlsbD0iIzU2NUFERCI+PC9wYXRoPgo8cGF0aCBmaWxsLXJ1bGU9ImV2ZW5vZGQiIGNsaXAtcnVsZT0iZXZlbm9kZCIgZD0iTTYuNTA0NTQgMTEuNzAyQzYuNDM3NzQgMTEuMDY5MiA2LjQzNjk0IDEwLjM4OTYgNi41MDg1NCA5Ljc4NTE5QzYuNjU2OTQgOC41NDE5OSA2Ljk5ODk0IDguMjA1OTkgNi44MzY1NCA4LjAzOTE5QzYuMTUyNTQgNy4zMzcxOSA1LjQ2ODk0IDYuNjM1MTkgNC43ODQ5NCA1LjkzMzU5QzQuNDA2NTQgNi41MTExOSA0LjA5Njk0IDguMTI1OTkgNC4wMTc3NCA4Ljk0MDM5QzMuNjg5MzQgMTIuMzA0IDUuMDQ0NTQgMTUuMjU0IDcuMTA5MzQgMTcuNThDOC4zNzUzNCAxOS4wMDY0IDkuODE2MTQgMTkuOTkwNCAxMS40ODkzIDIwLjgzMkMxMi41ODYxIDIxLjQ4IDE1LjE3NjkgMjIuMTc1NiAxNy4yOTMzIDIyLjI0MjhDMTYuNzk4MSAyMi4wNTU2IDE1LjkwMDkgMjEuOTE3NiAxNS4zMTQxIDIxLjczNEMxMi4yNzg1IDIwLjcwNTIgOS41MDg5NCAxOC43MDUyIDcuOTYwNTQgMTYuMDI2NEM3LjIwMTM0IDE0LjcxMiA2LjY4MzM0IDEzLjQwMjggNi41MDQ1NCAxMS43MDJaIiBmaWxsPSIjNTY1QUREIj48L3BhdGg+CjxwYXRoIGZpbGwtcnVsZT0iZXZlbm9kZCIgY2xpcC1ydWxlPSJldmVub2RkIiBkPSJNOS41NTQ2MyA3Ljk2MTQ0QzkuNzAwMjMgNy4zNDE4NCA5LjkyMzAzIDYuNjk5NDQgMTAuMTkwNiA2LjE1MzA0QzEwLjc0MDYgNS4wMjc4NCAxMS4xNzQyIDQuODIzNDQgMTEuMDc1OCA0LjYxMjY0QzEwLjY2MTggMy43MjQ2NCAxMC4yNDc0IDIuODM2MjQgOS44MzMwMyAxLjk0ODI0QzkuMjg1MDMgMi4zNjkwNCA4LjQ2MDYzIDMuNzkxMDQgOC4xMTcwMyA0LjUzNDI0QzYuNjk4MjMgNy42MDE0NCA3LjAwNTQzIDEwLjgzMyA4LjE4NzgzIDEzLjcxMDJDOC45MTI2MyAxNS40NzQyIDkuOTQ4MjMgMTYuODc4MiAxMS4yNTAyIDE4LjIyNDJDMTIuMDcyMiAxOS4xOTc0IDE0LjI4OSAyMC43MDg2IDE2LjI2NDYgMjEuNDY5NEMxNS44NTkgMjEuMTI5OCAxNS4wNTc4IDIwLjcwMzQgMTQuNTYzOCAyMC4zMzY2QzEyLjAzNzQgMTguMzY0NiAxMC4wODE4IDE1LjU2MyA5LjUwMzgzIDEyLjUyMzhDOS4yMTk4MyAxMS4wMzI2IDkuMTYyNjMgOS42MjU4NCA5LjU1NDYzIDcuOTYxNDRaIiBmaWxsPSIjNTY1QUREIj48L3BhdGg+CjxwYXRoIGZpbGwtcnVsZT0iZXZlbm9kZCIgY2xpcC1ydWxlPSJldmVub2RkIiBkPSJNMTMuOTMxNyA1LjQ2NTZDMTQuMzAwMSA0Ljk0NjggMTQuNzQ5MyA0LjQzNTYgMTUuMjAyMSA0LjAzQzE2LjEzNTcgMy4xOTQ4IDE2LjYxNDUgMy4xNjkyIDE2LjYwMjkgMi45MzY4TDE2LjQ1NDkgMEMxNS43ODg5IDAuMTgzNiAxNC40ODk3IDEuMTkwNCAxMy44OTE3IDEuNzQ5NkMxMS40MjE3IDQuMDU2IDEwLjQ4ODUgNy4xNjU2IDEwLjUwMDEgMTAuMjc1NkMxMC41MDY5IDEyLjE4MjggMTAuOTM3MyAxMy44NzM2IDExLjYzNjUgMTUuNjExMkMxMi4wMzEzIDE2LjgyMjQgMTMuNTE1NyAxOS4wNTcyIDE1LjA1ODkgMjAuNTA2NEMxNC44MTA5IDIwLjAzODggMTQuMjI4OSAxOS4zNDI0IDEzLjkxMDEgMTguODE2QzEyLjMxMjkgMTYuMDM4IDExLjU1NjkgMTIuNzA2IDEyLjE2NTcgOS42NzI4QzEyLjQ2NDkgOC4xODQ0IDEyLjk0MjEgNi44NiAxMy45MzE3IDUuNDY1NloiIGZpbGw9IiM1NjVBREQiPjwvcGF0aD4KPC9zdmc+";
+const DEFAULT_NOTES = `Darwix AI sells BFSI AI products. Core products: Sherpa (field and investigation assist), Voice Agent, Real-Time Assist, Auto PD / Live PD Assist (Personal Discussion report written live, housing finance), Evidence Intelligence (cross-source discrepancy review for underwriting, ARC retail assets, health-insurance claims), Alert Intelligence (wealth RM signal triage), Pre-Meet Intelligence, Video PIVC, Tele-Medicine.
+Rules that apply to every post:
+- The product never declares fraud or decides a claim, loan or policy. Patterns are leads, not verdicts. A human records the resolution.
+- Every value keeps its source, state and history. Statements stay statements until a source proves them.
+- Use neutral labels (Illustrative Hospital A, a housing finance company). Do not name real customers, banks or insurers.
+- Do not invent statistics. Use a number only if it is in the content row.
+- Voice: precise, operational, plain sentences. No exclamation marks, no hype adjectives, no hedging.`;
+const DEFAULT_BANNED = "fraud detected, catches fraud, detects fraud, guarantee, guaranteed, 100%, best-in-class, revolutionary, game-changer, game changing";
+const BRANDS = ["HDFC","ICICI","CIBIL","Bajaj","ABSLI","Niva Bupa","Prudential","Kotak","Edelweiss","Lodha","SMFG","Axis","Meiji"];
+const TZ = "Asia/Kolkata";
+
+/* ---------- tiny helpers ---------- */
+const $ = (s, r=document) => r.querySelector(s);
+const esc = s => String(s ?? "").replace(/[&<>"']/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
+const lsGet = (k, d) => { try { const v = localStorage.getItem(k); return v == null ? d : JSON.parse(v); } catch { return d; } };
+const lsSet = (k, v) => { try { localStorage.setItem(k, JSON.stringify(v)); } catch {} };
+const ICONS = {"circle-alert": "data:image/svg+xml;base64,PHN2ZyBjbGFzcz0ibHVjaWRlIGx1Y2lkZS1jaXJjbGUtYWxlcnQiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgd2lkdGg9IjI0IiBoZWlnaHQ9IjI0IiB2aWV3Qm94PSIwIDAgMjQgMjQiIGZpbGw9Im5vbmUiIHN0cm9rZT0iIzAwMCIgc3Ryb2tlLXdpZHRoPSIxLjUiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCI+CiAgPGNpcmNsZSBjeD0iMTIiIGN5PSIxMiIgcj0iMTAiPjwvY2lyY2xlPgogIDxsaW5lIHgxPSIxMiIgeDI9IjEyIiB5MT0iOCIgeTI9IjEyIj48L2xpbmU+CiAgPGxpbmUgeDE9IjEyIiB4Mj0iMTIuMDEiIHkxPSIxNiIgeTI9IjE2Ij48L2xpbmU+Cjwvc3ZnPg==", "check": "data:image/svg+xml;base64,PHN2ZyBjbGFzcz0ibHVjaWRlIGx1Y2lkZS1jaGVjayIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiB3aWR0aD0iMjQiIGhlaWdodD0iMjQiIHZpZXdCb3g9IjAgMCAyNCAyNCIgZmlsbD0ibm9uZSIgc3Ryb2tlPSIjMDAwIiBzdHJva2Utd2lkdGg9IjEuNSIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIiBzdHJva2UtbGluZWpvaW49InJvdW5kIj4KICA8cGF0aCBkPSJNMjAgNiA5IDE3bC01LTUiPjwvcGF0aD4KPC9zdmc+", "arrow-right": "data:image/svg+xml;base64,PHN2ZyBjbGFzcz0ibHVjaWRlIGx1Y2lkZS1hcnJvdy1yaWdodCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiB3aWR0aD0iMjQiIGhlaWdodD0iMjQiIHZpZXdCb3g9IjAgMCAyNCAyNCIgZmlsbD0ibm9uZSIgc3Ryb2tlPSIjMDAwIiBzdHJva2Utd2lkdGg9IjEuNSIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIiBzdHJva2UtbGluZWpvaW49InJvdW5kIj4KICA8cGF0aCBkPSJNNSAxMmgxNCI+PC9wYXRoPgogIDxwYXRoIGQ9Im0xMiA1IDcgNy03IDciPjwvcGF0aD4KPC9zdmc+", "eye": "data:image/svg+xml;base64,PHN2ZyBjbGFzcz0ibHVjaWRlIGx1Y2lkZS1leWUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgd2lkdGg9IjI0IiBoZWlnaHQ9IjI0IiB2aWV3Qm94PSIwIDAgMjQgMjQiIGZpbGw9Im5vbmUiIHN0cm9rZT0iIzAwMCIgc3Ryb2tlLXdpZHRoPSIxLjUiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCI+CiAgPHBhdGggZD0iTTIuMDYyIDEyLjM0OGExIDEgMCAwIDEgMC0uNjk2IDEwLjc1IDEwLjc1IDAgMCAxIDE5Ljg3NiAwIDEgMSAwIDAgMSAwIC42OTYgMTAuNzUgMTAuNzUgMCAwIDEtMTkuODc2IDAiPjwvcGF0aD4KICA8Y2lyY2xlIGN4PSIxMiIgY3k9IjEyIiByPSIzIj48L2NpcmNsZT4KPC9zdmc+", "calendar": "data:image/svg+xml;base64,PHN2ZyBjbGFzcz0ibHVjaWRlIGx1Y2lkZS1jYWxlbmRhciIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiB3aWR0aD0iMjQiIGhlaWdodD0iMjQiIHZpZXdCb3g9IjAgMCAyNCAyNCIgZmlsbD0ibm9uZSIgc3Ryb2tlPSIjMDAwIiBzdHJva2Utd2lkdGg9IjEuNSIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIiBzdHJva2UtbGluZWpvaW49InJvdW5kIj4KICA8cGF0aCBkPSJNOCAydjQiPjwvcGF0aD4KICA8cGF0aCBkPSJNMTYgMnY0Ij48L3BhdGg+CiAgPHJlY3Qgd2lkdGg9IjE4IiBoZWlnaHQ9IjE4IiB4PSIzIiB5PSI0IiByeD0iMiI+PC9yZWN0PgogIDxwYXRoIGQ9Ik0zIDEwaDE4Ij48L3BhdGg+Cjwvc3ZnPg==", "refresh-cw": "data:image/svg+xml;base64,PHN2ZyBjbGFzcz0ibHVjaWRlIGx1Y2lkZS1yZWZyZXNoLWN3IiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyNCIgaGVpZ2h0PSIyNCIgdmlld0JveD0iMCAwIDI0IDI0IiBmaWxsPSJub25lIiBzdHJva2U9IiMwMDAiIHN0cm9rZS13aWR0aD0iMS41IiBzdHJva2UtbGluZWNhcD0icm91bmQiIHN0cm9rZS1saW5lam9pbj0icm91bmQiPgogIDxwYXRoIGQ9Ik0zIDEyYTkgOSAwIDAgMSA5LTkgOS43NSA5Ljc1IDAgMCAxIDYuNzQgMi43NEwyMSA4Ij48L3BhdGg+CiAgPHBhdGggZD0iTTIxIDN2NWgtNSI+PC9wYXRoPgogIDxwYXRoIGQ9Ik0yMSAxMmE5IDkgMCAwIDEtOSA5IDkuNzUgOS43NSAwIDAgMS02Ljc0LTIuNzRMMyAxNiI+PC9wYXRoPgogIDxwYXRoIGQ9Ik04IDE2SDN2NSI+PC9wYXRoPgo8L3N2Zz4=", "send": "data:image/svg+xml;base64,PHN2ZyBjbGFzcz0ibHVjaWRlIGx1Y2lkZS1zZW5kIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyNCIgaGVpZ2h0PSIyNCIgdmlld0JveD0iMCAwIDI0IDI0IiBmaWxsPSJub25lIiBzdHJva2U9IiMwMDAiIHN0cm9rZS13aWR0aD0iMS41IiBzdHJva2UtbGluZWNhcD0icm91bmQiIHN0cm9rZS1saW5lam9pbj0icm91bmQiPgogIDxwYXRoIGQ9Ik0xNC41MzYgMjEuNjg2YS41LjUgMCAwIDAgLjkzNy0uMDI0bDYuNS0xOWEuNDk2LjQ5NiAwIDAgMC0uNjM1LS42MzVsLTE5IDYuNWEuNS41IDAgMCAwLS4wMjQuOTM3bDcuOTMgMy4xOGEyIDIgMCAwIDEgMS4xMTIgMS4xMXoiPjwvcGF0aD4KICA8cGF0aCBkPSJtMjEuODU0IDIuMTQ3LTEwLjk0IDEwLjkzOSI+PC9wYXRoPgo8L3N2Zz4=", "file-text": "data:image/svg+xml;base64,PHN2ZyBjbGFzcz0ibHVjaWRlIGx1Y2lkZS1maWxlLXRleHQiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgd2lkdGg9IjI0IiBoZWlnaHQ9IjI0IiB2aWV3Qm94PSIwIDAgMjQgMjQiIGZpbGw9Im5vbmUiIHN0cm9rZT0iIzAwMCIgc3Ryb2tlLXdpZHRoPSIxLjUiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCI+CiAgPHBhdGggZD0iTTE1IDJINmEyIDIgMCAwIDAtMiAydjE2YTIgMiAwIDAgMCAyIDJoMTJhMiAyIDAgMCAwIDItMlY3WiI+PC9wYXRoPgogIDxwYXRoIGQ9Ik0xNCAydjRhMiAyIDAgMCAwIDIgMmg0Ij48L3BhdGg+CiAgPHBhdGggZD0iTTEwIDlIOCI+PC9wYXRoPgogIDxwYXRoIGQ9Ik0xNiAxM0g4Ij48L3BhdGg+CiAgPHBhdGggZD0iTTE2IDE3SDgiPjwvcGF0aD4KPC9zdmc+", "loader-circle": "data:image/svg+xml;base64,PHN2ZyBjbGFzcz0ibHVjaWRlIGx1Y2lkZS1sb2FkZXItY2lyY2xlIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyNCIgaGVpZ2h0PSIyNCIgdmlld0JveD0iMCAwIDI0IDI0IiBmaWxsPSJub25lIiBzdHJva2U9IiMwMDAiIHN0cm9rZS13aWR0aD0iMS41IiBzdHJva2UtbGluZWNhcD0icm91bmQiIHN0cm9rZS1saW5lam9pbj0icm91bmQiPgogIDxwYXRoIGQ9Ik0yMSAxMmE5IDkgMCAxIDEtNi4yMTktOC41NiI+PC9wYXRoPgo8L3N2Zz4=", "plus": "data:image/svg+xml;base64,PHN2ZyBjbGFzcz0ibHVjaWRlIGx1Y2lkZS1wbHVzIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyNCIgaGVpZ2h0PSIyNCIgdmlld0JveD0iMCAwIDI0IDI0IiBmaWxsPSJub25lIiBzdHJva2U9IiMwMDAiIHN0cm9rZS13aWR0aD0iMS41IiBzdHJva2UtbGluZWNhcD0icm91bmQiIHN0cm9rZS1saW5lam9pbj0icm91bmQiPgogIDxwYXRoIGQ9Ik01IDEyaDE0Ij48L3BhdGg+CiAgPHBhdGggZD0iTTEyIDV2MTQiPjwvcGF0aD4KPC9zdmc+", "circle-check": "data:image/svg+xml;base64,PHN2ZyBjbGFzcz0ibHVjaWRlIGx1Y2lkZS1jaXJjbGUtY2hlY2siIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgd2lkdGg9IjI0IiBoZWlnaHQ9IjI0IiB2aWV3Qm94PSIwIDAgMjQgMjQiIGZpbGw9Im5vbmUiIHN0cm9rZT0iIzAwMCIgc3Ryb2tlLXdpZHRoPSIxLjUiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCI+CiAgPGNpcmNsZSBjeD0iMTIiIGN5PSIxMiIgcj0iMTAiPjwvY2lyY2xlPgogIDxwYXRoIGQ9Im05IDEyIDIgMiA0LTQiPjwvcGF0aD4KPC9zdmc+", "sparkles": "data:image/svg+xml;base64,PHN2ZyBjbGFzcz0ibHVjaWRlIGx1Y2lkZS1zcGFya2xlcyIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiB3aWR0aD0iMjQiIGhlaWdodD0iMjQiIHZpZXdCb3g9IjAgMCAyNCAyNCIgZmlsbD0ibm9uZSIgc3Ryb2tlPSIjMDAwIiBzdHJva2Utd2lkdGg9IjEuNSIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIiBzdHJva2UtbGluZWpvaW49InJvdW5kIj4KICA8cGF0aCBkPSJNOS45MzcgMTUuNUEyIDIgMCAwIDAgOC41IDE0LjA2M2wtNi4xMzUtMS41ODJhLjUuNSAwIDAgMSAwLS45NjJMOC41IDkuOTM2QTIgMiAwIDAgMCA5LjkzNyA4LjVsMS41ODItNi4xMzVhLjUuNSAwIDAgMSAuOTYzIDBMMTQuMDYzIDguNUEyIDIgMCAwIDAgMTUuNSA5LjkzN2w2LjEzNSAxLjU4MWEuNS41IDAgMCAxIDAgLjk2NEwxNS41IDE0LjA2M2EyIDIgMCAwIDAtMS40MzcgMS40MzdsLTEuNTgyIDYuMTM1YS41LjUgMCAwIDEtLjk2MyAweiI+PC9wYXRoPgogIDxwYXRoIGQ9Ik0yMCAzdjQiPjwvcGF0aD4KICA8cGF0aCBkPSJNMjIgNWgtNCI+PC9wYXRoPgogIDxwYXRoIGQ9Ik00IDE3djIiPjwvcGF0aD4KICA8cGF0aCBkPSJNNSAxOEgzIj48L3BhdGg+Cjwvc3ZnPg==", "upload": "data:image/svg+xml;base64,PHN2ZyBjbGFzcz0ibHVjaWRlIGx1Y2lkZS11cGxvYWQiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgd2lkdGg9IjI0IiBoZWlnaHQ9IjI0IiB2aWV3Qm94PSIwIDAgMjQgMjQiIGZpbGw9Im5vbmUiIHN0cm9rZT0iIzAwMCIgc3Ryb2tlLXdpZHRoPSIxLjUiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCI+CiAgPHBhdGggZD0iTTIxIDE1djRhMiAyIDAgMCAxLTIgMkg1YTIgMiAwIDAgMS0yLTJ2LTQiPjwvcGF0aD4KICA8cG9seWxpbmUgcG9pbnRzPSIxNyA4IDEyIDMgNyA4Ij48L3BvbHlsaW5lPgogIDxsaW5lIHgxPSIxMiIgeDI9IjEyIiB5MT0iMyIgeTI9IjE1Ij48L2xpbmU+Cjwvc3ZnPg==", "x": "data:image/svg+xml;base64,PHN2ZyBjbGFzcz0ibHVjaWRlIGx1Y2lkZS14IiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyNCIgaGVpZ2h0PSIyNCIgdmlld0JveD0iMCAwIDI0IDI0IiBmaWxsPSJub25lIiBzdHJva2U9IiMwMDAiIHN0cm9rZS13aWR0aD0iMS41IiBzdHJva2UtbGluZWNhcD0icm91bmQiIHN0cm9rZS1saW5lam9pbj0icm91bmQiPgogIDxwYXRoIGQ9Ik0xOCA2IDYgMTgiPjwvcGF0aD4KICA8cGF0aCBkPSJtNiA2IDEyIDEyIj48L3BhdGg+Cjwvc3ZnPg==", "link": "data:image/svg+xml;base64,PHN2ZyBjbGFzcz0ibHVjaWRlIGx1Y2lkZS1saW5rIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyNCIgaGVpZ2h0PSIyNCIgdmlld0JveD0iMCAwIDI0IDI0IiBmaWxsPSJub25lIiBzdHJva2U9IiMwMDAiIHN0cm9rZS13aWR0aD0iMS41IiBzdHJva2UtbGluZWNhcD0icm91bmQiIHN0cm9rZS1saW5lam9pbj0icm91bmQiPgogIDxwYXRoIGQ9Ik0xMCAxM2E1IDUgMCAwIDAgNy41NC41NGwzLTNhNSA1IDAgMCAwLTcuMDctNy4wN2wtMS43MiAxLjcxIj48L3BhdGg+CiAgPHBhdGggZD0iTTE0IDExYTUgNSAwIDAgMC03LjU0LS41NGwtMyAzYTUgNSAwIDAgMCA3LjA3IDcuMDdsMS43MS0xLjcxIj48L3BhdGg+Cjwvc3ZnPg==", "chevron-left": "data:image/svg+xml;base64,PHN2ZyBjbGFzcz0ibHVjaWRlIGx1Y2lkZS1jaGV2cm9uLWxlZnQiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgd2lkdGg9IjI0IiBoZWlnaHQ9IjI0IiB2aWV3Qm94PSIwIDAgMjQgMjQiIGZpbGw9Im5vbmUiIHN0cm9rZT0iIzAwMCIgc3Ryb2tlLXdpZHRoPSIxLjUiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCI+CiAgPHBhdGggZD0ibTE1IDE4LTYtNiA2LTYiPjwvcGF0aD4KPC9zdmc+", "chevron-right": "data:image/svg+xml;base64,PHN2ZyBjbGFzcz0ibHVjaWRlIGx1Y2lkZS1jaGV2cm9uLXJpZ2h0IiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyNCIgaGVpZ2h0PSIyNCIgdmlld0JveD0iMCAwIDI0IDI0IiBmaWxsPSJub25lIiBzdHJva2U9IiMwMDAiIHN0cm9rZS13aWR0aD0iMS41IiBzdHJva2UtbGluZWNhcD0icm91bmQiIHN0cm9rZS1saW5lam9pbj0icm91bmQiPgogIDxwYXRoIGQ9Im05IDE4IDYtNi02LTYiPjwvcGF0aD4KPC9zdmc+", "instagram": "data:image/svg+xml;base64,PHN2ZyByb2xlPSJpbWciIHZpZXdCb3g9IjAgMCAyNCAyNCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48dGl0bGU+SW5zdGFncmFtPC90aXRsZT48cGF0aCBkPSJNMTIgMEM4Ljc0IDAgOC4zMzMuMDE1IDcuMDUzLjA3MiA1Ljc3NS4xMzIgNC45MDUuMzMzIDQuMTQuNjNjLS43ODkuMzA2LTEuNDU5LjcxNy0yLjEyNiAxLjM4NFMuOTM1IDMuMzUuNjMgNC4xNEMuMzMzIDQuOTA1LjEzMSA1Ljc3NS4wNzIgNy4wNTMuMDEyIDguMzMzIDAgOC43NCAwIDEycy4wMTUgMy42NjcuMDcyIDQuOTQ3Yy4wNiAxLjI3Ny4yNjEgMi4xNDguNTU4IDIuOTEzLjMwNi43ODguNzE3IDEuNDU5IDEuMzg0IDIuMTI2LjY2Ny42NjYgMS4zMzYgMS4wNzkgMi4xMjYgMS4zODQuNzY2LjI5NiAxLjYzNi40OTkgMi45MTMuNTU4QzguMzMzIDIzLjk4OCA4Ljc0IDI0IDEyIDI0czMuNjY3LS4wMTUgNC45NDctLjA3MmMxLjI3Ny0uMDYgMi4xNDgtLjI2MiAyLjkxMy0uNTU4Ljc4OC0uMzA2IDEuNDU5LS43MTggMi4xMjYtMS4zODQuNjY2LS42NjcgMS4wNzktMS4zMzUgMS4zODQtMi4xMjYuMjk2LS43NjUuNDk5LTEuNjM2LjU1OC0yLjkxMy4wNi0xLjI4LjA3Mi0xLjY4Ny4wNzItNC45NDdzLS4wMTUtMy42NjctLjA3Mi00Ljk0N2MtLjA2LTEuMjc3LS4yNjItMi4xNDktLjU1OC0yLjkxMy0uMzA2LS43ODktLjcxOC0xLjQ1OS0xLjM4NC0yLjEyNkMyMS4zMTkgMS4zNDcgMjAuNjUxLjkzNSAxOS44Ni42M2MtLjc2NS0uMjk3LTEuNjM2LS40OTktMi45MTMtLjU1OEMxNS42NjcuMDEyIDE1LjI2IDAgMTIgMHptMCAyLjE2YzMuMjAzIDAgMy41ODUuMDE2IDQuODUuMDcxIDEuMTcuMDU1IDEuODA1LjI0OSAyLjIyNy40MTUuNTYyLjIxNy45Ni40NzcgMS4zODIuODk2LjQxOS40Mi42NzkuODE5Ljg5NiAxLjM4MS4xNjQuNDIyLjM2IDEuMDU3LjQxMyAyLjIyNy4wNTcgMS4yNjYuMDcgMS42NDYuMDcgNC44NXMtLjAxNSAzLjU4NS0uMDc0IDQuODVjLS4wNjEgMS4xNy0uMjU2IDEuODA1LS40MjEgMi4yMjctLjIyNC41NjItLjQ3OS45Ni0uODk5IDEuMzgyLS40MTkuNDE5LS44MjQuNjc5LTEuMzguODk2LS40Mi4xNjQtMS4wNjUuMzYtMi4yMzUuNDEzLTEuMjc0LjA1Ny0xLjY0OS4wNy00Ljg1OS4wNy0zLjIxMSAwLTMuNTg2LS4wMTUtNC44NTktLjA3NC0xLjE3MS0uMDYxLTEuODE2LS4yNTYtMi4yMzYtLjQyMS0uNTY5LS4yMjQtLjk2LS40NzktMS4zNzktLjg5OS0uNDIxLS40MTktLjY5LS44MjQtLjktMS4zOC0uMTY1LS40Mi0uMzU5LTEuMDY1LS40Mi0yLjIzNS0uMDQ1LTEuMjYtLjA2MS0xLjY0OS0uMDYxLTQuODQ0IDAtMy4xOTYuMDE2LTMuNTg2LjA2MS00Ljg2MS4wNjEtMS4xNy4yNTUtMS44MTQuNDItMi4yMzQuMjEtLjU3LjQ3OS0uOTYuOS0xLjM4MS40MTktLjQxOS44MS0uNjg5IDEuMzc5LS44OTguNDItLjE2NiAxLjA1MS0uMzYxIDIuMjIxLS40MjEgMS4yNzUtLjA0NSAxLjY1LS4wNiA0Ljg1OS0uMDZsLjA0NS4wM3ptMCAzLjY3OGMtMy40MDUgMC02LjE2MiAyLjc2LTYuMTYyIDYuMTYyIDAgMy40MDUgMi43NiA2LjE2MiA2LjE2MiA2LjE2MiAzLjQwNSAwIDYuMTYyLTIuNzYgNi4xNjItNi4xNjIgMC0zLjQwNS0yLjc2LTYuMTYyLTYuMTYyLTYuMTYyek0xMiAxNmMtMi4yMSAwLTQtMS43OS00LTRzMS43OS00IDQtNCA0IDEuNzkgNCA0LTEuNzkgNC00IDR6bTcuODQ2LTEwLjQwNWMwIC43OTUtLjY0NiAxLjQ0LTEuNDQgMS40NC0uNzk1IDAtMS40NC0uNjQ2LTEuNDQtMS40NCAwLS43OTQuNjQ2LTEuNDM5IDEuNDQtMS40MzkuNzkzLS4wMDEgMS40NC42NDUgMS40NCAxLjQzOXoiPjwvcGF0aD48L3N2Zz4="};
+const ico = (n,sz=16) => `<span class="i" style="--u:url(${ICONS[n]});width:${sz}px;height:${sz}px" aria-hidden="true"></span>`;
+const uid = () => "p" + Date.now().toString(36) + Math.random().toString(36).slice(2,5);
+const slug = s => String(s||"post").toLowerCase().replace(/[^a-z0-9]+/g,"-").replace(/^-|-$/g,"").slice(0,32) || "post";
+const fmtIST = (iso, o={}) => iso ? new Date(iso).toLocaleString("en-IN", {timeZone:TZ, day:"2-digit", month:"short", hour:"2-digit", minute:"2-digit", hour12:false, ...o}) : "Not scheduled";
+const istParts = iso => { const d = new Date(new Date(iso).getTime() + 19800000); return d; };
+const toLocalInput = iso => iso ? istParts(iso).toISOString().slice(0,16) : "";
+const fromLocalInput = v => v ? new Date(v + ":00+05:30").toISOString() : null;
+const b64e = s => btoa(String.fromCharCode(...new TextEncoder().encode(s)));
+const b64d = s => new TextDecoder().decode(Uint8Array.from(atob(s.replace(/\n/g,"")), c => c.charCodeAt(0)));
+
+/* ---------- state ---------- */
+const S = {
+  tab: lsGet("tab","overview"), posts: [], sha: null, runs: [], insights: null, loading: false, error: null,
+  cfg: Object.assign({ owner:"Rohan-2312", repo:"darwix-instagram", branch:"main", token:"", aiKey:"", aiModel:"claude-sonnet-5-5",
+    notes: DEFAULT_NOTES, banned: DEFAULT_BANNED, defaultTime:"11:00", defaultCta:"Link in bio.", defaultTags:"#darwixai #bfsi" }, lsGet("cfg", {})),
+  fStatus: "all", calMonth: null, drawer: null, busy: {}, toast: null, igId: "17841412465345449", screens: {}
+};
+const live = () => !!S.cfg.token;
+
+/* ---------- post model ---------- */
+/* schedule.json entry: id, publish_at (UTC), approved, status, caption, images[], media_id, published_at, error
+   studio extras kept in "meta": pillar, topic, hook, direction, cta, slides[], generated_by                    */
+function stage(p){
+  if (p.status === "published") return "published";
+  if (p.status === "failed") return "failed";
+  if (p.status === "planned") return "planned";
+  if (!p.approved) return "review";
+  return new Date(p.publish_at) > new Date() ? "scheduled" : "publishing";
+}
+const STAGE_L = {planned:"Planned",review:"Needs review",scheduled:"Scheduled",publishing:"Publishing",published:"Published",failed:"Failed"};
+const pillOf = st => `<span class="pill s-${st}"><i></i>${STAGE_L[st]}</span>`;
+function checks(p){
+  const out = [], m = p.meta || {}, slides = m.slides || [];
+  const text = [p.caption||"", ...slides.map(s => (s.title||"")+" "+(s.body||""))].join("\n");
+  if (!slides.length) return [{l:"fail", t:"No slides yet. Generate or add slides."}];
+  if (slides.length < 2 || slides.length > 10) out.push({l:"fail", t:`Carousels need 2 to 10 slides. This one has ${slides.length}.`});
+  if ((p.caption||"").length > 2200) out.push({l:"fail", t:`Caption is ${(p.caption||"").length} characters. Instagram allows 2,200.`});
+  if (!(p.caption||"").trim()) out.push({l:"fail", t:"Caption is empty."});
+  const tags = (p.caption||"").match(/#\w+/g) || [];
+  if (tags.length > 30) out.push({l:"fail", t:`${tags.length} hashtags. Instagram allows 30.`});
+  S.cfg.banned.split(",").map(x=>x.trim()).filter(Boolean).forEach(w => { if (text.toLowerCase().includes(w.toLowerCase())) out.push({l:"fail", t:`Banned phrase: "${w}".`}); });
+  BRANDS.forEach(b => { if (text.includes(b)) out.push({l:"warn", t:`Names a real company (${b}). Use a neutral label unless it is cleared.`}); });
+  const nums = [...new Set(text.match(/\b\d[\d,.]*\s?(%|x|×|ms|s|min|crore|lakh|cr)?/gi) || [])].filter(n => n.trim().length > 1 || /\d/.test(n)).slice(0,4);
+  if (nums.length) out.push({l:"warn", t:`Verify figures against a source: ${nums.map(n=>n.trim()).join(", ")}.`});
+  if (/\bfraud\b/i.test(text) && !/never|not|lead|review/i.test(text)) out.push({l:"warn", t:"Mentions fraud. Confirm it does not read as a verdict."});
+  slides.forEach((s,i) => { if ((s.title||"").length > 110) out.push({l:"warn", t:`Slide ${i+1} headline is long and may shrink.`}); if ((s.body||"").length > 260) out.push({l:"warn", t:`Slide ${i+1} body is long.`}); });
+  return out;
+}
+function quality(p){
+  const c = checks(p);
+  if (c.some(x=>x.l==="fail")) return ["q-low","Blocked"];
+  if (c.some(x=>x.l==="warn")) return ["q-med","Check figures"];
+  return ["q-high","Checks clear"];
+}
+
+/* ---------- slide renderer (1080x1350, Darwix palette) ---------- */
+const logoImg = new Image(); logoImg.src = LOGO;
+function wrapLines(ctx, text, maxW){
+  const out = [];
+  String(text||"").split("\n").forEach(par => {
+    const words = par.split(/\s+/).filter(Boolean); let line = "";
+    words.forEach(w => { const t = line ? line+" "+w : w; if (ctx.measureText(t).width > maxW && line){ out.push(line); line = w; } else line = t; });
+    if (line) out.push(line); if (!words.length) out.push("");
+  });
+  return out;
+}
+function rr(ctx,x,y,w,h,r){ ctx.beginPath(); ctx.moveTo(x+r,y); ctx.arcTo(x+w,y,x+w,y+h,r); ctx.arcTo(x+w,y+h,x,y+h,r); ctx.arcTo(x,y+h,x,y,r); ctx.arcTo(x,y,x+w,y,r); ctx.closePath(); }
+function fitText(ctx, text, weight, maxW, maxLines, sizes){
+  for (const sz of sizes){ ctx.font = `${weight} ${sz}px Manrope, sans-serif`; const l = wrapLines(ctx, text, maxW); if (l.length <= maxLines) return {sz, lines:l}; }
+  const sz = sizes[sizes.length-1]; ctx.font = `${weight} ${sz}px Manrope, sans-serif`; return {sz, lines:wrapLines(ctx,text,maxW).slice(0,maxLines)};
+}
+async function loadScreen(path){
+  if (!path) return null;
+  if (S.screens[path]) return S.screens[path];
+  const img = new Image(); img.crossOrigin = "anonymous";
+  const src = path.startsWith("data:") ? path : `https://raw.githubusercontent.com/${S.cfg.owner}/${S.cfg.repo}/${S.cfg.branch}/${path}`;
+  await new Promise(r => { img.onload = r; img.onerror = r; img.src = src; });
+  S.screens[path] = img.naturalWidth ? img : null; return S.screens[path];
+}
+async function drawSlide(canvas, slide, idx, total, eyebrow){
+  try { await Promise.all([document.fonts.load("600 40px Manrope"), document.fonts.load("500 20px Manrope"), document.fonts.load("400 40px Manrope")]); } catch {}
+  const W = 1080, H = 1350, M = 90, c = canvas.getContext("2d");
+  canvas.width = W; canvas.height = H;
+  const g = c.createLinearGradient(0,0,W*0.35,H); g.addColorStop(0,"#FFFFFF"); g.addColorStop(.42,"#FBFBFF"); g.addColorStop(1,"#EFEFFC");
+  c.fillStyle = g; c.fillRect(0,0,W,H);
+  c.strokeStyle = "rgba(86,90,221,.055)"; c.lineWidth = 1;
+  for (let x=M; x<W; x+=90){ c.beginPath(); c.moveTo(x,0); c.lineTo(x,H); c.stroke(); }
+  for (let y=60; y<H; y+=90){ c.beginPath(); c.moveTo(0,y); c.lineTo(W,y); c.stroke(); }
+  const bl = c.createRadialGradient(W*.82,H*.78,0,W*.82,H*.78,520); bl.addColorStop(0,"rgba(86,90,221,.20)"); bl.addColorStop(1,"rgba(86,90,221,0)");
+  c.fillStyle = bl; c.fillRect(0,0,W,H);
+  if (logoImg.complete && logoImg.naturalWidth) c.drawImage(logoImg, W/2-27, 70, 54, 54);
+  c.textBaseline = "alphabetic"; c.fillStyle = "#667085"; c.font = "500 20px Manrope, sans-serif";
+  if (c.letterSpacing !== undefined) c.letterSpacing = "3px";
+  c.textAlign = "left"; let eb = (eyebrow||"").toUpperCase(); while (eb.length > 4 && c.measureText(eb).width > 340) eb = eb.slice(0,-2); if (eb !== (eyebrow||"").toUpperCase()) eb = eb.trimEnd() + "…"; c.fillText(eb, M, 104);
+  c.textAlign = "right"; c.fillText(String(idx+1).padStart(2,"0")+" / "+String(total).padStart(2,"0"), W-M, 104);
+  if (c.letterSpacing !== undefined) c.letterSpacing = "0px";
+  c.textAlign = "left";
+  const kind = slide.kind || "content", maxW = W - M*2;
+  if (kind === "cover"){
+    const f = fitText(c, slide.title, 600, maxW, 6, [104,92,82,72,64]);
+    c.fillStyle = "#1F2337"; c.font = `600 ${f.sz}px Manrope, sans-serif`; let y = 400;
+    f.lines.forEach(l => { c.fillText(l, M, y); y += f.sz*1.08; });
+    if (slide.body){ c.fillStyle = "#667085"; c.font = "400 40px Manrope, sans-serif"; y += 24; wrapLines(c, slide.body, maxW).slice(0,4).forEach(l => { c.fillText(l, M, y); y += 52; }); }
+    rr(c, M, 1110, 250, 84, 42); c.fillStyle = "#565ADD"; c.fill();
+    c.fillStyle = "#FFFFFF"; c.font = "600 32px Manrope, sans-serif"; c.textAlign = "center"; c.fillText("Swipe  →", M+125, 1163); c.textAlign = "left";
+  } else if (kind === "cta"){
+    rr(c, M, 330, maxW, 700, 30); c.fillStyle = "#565ADD"; c.fill();
+    c.fillStyle = "#FFFFFF"; const f = fitText(c, slide.title, 600, maxW-120, 5, [82,74,66,58]);
+    c.font = `600 ${f.sz}px Manrope, sans-serif`; let y = 470; f.lines.forEach(l => { c.fillText(l, M+60, y); y += f.sz*1.1; });
+    if (slide.body){ c.fillStyle = "rgba(255,255,255,.86)"; c.font = "400 38px Manrope, sans-serif"; y += 20; wrapLines(c, slide.body, maxW-120).slice(0,5).forEach(l => { c.fillText(l, M+60, y); y += 50; }); }
+    rr(c, M+60, 900, 330, 80, 40); c.fillStyle = "#FFFFFF"; c.fill(); c.fillStyle = "#3F42B8"; c.font = "600 32px Manrope, sans-serif"; c.textAlign = "center"; c.fillText("darwix.ai", M+225, 951); c.textAlign = "left";
+  } else {
+    const hasShot = !!slide.screen, tf = fitText(c, slide.title, 600, maxW, hasShot ? 3 : 5, hasShot ? [64,56,50] : [78,68,60,52]);
+    c.fillStyle = "#1F2337"; c.font = `600 ${tf.sz}px Manrope, sans-serif`; let y = hasShot ? 250 : 400;
+    tf.lines.forEach(l => { c.fillText(l, M, y); y += tf.sz*1.1; });
+    if (hasShot){
+      const img = await loadScreen(slide.screen);
+      y += 10; const bx = M, bw = maxW, by = Math.max(y+10, 480), bh = 1160 - by;
+      c.save(); c.shadowColor = "rgba(31,35,55,.16)"; c.shadowBlur = 40; c.shadowOffsetY = 14; rr(c,bx,by,bw,bh,30); c.fillStyle = "#FFFFFF"; c.fill(); c.restore();
+      c.save(); rr(c,bx,by,bw,bh,30); c.clip();
+      if (img){ const r = Math.min(bw/img.naturalWidth, bh/img.naturalHeight); const w = img.naturalWidth*r, h = img.naturalHeight*r; c.drawImage(img, bx+(bw-w)/2, by+(bh-h)/2, w, h); }
+      else { c.fillStyle="#F3F4FF"; c.fillRect(bx,by,bw,bh); c.fillStyle="#8A90A6"; c.font="500 28px Manrope, sans-serif"; c.textAlign="center"; c.fillText("Product screen", bx+bw/2, by+bh/2); c.textAlign="left"; }
+      c.restore(); rr(c,bx,by,bw,bh,30); c.strokeStyle="#E6E7FB"; c.lineWidth=2; c.stroke();
+      if (slide.body){ c.fillStyle = "#667085"; c.font = "400 34px Manrope, sans-serif"; wrapLines(c, slide.body, maxW).slice(0,2).forEach((l,i) => c.fillText(l, M, 1220 + i*44)); }
+    } else if (slide.body){
+      y += 40; const bf = fitText(c, slide.body, 400, maxW-80, 9, [44,40,36,32]); const lh = bf.sz*1.34, ph = bf.lines.length*lh + 80;
+      rr(c, M, y, maxW, ph, 30); c.fillStyle = "#F3F4FF"; c.fill(); c.strokeStyle = "#E6E7FB"; c.lineWidth = 2; c.stroke();
+      c.fillStyle = "#1F2337"; c.font = `400 ${bf.sz}px Manrope, sans-serif`; let yy = y + 40 + bf.sz;
+      bf.lines.forEach(l => { c.fillText(l, M+40, yy); yy += lh; });
+    }
+  }
+  c.fillStyle = "#8A90A6"; c.font = "500 22px Manrope, sans-serif"; c.textAlign = "left"; c.fillText("Darwix AI  ·  @darwixai", M, 1290);
+}
+const canvasToJpeg = cv => new Promise(r => cv.toBlob(r, "image/jpeg", 0.92));
+const blobToB64 = b => new Promise(r => { const f = new FileReader(); f.onload = () => r(String(f.result).split(",")[1]); f.readAsDataURL(b); });
+
+/* ---------- data layer: GitHub (live) or local sample (demo) ---------- */
+const gh = {
+  base(){ return `https://api.github.com/repos/${S.cfg.owner}/${S.cfg.repo}`; },
+  async req(path, opt={}){
+    const r = await fetch(this.base()+path, { ...opt, headers: { "Accept":"application/vnd.github+json", "Authorization":"Bearer "+S.cfg.token, "X-GitHub-Api-Version":"2022-11-28", ...(opt.body?{"Content-Type":"application/json"}:{}) } });
+    if (r.status === 204) return null;
+    const j = await r.json().catch(()=>({}));
+    if (!r.ok) throw new Error(j.message ? `GitHub: ${j.message}` : `GitHub error ${r.status}`);
+    return j;
+  },
+  async getFile(path){ try { const j = await this.req(`/contents/${path}?ref=${S.cfg.branch}`); return { text: b64d(j.content), sha: j.sha }; } catch(e){ if (/Not Found/.test(e.message)) return null; throw e; } },
+  async putFile(path, b64, msg, sha){ return this.req(`/contents/${path}`, { method:"PUT", body: JSON.stringify({ message: msg, content: b64, branch: S.cfg.branch, ...(sha?{sha}:{}) }) }); },
+  async sha(path){ try { const j = await this.req(`/contents/${path}?ref=${S.cfg.branch}`); return j.sha; } catch { return null; } }
+};
+async function loadAll(){
+  S.loading = true; S.error = null; render();
+  try {
+    if (live()){
+      const f = await gh.getFile("schedule.json");
+      S.posts = f ? JSON.parse(f.text) : []; S.sha = f ? f.sha : null;
+      try { const r = await gh.req("/actions/workflows/publish.yml/runs?per_page=6"); S.runs = r.workflow_runs || []; } catch { S.runs = []; }
+      try { const i = await gh.getFile("insights.json"); S.insights = i ? JSON.parse(i.text) : null; } catch { S.insights = null; }
+    } else { S.posts = lsGet("demoPosts", null) || seedPosts(); S.runs = seedRuns(); S.insights = seedInsights(); }
+  } catch(e){ S.error = e.message; }
+  S.loading = false; render();
+}
+async function savePosts(msg){
+  if (!live()){ lsSet("demoPosts", S.posts); return; }
+  const doSave = async () => gh.putFile("schedule.json", b64e(JSON.stringify(S.posts, null, 2) + "\n"), msg, S.sha);
+  let r;
+  try { r = await doSave(); }
+  catch(e){
+    if (!/does not match|conflict|sha/i.test(e.message)) throw e;
+    // the publisher committed a status change meanwhile: merge by id, keep its status fields
+    const f = await gh.getFile("schedule.json"); const remote = JSON.parse(f.text); S.sha = f.sha;
+    const byId = Object.fromEntries(remote.map(p => [p.id, p]));
+    S.posts = S.posts.map(p => { const q = byId[p.id]; return q && (q.status==="published"||q.status==="failed") ? { ...p, status:q.status, media_id:q.media_id, published_at:q.published_at, error:q.error } : p; });
+    remote.forEach(q => { if (!S.posts.find(p => p.id === q.id)) S.posts.push(q); });
+    r = await doSave();
+  }
+  S.sha = r.content.sha;
+}
+
+/* ---------- sample data for demo mode ---------- */
+function seedPosts(){
+  const iso = (d,h,m) => new Date(Date.UTC(2026,9,d,h,m)).toISOString();
+  const sl = (...a) => a.map((x,i) => ({kind: i===0?"cover":i===a.length-1?"cta":"content", title:x[0], body:x[1]||""}));
+  return [
+    { id:"real-time-pd-001", publish_at:iso(7,19,50), approved:true, status:"published", published_at:iso(7,20,5), media_id:"sample", caption:"A personal discussion report, written while the conversation happens.\n\nLink in bio.\n\n#darwixai #bfsi #housingfinance",
+      images:[], meta:{ pillar:"Product", topic:"Live PD Automation", hook:"The PD report writes itself while you talk.", direction:"Show the live PD flow", cta:"Link in bio.", slides: sl(["The PD report writes itself while you talk.","Live PD Assist for housing finance."],["The officer talks. The report fills in.","Each field keeps its source and state."],["Statements stay statements.","A value is confirmed only when a source supports it."],["See it on a live case","Request a demo at darwix.ai"]) } },
+    { id:"evidence-intel-001", publish_at:iso(9,5,30), approved:true, status:"draft", caption:"Seller tape says one thing. The documents say another.\n\nEvidence Intelligence lines them up and shows what does not match.\n\nLink in bio.\n\n#darwixai #bfsi #ARC", images:["posts/evidence-intel-001/01.jpg"],
+      meta:{ pillar:"Product", topic:"Evidence Intelligence", hook:"The tape says one thing. The documents say another.", direction:"Cross-source reconciliation for ARC retail pools", cta:"Link in bio.", slides: sl(["The tape says one thing. The documents say another.","Evidence Intelligence for asset reconstruction."],["Every field is traced to its source.","Conflicts are kept, not averaged away."],["Missing evidence becomes a seller query.","A person records the resolution."],["Verify the asset behind the tape.","darwix.ai"]) } },
+    { id:"alert-intel-001", publish_at:null, approved:false, status:"draft", caption:"Not every market signal needs a relationship manager's attention.\n\nAlert Intelligence ranks what matters for each client.\n\nLink in bio.\n\n#darwixai #wealthmanagement", images:[],
+      meta:{ pillar:"Product", topic:"Alert Intelligence", hook:"Most signals are noise. Some are not.", direction:"Wealth RM signal triage", cta:"Link in bio.", slides: sl(["Most signals are noise. Some are not.","Alert Intelligence for wealth teams."],["Each alert carries a relevance score.","The reason is shown with the alert."],["Severity decides what reaches the RM first.","Everything else waits in the log."],["See the triage view","darwix.ai"]) } },
+    { id:"fraud-ei-001", publish_at:null, approved:false, status:"draft", caption:"It never declares fraud.\n\nIt shows where the sources disagree and who should look next.\n\nLink in bio.\n\n#darwixai #healthinsurance", images:[],
+      meta:{ pillar:"Trust", topic:"Fraud and Abuse Evidence Intelligence", hook:"It never declares fraud.", direction:"Contradictions are leads, not verdicts", cta:"Link in bio.", slides: sl(["It never declares fraud.","Evidence Intelligence for claim investigation."],["Patterns are leads, not verdicts.","Every finding links to its sources."],["Open, resolve, refer or route to a reviewer.","The decision stays with a person."],["See the investigation view","darwix.ai"]) } },
+    { id:"pivc-001", publish_at:null, approved:false, status:"planned", caption:"", images:[], meta:{ pillar:"Product", topic:"Video PIVC", hook:"A verification call that checks itself.", direction:"Identity, policy checks and discrepancy flags during the call", cta:"Link in bio.", slides:[] } },
+    { id:"premeet-001", publish_at:null, approved:false, status:"planned", caption:"", images:[], meta:{ pillar:"Product", topic:"Pre-Meet Intelligence", hook:"Walk into the meeting already briefed.", direction:"Customer brief assembled before the RM meeting", cta:"Link in bio.", slides:[] } }
+  ];
+}
+function seedRuns(){ const n = Date.now(); return [
+  { id:1, name:"publish-instagram", conclusion:"success", status:"completed", created_at:new Date(n-12*60000).toISOString(), html_url:"#", display_title:"No posts due" },
+  { id:2, name:"publish-instagram", conclusion:"success", status:"completed", created_at:new Date(n-27*60000).toISOString(), html_url:"#", display_title:"No posts due" },
+  { id:3, name:"publish-instagram", conclusion:"success", status:"completed", created_at:new Date(n-42*60000).toISOString(), html_url:"#", display_title:"Published real-time-pd-001" } ]; }
+function seedInsights(){ return { updated:new Date().toISOString(), sample:true, posts:[{ id:"real-time-pd-001", media_id:"sample", like_count:0, comments_count:0, reach:null, saved:null, shares:null }] }; }
+
+/* ---------- actions ---------- */
+function toast(t){ S.toast = t; renderToast(); clearTimeout(toast.t); toast.t = setTimeout(()=>{ S.toast=null; renderToast(); }, 3600); }
+function renderToast(){ let el = $("#toast"); if (!S.toast){ el && el.remove(); return; } if (!el){ el = document.createElement("div"); el.id="toast"; el.className="toast"; el.setAttribute("role","status"); document.body.appendChild(el); } el.textContent = S.toast; }
+const getPost = id => S.posts.find(p => p.id === id);
+function nextSlot(){
+  const [h,m] = (S.cfg.defaultTime||"11:00").split(":").map(Number);
+  const taken = new Set(S.posts.filter(p=>p.publish_at && ["scheduled","publishing"].includes(stage(p))).map(p => istParts(p.publish_at).toISOString().slice(0,10)));
+  let d = new Date(Date.now() + 19800000); d.setUTCHours(h,m,0,0);
+  if (d.getTime() - 19800000 < Date.now() + 3600000) d = new Date(d.getTime() + 86400000);
+  for (let i=0;i<60;i++){ if (!taken.has(d.toISOString().slice(0,10))) break; d = new Date(d.getTime()+86400000); }
+  return new Date(d.getTime() - 19800000).toISOString();
+}
+function fallbackSlides(row){
+  const bullets = String(row.direction||"").split(/\n|;|(?<=[.!?])\s+/).map(s=>s.trim()).filter(Boolean).slice(0,5);
+  const content = bullets.map(b => { const parts = b.split(/[:—–-]\s+/); return parts.length>1 && parts[0].length<70 ? {kind:"content", title:parts[0], body:parts.slice(1).join(". ")} : {kind:"content", title:b, body:""}; });
+  return [{kind:"cover", title: row.hook || row.topic, body: row.topic}, ...content, {kind:"cta", title: row.cta || S.cfg.defaultCta, body:"See it on a live case."}];
+}
+async function aiGenerate(row){
+  const sys = `You write Instagram carousels for Darwix AI. Return only JSON.\n\n${S.cfg.notes}\n\nBanned phrases: ${S.cfg.banned}.`;
+  const user = `Content row\nPillar: ${row.pillar}\nTopic / use case: ${row.topic}\nCore hook: ${row.hook}\nContent direction: ${row.direction}\nCTA: ${row.cta}\n\nReturn JSON: {"slides":[{"kind":"cover|content|cta","title":"max 90 characters","body":"max 200 characters, optional"}],"caption":"hook line, 2 to 4 short paragraphs, the CTA, then hashtags","flags":["any claim or number a person must verify"]}.\nRules: slide 1 kind cover, last slide kind cta, 5 to 8 slides total, plain sentences, no emoji.`;
+  const r = await fetch("https://api.anthropic.com/v1/messages", { method:"POST", headers:{ "content-type":"application/json", "x-api-key":S.cfg.aiKey, "anthropic-version":"2023-06-01", "anthropic-dangerous-direct-browser-access":"true" },
+    body: JSON.stringify({ model:S.cfg.aiModel, max_tokens:2500, system:sys, messages:[{role:"user", content:user}] }) });
+  const j = await r.json(); if (!r.ok) throw new Error(j.error?.message || "AI request failed");
+  const txt = (j.content||[]).map(b=>b.text||"").join(""); const m = txt.match(/\{[\s\S]*\}/); if (!m) throw new Error("AI reply was not JSON");
+  return JSON.parse(m[0]);
+}
+async function generate(id){
+  const p = getPost(id); const row = p.meta; S.busy[id] = "Generating"; render();
+  try {
+    let out;
+    if (S.cfg.aiKey) out = await aiGenerate(row);
+    else out = { slides: fallbackSlides(row), caption: `${row.hook || row.topic}\n\n${row.direction}\n\n${row.cta || S.cfg.defaultCta}\n\n${S.cfg.defaultTags}`, flags:[] };
+    p.meta.slides = out.slides; p.caption = out.caption; p.meta.flags = out.flags || []; p.meta.generated_by = S.cfg.aiKey ? S.cfg.aiModel : "template";
+    p.status = "draft"; p.approved = false; p.images = [];
+    await savePosts(`studio: generate ${p.id}`);
+    toast(S.cfg.aiKey ? "Draft ready for review." : "Draft built from the row. Add an Anthropic key in Settings for AI copy.");
+  } catch(e){ toast("Generate failed: " + e.message); }
+  delete S.busy[id]; render();
+}
+async function approve(id, whenISO){
+  const p = getPost(id); const c = checks(p);
+  if (c.some(x=>x.l==="fail")){ toast("Fix the blocked items first."); return; }
+  if (!whenISO){ toast("Pick a publish time."); return; }
+  if (new Date(whenISO) < new Date(Date.now() - 60000)){ whenISO = new Date().toISOString(); }
+  S.busy[id] = "Rendering slides"; render();
+  try {
+    const slides = p.meta.slides; const cv = $("#work"); const paths = [];
+    for (let i=0;i<slides.length;i++){
+      await drawSlide(cv, slides[i], i, slides.length, p.meta.topic);
+      const path = `posts/${p.id}/${String(i+1).padStart(2,"0")}.jpg`; paths.push(path);
+      if (live()){ S.busy[id] = `Uploading ${i+1}/${slides.length}`; render(); const blob = await canvasToJpeg(cv); const sha = await gh.sha(path); await gh.putFile(path, await blobToB64(blob), `studio: slide ${i+1} of ${p.id}`, sha); }
+    }
+    p.images = paths; p.publish_at = whenISO; p.approved = true; p.status = "draft"; delete p.error;
+    await savePosts(`studio: approve ${p.id}`);
+    toast(live() ? "Approved. The publisher posts it at the scheduled time." : "Approved in sample mode. Connect GitHub in Settings to publish for real.");
+  } catch(e){ toast("Approve failed: " + e.message); }
+  delete S.busy[id]; render();
+}
+async function unapprove(id){ const p = getPost(id); p.approved = false; try { await savePosts(`studio: unapprove ${id}`); toast("Pulled back to review."); } catch(e){ toast(e.message); } render(); }
+async function retry(id){ const p = getPost(id); p.status = "draft"; p.approved = true; delete p.error; p.publish_at = new Date().toISOString(); try { await savePosts(`studio: retry ${id}`); if (live()) await runPublisher(true); toast("Queued for the next publisher run."); } catch(e){ toast(e.message); } render(); }
+async function publishNow(id){ const p = getPost(id); p.publish_at = new Date().toISOString(); try { await savePosts(`studio: publish now ${id}`); if (live()) await runPublisher(true); toast(live() ? "Publisher started." : "Sample mode: nothing was posted."); } catch(e){ toast(e.message); } render(); }
+async function runPublisher(quiet){
+  if (!live()){ toast("Connect GitHub in Settings to run the publisher."); return; }
+  try { await gh.req("/actions/workflows/publish.yml/dispatches", { method:"POST", body: JSON.stringify({ ref:S.cfg.branch }) }); if (!quiet) toast("Publisher started. Results appear in a minute."); setTimeout(refreshRuns, 8000); }
+  catch(e){ toast(e.message); }
+}
+async function refreshRuns(){ if (!live()) return; try { const r = await gh.req("/actions/workflows/publish.yml/runs?per_page=6"); S.runs = r.workflow_runs || []; render(); } catch {} }
+async function removePost(id){ S.posts = S.posts.filter(p => p.id !== id); try { await savePosts(`studio: remove ${id}`); } catch(e){ toast(e.message); } S.drawer = null; render(); }
+function addRows(rows){
+  rows.forEach(r => S.posts.push({ id: slug(r.topic)+"-"+Date.now().toString(36).slice(-4), publish_at:null, approved:false, status:"planned", caption:"", images:[], meta:{ pillar:r.pillar, topic:r.topic, hook:r.hook, direction:r.direction, cta:r.cta||S.cfg.defaultCta, slides:[] } }));
+  return savePosts(`studio: add ${rows.length} planned post(s)`);
+}
+function parseSheet(txt){
+  const lines = txt.trim().split(/\r?\n/).filter(Boolean); if (!lines.length) return [];
+  const sep = lines[0].includes("\t") ? "\t" : ",";
+  const cells = l => { const o=[]; let cur="", q=false; for (const ch of l){ if (ch==='"') q=!q; else if (ch===sep && !q){ o.push(cur); cur=""; } else cur+=ch; } o.push(cur); return o.map(s=>s.trim()); };
+  let rows = lines.map(cells); const head = rows[0].map(h=>h.toLowerCase());
+  if (head.some(h => /pillar|topic|hook/.test(h))) rows = rows.slice(1); else rows = rows;
+  return rows.filter(r => r[1] || r[2]).map(r => ({ pillar:r[0]||"", topic:r[1]||"", hook:r[2]||"", direction:r[3]||"", cta:r[4]||"" }));
+}
+
+/* ---------- views ---------- */
+const TABS = [["overview","Overview"],["create","Create"],["posts","Posts"],["calendar","Calendar"],["approvals","Approvals"],["insights","Insights"],["settings","Settings"]];
+const byStage = () => { const o = {planned:[],review:[],scheduled:[],publishing:[],published:[],failed:[]}; S.posts.forEach(p => o[stage(p)].push(p)); return o; };
+const cover = p => p.images && p.images[0] && live() ? `https://raw.githubusercontent.com/${S.cfg.owner}/${S.cfg.repo}/${S.cfg.branch}/${p.images[0]}` : "";
+const igBox = (cls="") => `<span class="lb ${cls}"><span class="i ig" style="--u:url(${ICONS.instagram});width:56%;height:56%"></span></span>`;
+const tokenIssue = () => { const f = S.posts.find(p => stage(p)==="failed"); return f && /token|oauth|session|permission|expired|190|200/i.test(f.error||"") ? f : null; };
+const hashtag = t => esc(t).replace(/(^|\s)(#[A-Za-z]\w*)/g, '$1<span class="tg">$2</span>');
+const qpill = p => { const [qc,ql] = quality(p); return `<span class="chip ${qc}">${ql}</span>`; };
+const nextBtn = (label, act) => `<button class="btn pri lg" data-act="${act}">${label}${ico("arrow-right",16)}</button>`;
+
+function vOverview(){
+  const b = byStage(), n = S.posts.length, gen = n - b.planned.length;
+  const appr = b.scheduled.length + b.publishing.length + b.published.length + b.failed.length;
+  const insReal = S.insights && !S.insights.sample;
+  const steps = [
+    { l:"Plan", m:`${n} row${n===1?"":"s"} in the queue`, st: n?"done":"cur", f: n?1:0 },
+    { l:"Generate", m:`${gen} of ${n} drafted`, st: b.planned.length?"cur":(n?"done":"up"), f: n?gen/n:0 },
+    { l:"Review", m:`${b.review.length} waiting · ${appr} approved`, st: b.review.length?"cur":(appr?"done":"up"), f: gen?appr/gen:0, badge: b.review.length?["In progress","cur"]:null },
+    { l:"Schedule", m:`${b.scheduled.length+b.publishing.length} scheduled`, st: (b.scheduled.length+b.publishing.length)?"cur":(b.published.length?"done":"up"), f: gen?(b.scheduled.length+b.publishing.length+b.published.length)/gen:0 },
+    { l:"Publish", m:`${b.published.length} of ${n} live${b.failed.length?` · ${b.failed.length} failed`:""}`, st: b.failed.length?"err":(b.published.length&&!b.scheduled.length&&!b.review.length&&!b.planned.length?"done":"up"), f: n?b.published.length/n:0, badge: b.failed.length?[`${b.failed.length} failed`,"err"]:null },
+    { l:"Track", m: insReal ? "Insights synced" : "Insights not synced yet", st: insReal?"done":"up", f: insReal?1:0 } ];
+  const cur = steps.findIndex(s => s.st !== "done"); const pct = Math.round(100 * steps.reduce((a,s)=>a+Math.min(1,s.f),0) / steps.length);
+  const issue = tokenIssue(), failed = b.failed[0];
+  let next;
+  if (failed) next = ["Fix 1 failed post", esc((failed.error||"Publishing failed.").slice(0,170).replace(/[.\s]*$/,"")) + "." + (issue?" Reconnect, then retry.":""), issue?"Reconnect Instagram":"Retry", issue?"tab:settings":"retry:"+failed.id];
+  else if (b.review.length) next = [`Review ${b.review.length} draft${b.review.length>1?"s":""}`, "Nothing posts until you approve it and set a time.", "Open Approvals", "tab:approvals"];
+  else if (b.planned.length) next = [`Generate ${b.planned.length} planned post${b.planned.length>1?"s":""}`, "These rows are in the queue and have no slides yet.", "Generate all", "genall"];
+  else next = ["Add the next content row", "The queue is empty. Add one row or paste rows from your sheet.", "Create carousel", "tab:create"];
+  const upcoming = [...b.failed, ...b.publishing, ...b.scheduled].sort((a,c)=>new Date(a.publish_at)-new Date(c.publish_at)).slice(0,5);
+  const runs = S.runs.slice(0,6), cnt = k => S.posts.filter(p=>stage(p)===k).length;
+  const brk = [["review","Needs review"],["scheduled","Scheduled"],["published","Published"],["failed","Failed"],["planned","Planned"]].filter(([k])=>cnt(k)).map(([k,l])=>`<span class="pill s-${k}" style="height:22px">${cnt(k)} ${l.toLowerCase()}</span>`).join("");
+  return `
+  ${issue ? `<div class="banner err" role="alert"><span style="color:var(--err);display:flex">${ico("circle-alert",24)}</span><div class="bt"><b>Publishing failed</b><span class="m">${esc(issue.meta?.topic||issue.id)} carousel · ${esc(fmtIST(issue.publish_at))} IST · ${esc((issue.error||"").slice(0,180))}</span></div><div class="row"><button class="btn out" data-act="tab:settings">Reconnect account</button><button class="btn tx" data-act="retry:${issue.id}">Retry</button></div></div>`:""}
+  <section class="sec" style="padding:24px;display:flex;flex-direction:column;gap:22px">
+    <div class="row" style="justify-content:space-between;align-items:flex-end;gap:20px">
+      <div style="display:flex;flex-direction:column;gap:4px;min-width:0"><span class="lbl">Content queue</span><span style="font:700 22px/30px var(--font);letter-spacing:-.5px;color:var(--ink)">@darwixai carousels</span><span class="sub">${cur<0?"All steps complete":`Step ${cur+1} of 6 · ${steps[cur].l}`}</span></div>
+      <div style="display:flex;flex-direction:column;gap:8px;align-items:flex-end"><div style="display:flex;align-items:baseline;gap:6px"><span class="big">${pct}%</span><span style="font-size:13px;color:var(--ink3)">complete</span></div><div class="pbar"><i style="width:${pct}%"></i></div></div>
+    </div>
+    <div style="overflow-x:auto;margin:0 -4px;padding:0 4px"><div class="jgrid">${steps.map((s,i)=>`
+      <button class="js ${s.st}" data-act="tab:${["create","approvals","approvals","calendar","calendar","insights"][i]}"><div class="rl"><span class="ring">${s.st==="done"?ico("check",14):s.st==="err"?ico("circle-alert",16):(s.st==="cur"||s.st==="up"?i+1:"")}</span>${i<5?`<span class="hl"></span>`:""}</div><span class="lab">${s.l}</span><span class="met">${esc(s.m)}</span>${s.badge?`<span class="pill ${s.badge[1]==="err"?"s-failed":"s-scheduled"}" style="font-family:var(--pill)">${s.badge[0]}</span>`:""}${(s.st==="cur"||s.st==="err"||(s.st==="up"&&s.f>0))?`<div class="jbar"><i style="width:${Math.max(4,Math.round(100*Math.min(1,s.f)))}%"></i></div>`:""}</button>`).join("")}</div></div>
+    <div class="ntgrid">
+      <div class="tile" style="padding:16px 18px;display:flex;align-items:center;gap:16px;flex-wrap:wrap"><div style="flex:1;min-width:200px;display:flex;flex-direction:column;gap:4px"><span class="lbl">Next step</span><span style="font:600 16px/24px var(--font);color:var(--ink)">${next[0]}</span><span style="font:400 12.5px/19px var(--font);color:var(--ink3)">${next[1]}</span></div>${nextBtn(next[2], next[3]).replace("btn pri lg","btn pri lg")}</div>
+      <div class="tile" style="padding:12px 14px;background:var(--surface);display:flex;flex-direction:column;gap:8px"><span class="lbl" style="font:700 10px var(--pill);letter-spacing:1.4px">Waiting on you</span>
+        <div class="wait"><button data-act="tab:approvals"><div class="row" style="gap:8px;flex-wrap:nowrap"><span style="color:#C98A00;display:flex">${ico("file-text",16)}</span><b>${b.review.length}</b></div><span class="l">Needs review</span></button><button data-act="tab:approvals"><div class="row" style="gap:8px;flex-wrap:nowrap"><span style="color:var(--brand);display:flex">${ico("calendar",16)}</span><b>${b.planned.length}</b></div><span class="l">Planned, no slides</span></button><button data-act="tab:posts"><div class="row" style="gap:8px;flex-wrap:nowrap"><span style="color:var(--err);display:flex">${ico("circle-alert",16)}</span><b>${b.failed.length}</b></div><span class="l">Failed</span></button></div></div>
+    </div>
+  </section>
+  <div class="wrapflex">
+    <section class="sec" style="flex:1 1 460px;display:flex;flex-direction:column"><div class="sec-h"><h2>Review queue</h2><span class="mono">${b.review.length}</span>${b.planned.length?`<button class="btn sm tx" data-act="genall">${ico("sparkles",14)}Generate ${b.planned.length} planned</button>`:""}</div>
+      ${b.review.slice(0,4).map(reviewItem).join("") || `<div class="empty"><span class="ring" style="background:var(--ok-bg);color:var(--ok)">${ico("circle-check",22)}</span><b>Nothing to review</b>Every draft is approved or scheduled.</div>`}
+      ${b.review.length>4?`<button class="btn sm tx" style="margin:auto auto 8px 12px" data-act="tab:approvals">View all ${b.review.length} in Approvals${ico("arrow-right",14)}</button>`:""}</section>
+    <section class="sec" style="flex:1 1 380px;display:flex;flex-direction:column"><div class="sec-h"><h2>Up next</h2><small>Publishing queue · IST</small><button class="btn sm tx" data-act="tab:calendar">${ico("calendar",14)}Calendar</button></div>
+      ${upcoming.map(upItem).join("") || `<div class="empty"><span class="ring" style="background:var(--tint);color:var(--brand)">${ico("calendar",22)}</span><b>Nothing scheduled</b>Approve a draft and pick a time. It will appear here.</div>`}</section>
+  </div>
+  <div class="wrapflex" style="align-items:flex-start">
+    <section style="flex:1 1 420px;min-width:0;display:flex;flex-direction:column;gap:12px"><div class="row" style="justify-content:space-between"><h2 style="margin:0;font:700 18px var(--font);color:var(--ink)">By platform</h2><span style="font-size:13px;color:var(--ink3)">${n} post${n===1?"":"s"} · Instagram only for now</span></div>
+      <div class="pgrid">
+        <button class="pc" data-act="tab:posts"><div class="row" style="gap:10px;flex-wrap:nowrap">${igBox("s28")}<b style="font:700 15px var(--font);color:var(--ink)">Instagram</b><span style="margin-left:auto;font:600 13px var(--font);color:var(--ink2)">${n} posts</span></div><div class="row" style="gap:6px">${brk||`<span style="font-size:12px;color:var(--ink3)">No posts yet</span>`}</div><div class="ft"><span class="dot ${issue?"bad":""}"></span>${issue?"Connection expired":"@darwixai · connected"}${issue?`<span class="btn sm out" style="margin-left:auto;height:28px" data-act="tab:settings">Reconnect</span>`:""}</div></button>
+        ${[["LinkedIn","Darwix AI page"],["X","@darwix_ai"],["Facebook","Darwix AI page"]].map(([nm,acc])=>`<div class="pc dim"><div class="row" style="gap:10px;flex-wrap:nowrap"><span class="lb s28"></span><b style="font:700 15px var(--font);color:var(--ink)">${nm}</b><span style="margin-left:auto;font:600 13px var(--font);color:var(--ink3)">Later</span></div><div class="row" style="gap:6px"><span class="pill s-planned">not connected</span></div><div class="ft"><span class="dot off"></span>Not part of this build</div></div>`).join("")}
+      </div></section>
+    <section class="sec" style="flex:1 1 340px"><div class="sec-h"><h2>Publisher runs</h2><button class="btn sm tx" data-act="runpub">${ico("refresh-cw",14)}Run now</button></div>
+      ${runs.length ? runs.map(r=>`<div class="run"><span class="led ${r.status!=="completed"?"run":r.conclusion==="success"?"ok":"bad"}"></span><div style="flex:1;min-width:0;display:flex;flex-direction:column;gap:1px"><span style="font:600 13px var(--font);color:var(--ink)">${esc(r.name||"publish-instagram")}</span><span style="font:400 12px var(--font);color:var(--ink3);white-space:nowrap;overflow:hidden;text-overflow:ellipsis">${esc(r.display_title||"")}${r.status!=="completed"?" · running":" · "+esc(r.conclusion||"")}</span></div><div style="display:flex;flex-direction:column;align-items:flex-end;gap:1px"><span class="mono" style="font-size:11.5px;color:var(--ink2)">${esc(fmtIST(r.created_at,{day:undefined,month:undefined}))}</span><span class="mono" style="font-size:11px;color:var(--ink3)">IST</span></div></div>`).join("") : `<div class="empty"><b>No runs yet</b>The publisher checks the schedule every 15 minutes.</div>`}</section>
+  </div>`;
+}
+function reviewItem(p){
+  const m = p.meta||{};
+  return `<div class="ri">${igBox()}<div class="tt"><span class="t1">Instagram · ${esc(m.topic||p.id)}</span>${qpill(p)}<span class="t2">${esc((p.caption||m.hook||"").split("\n")[0])}</span></div><button class="btn sm ic" aria-label="Preview post" title="Preview" data-act="open:${p.id}">${ico("eye",14)}</button><button class="btn sm pri" data-act="open:${p.id}">Review</button></div>`;
+}
+function upItem(p){
+  const st = stage(p), m = p.meta||{}, t = istParts(p.publish_at);
+  return `<div class="ri"><div style="width:52px;flex:0 0 52px;display:flex;flex-direction:column;gap:1px"><span class="mono" style="font-size:12.5px;color:var(--ink);font-weight:500">${esc(fmtIST(p.publish_at,{hour:undefined,minute:undefined}))}</span><span class="mono" style="font-size:11.5px;color:var(--ink3)">${t.toISOString().slice(11,16)}</span></div>${igBox("s28")}<div class="tt"><span class="t1" style="font-size:13px">Instagram · ${esc(m.topic||p.id)}</span>${pillOf(st)}</div>${st==="failed"?`<button class="btn sm out" data-act="retry:${p.id}">${ico("refresh-cw",14)}Retry</button>`:`<button class="btn sm" data-act="now:${p.id}">${ico("send",14)}Publish now</button>`}</div>`;
+}
+function vCreate(){
+  const d = S.createDraft || { pillar:"Product", topic:"", hook:"", direction:"", cta:S.cfg.defaultCta };
+  return `<div class="stepper"><span class="ring" style="background:var(--surface)">1</span><span class="on">Content row</span><span class="hl"></span><span class="ring">2</span><span>Generate</span><span class="hl"></span><span class="ring">3</span><span>Review and approve</span></div>
+  <section class="sec"><div class="secb"><div><span class="lbl">1 · Content row</span><div style="font:700 18px var(--font);color:var(--ink);margin-top:2px">One post from one row</div></div>
+    <div class="form">
+      <label class="f">Content pillar<input type="text" id="c_pillar" value="${esc(d.pillar)}" placeholder="Product, Trust, Proof"></label>
+      <label class="f">Topic / use case<input type="text" id="c_topic" value="${esc(d.topic)}" placeholder="Live PD Automation"></label>
+      <label class="f full">Core hook<input type="text" id="c_hook" value="${esc(d.hook)}" placeholder="The PD report writes itself while you talk."></label>
+      <label class="f full">Content direction<textarea id="c_dir" placeholder="What each slide should cover. One idea per line works best.">${esc(d.direction)}</textarea></label>
+      <label class="f full">Call to action<input type="text" id="c_cta" value="${esc(d.cta)}"></label>
+    </div>
+    <div class="row"><button class="btn pri lg" data-act="addgen">${ico("sparkles",16)}Add and generate</button><button class="btn lg" data-act="addrow">Add to queue only</button><span class="hint">${S.cfg.aiKey ? `Copy is written by ${esc(S.cfg.aiModel)}.` : "No Anthropic key set. Slides are built straight from your direction. Add a key in Settings for written copy."}</span></div></div></section>
+  <section class="sec"><div class="secb"><div><span class="lbl">2 · Or paste rows from your content plan</span><div style="font:700 18px var(--font);color:var(--ink);margin-top:2px">Import from a sheet</div></div>
+    <p class="sub" style="margin:0">Copy rows from Google Sheets in this order: Content Pillar, Topic / Use Case, Core Hook, Content Direction, CTA. A header row is fine.</p>
+    <textarea id="c_paste" style="min-height:130px;font-family:var(--mono);font-size:12.5px" placeholder="Product&#9;Live PD Automation&#9;The PD report writes itself&#9;Show the live flow&#9;Link in bio."></textarea>
+    <div class="row"><button class="btn pri" data-act="import">${ico("upload",16)}Add rows to queue</button></div></div></section>`;
+}
+function vPosts(){
+  const sts = [["all","All"],["planned","Planned"],["review","Needs review"],["scheduled","Scheduled"],["published","Published"],["failed","Failed"]];
+  const list = S.posts.filter(p => S.fStatus==="all" || stage(p)===S.fStatus || (S.fStatus==="scheduled" && stage(p)==="publishing"));
+  const n = k => k==="all" ? S.posts.length : S.posts.filter(p=>stage(p)===k).length;
+  return `<section class="sec" style="padding:14px 18px;display:flex;flex-direction:column;gap:12px"><div class="fgroup"><span class="flab">Platform</span><span class="fchip" aria-pressed="true"><span class="i ig" style="--u:url(${ICONS.instagram});width:14px;height:14px"></span>Instagram <em>${S.posts.length}</em></span></div>
+    <div class="fgroup" style="border-top:1px solid var(--hair);padding-top:12px"><span class="flab">Status</span>${sts.map(s=>`<button class="fchip" aria-pressed="${S.fStatus===s[0]}" data-act="f:${s[0]}">${s[1]} <em>${n(s[0])}</em></button>`).join("")}</div></section>
+  ${list.length ? `<div class="pgrid3">${list.map(postCard).join("")}</div>` : `<div class="sec empty"><b>No posts here</b>Change the filter or add a row in Create.</div>`}`;
+}
+function postCard(p){
+  const st = stage(p), m = p.meta||{}, busy = S.busy[p.id], n = (m.slides||[]).length;
+  return `<article class="sec post"><div class="row" style="flex-wrap:nowrap;gap:12px">${igBox()}<div style="min-width:0"><div style="font:700 14px var(--font);color:var(--ink)">Instagram</div><div style="font-size:12px;color:var(--ink3);white-space:nowrap;overflow:hidden;text-overflow:ellipsis">Carousel · ${esc(m.topic||p.id)}</div></div><span class="spacer"></span>${pillOf(st)}</div>
+    ${st==="failed"?`<div class="row" style="gap:8px;padding:8px 12px;border-radius:10px;background:var(--ban-bg);color:var(--fail-fg);font-size:12.5px"><span style="display:flex">${ico("circle-alert",14)}</span>${esc((p.error||"Publishing failed.").slice(0,150))}</div>`:""}
+    <div class="cap">${hashtag(p.caption || m.hook || "No caption yet.")}</div>
+    ${n?`<div class="strip">${cover(p)?p.images.slice(0,6).map(i=>`<img src="https://raw.githubusercontent.com/${esc(S.cfg.owner)}/${esc(S.cfg.repo)}/${esc(S.cfg.branch)}/${esc(i)}" alt="">`).join(""):(m.slides||[]).slice(0,5).map((s,i)=>`<div class="ph">slide ${i+1}${s.kind==="cover"?" · cover":""}</div>`).join("")}</div>`:""}
+    ${st!=="planned"?`<div class="row" style="gap:8px;font-size:12px;color:var(--ink3)">${qpill(p)}<span>${n} slides · 1080×1350</span></div>`:""}
+    <div class="ft"><button class="btn sm" data-act="open:${p.id}">Edit</button>${st==="planned"||st==="review"?`<button class="btn sm" data-act="gen:${p.id}">${ico("refresh-cw",14)}Regenerate</button>`:""}<span class="spacer"></span><span class="mono" style="font-size:11.5px;color:var(--ink3)">${p.publish_at?esc(fmtIST(p.publish_at))+" IST":""}</span>
+      ${busy?`<span class="hint">${busy}…</span>`:st==="planned"?`<button class="btn sm pri" data-act="gen:${p.id}">${ico("sparkles",14)}Generate</button>`:st==="review"?`<button class="btn sm pri" data-act="open:${p.id}">Review</button>`:st==="failed"?`<button class="btn sm out" data-act="retry:${p.id}">${ico("refresh-cw",14)}Retry</button>`:""}</div></article>`;
+}
+function vCalendar(){
+  const now = new Date(Date.now()+19800000);
+  if (!S.calMonth) S.calMonth = { y:now.getUTCFullYear(), m:now.getUTCMonth() };
+  const {y,m} = S.calMonth, first = new Date(Date.UTC(y,m,1)), lead = (first.getUTCDay()+6)%7, days = new Date(Date.UTC(y,m+1,0)).getUTCDate();
+  const cells = []; for (let i=0;i<lead;i++) cells.push(null); for (let d=1; d<=days; d++) cells.push(d); while (cells.length%7) cells.push(null);
+  const flt = S.calFilter || "all";
+  const evs = {}; S.posts.filter(p=>p.publish_at && (flt==="all" || stage(p)===flt || (flt==="scheduled"&&stage(p)==="publishing"))).forEach(p => { const t = istParts(p.publish_at); if (t.getUTCFullYear()===y && t.getUTCMonth()===m){ (evs[t.getUTCDate()] ||= []).push(p); } });
+  const un = S.posts.filter(p => !p.publish_at && stage(p)!=="planned");
+  return `<section class="sec"><div class="sec-h" style="flex-wrap:wrap;gap:12px"><h2 style="font-size:18px">${new Date(Date.UTC(y,m,1)).toLocaleString("en-IN",{month:"long",year:"numeric",timeZone:"UTC"})}</h2>
+    <div class="row" style="gap:6px;margin-left:auto">${[["all","All"],["scheduled","Scheduled"],["published","Published"],["failed","Failed"]].map(([k,l])=>`<button class="fchip" style="height:28px;padding:0 10px;font:600 12px var(--font)" aria-pressed="${flt===k}" data-act="calf:${k}">${l}</button>`).join("")}<button class="btn sm out" data-act="cal:-1" aria-label="Previous month">${ico("chevron-left",14)}</button><button class="btn sm out" data-act="cal:0">Today</button><button class="btn sm out" data-act="cal:1" aria-label="Next month">${ico("chevron-right",14)}</button></div></div>
+    <div class="cal">${["MON","TUE","WED","THU","FRI","SAT","SUN"].map(d=>`<div class="dh">${d}</div>`).join("")}${cells.map(d=>`<div class="day ${d?"":"out"} ${d&&y===now.getUTCFullYear()&&m===now.getUTCMonth()&&d===now.getUTCDate()?"today":""}">${d?`<span class="n">${d}</span>${(evs[d]||[]).map(p=>{const st=stage(p);return `<button class="ev s-${st}" data-act="open:${p.id}" title="${esc(p.meta?.topic||p.id)}"><span class="i ig" style="--u:url(${ICONS.instagram});width:12px;height:12px"></span><span>${esc(istParts(p.publish_at).toISOString().slice(11,16))} ${esc(p.meta?.topic||p.id)}</span></button>`}).join("")}`:""}</div>`).join("")}</div></section>
+  <section class="sec"><div class="sec-h"><h2>Not yet scheduled</h2><small>${un.length} draft${un.length===1?"":"s"} waiting for a time</small></div>${un.length?un.map(reviewItem).join(""):`<div class="empty"><span class="ring" style="background:var(--ok-bg);color:var(--ok)">${ico("circle-check",22)}</span><b>Every draft has a time</b></div>`}</section>
+  <section class="banner info"><span style="color:var(--brand);display:flex">${ico("refresh-cw",22)}</span><div class="bt"><b>Publishing automation</b><span class="m">GitHub Actions checks schedule.json every 15 minutes, publishes approved carousels that are due through the Instagram Graph API, then writes the result back here. Times are IST.</span></div><button class="btn out" data-act="runpub">${ico("send",14)}Check now</button></section>`;
+}
+function vApprovals(){
+  const b = byStage();
+  const list = (title, arr, dot, extra="") => `<section class="sec"><div class="sec-h"><h2>${title}</h2><span class="mono">${arr.length}</span>${extra}</div>${arr.length?arr.map(p=>p.status==="planned"?`<div class="ri">${igBox()}<div class="tt"><span class="t1">Instagram · ${esc(p.meta?.topic)}</span><span class="t2">${esc(p.meta?.hook||"")}</span></div><button class="btn sm pri" data-act="gen:${p.id}">${ico("sparkles",14)}Generate</button></div>`:(stage(p)==="review"?reviewItem(p):`<div class="ri">${igBox()}<div class="tt"><span class="t1">Instagram · ${esc(p.meta?.topic||p.id)}</span><span class="t2">${esc(fmtIST(p.publish_at))}${p.publish_at?" IST":""}</span></div>${pillOf(stage(p))}<button class="btn sm" data-act="open:${p.id}">Open</button></div>`)).join(""):`<div class="empty"><b>Nothing here</b></div>`}</section>`;
+  const cell = (k,l) => `<div class="sec"><b>${(k==="scheduled"?b.scheduled.length+b.publishing.length:b[k].length)}</b><span>${l}</span></div>`;
+  return `<div class="pipe">${cell("planned","Planned")}${cell("review","In review")}${cell("scheduled","Scheduled")}${cell("published","Published")}${cell("failed","Failed")}</div>
+  <div class="banner info"><span style="color:var(--brand);display:flex">${ico("circle-check",22)}</span><div class="bt"><b>Human approval required</b><span class="m">Every carousel stays in review until a person approves it and sets a time. The publisher ignores anything not approved.</span></div></div>
+  <div class="wrapflex" style="align-items:flex-start"><div style="flex:1 1 460px;min-width:0;display:flex;flex-direction:column;gap:20px">${list("Planned", b.planned, "", b.planned.length?`<button class="btn sm tx" data-act="genall">Generate all</button>`:"")}${list("Needs review", b.review)}</div>
+  <div style="flex:1 1 380px;min-width:0;display:flex;flex-direction:column;gap:20px">${list("Scheduled", [...b.scheduled,...b.publishing])}${list("Published", b.published)}${b.failed.length?list("Failed", b.failed):""}</div></div>`;
+}
+function vInsights(){
+  const ins = S.insights, rows = (ins?.posts||[]).map(r => ({...r, post:getPost(r.id)})).filter(r=>r.post);
+  const sum = k => rows.reduce((a,r)=>a+(+r[k]||0),0), has = k => rows.some(r=>r[k]!=null);
+  const max = Math.max(1, ...rows.map(r=>(+r.like_count||0)+(+r.comments_count||0)+(+r.saved||0)));
+  return `${ins?.sample||!live()?`<div class="banner info"><span style="color:var(--brand);display:flex">${ico("file-text",22)}</span><div class="bt"><b>Sample data</b><span class="m">Real numbers appear once the insights workflow has run in your repo. See the setup note in Settings.</span></div></div>`:""}
+  ${!ins?`<div class="sec empty"><b>No insights yet</b>Add insights.js and the insights workflow to the repo, then run it once. Steps are in Settings.</div>`:`
+  <div class="kpis"><div class="sec kpi"><span class="lbl">Likes</span><b>${sum("like_count")}</b></div><div class="sec kpi"><span class="lbl">Comments</span><b>${sum("comments_count")}</b></div><div class="sec kpi"><span class="lbl">Saves</span><b>${has("saved")?sum("saved"):"–"}</b></div><div class="sec kpi"><span class="lbl">Reach</span><b>${has("reach")?sum("reach"):"–"}</b></div></div>
+  <section class="sec"><div class="sec-h"><h2>By post</h2><small>Synced ${esc(fmtIST(ins.updated))} IST</small></div>${rows.length?`<div class="scroll"><table class="tbl"><thead><tr><th>Post</th><th class="num">Likes</th><th class="num">Comments</th><th class="num">Saves</th><th class="num">Shares</th><th class="num">Reach</th></tr></thead><tbody>${rows.map(r=>`<tr><td>${esc(r.post.meta?.topic||r.id)}</td><td class="num">${r.like_count??"–"}</td><td class="num">${r.comments_count??"–"}</td><td class="num">${r.saved??"–"}</td><td class="num">${r.shares??"–"}</td><td class="num">${r.reach??"–"}</td></tr>`).join("")}</tbody></table></div>`:`<div class="empty"><b>No published posts yet</b></div>`}</section>
+  ${rows.length>1?`<section class="sec"><div class="sec-h"><h2>Engagement per post</h2></div><div class="bars">${rows.map(r=>{const v=(+r.like_count||0)+(+r.comments_count||0)+(+r.saved||0);return `<div><em>${v}</em><i style="height:${Math.max(3,100*v/max)}%"></i><span>${esc((r.post.meta?.topic||r.id).slice(0,10))}</span></div>`}).join("")}</div></section>`:""}`}`;
+}
+function vSettings(){
+  const c = S.cfg, issue = tokenIssue();
+  const sec = (lab, title, sub, body, right="") => `<section class="sec"><div class="secb"><div class="row" style="justify-content:space-between;align-items:flex-start"><div><span class="lbl">${lab}</span><div style="font:700 18px var(--font);color:var(--ink);margin-top:2px">${title}</div>${sub?`<p class="sub" style="margin:4px 0 0">${sub}</p>`:""}</div>${right}</div>${body}</div></section>`;
+  return sec("Publishing engine","GitHub Actions publisher","The app reads and writes schedule.json in your repo. The workflow publishes through the Instagram Graph API. No other server.",
+    `<div class="form"><label class="f">Repository owner<input type="text" id="s_owner" value="${esc(c.owner)}"></label><label class="f">Repository<input type="text" id="s_repo" value="${esc(c.repo)}"></label><label class="f">Branch<input type="text" id="s_branch" value="${esc(c.branch)}"></label>
+      <label class="f">GitHub access token<input type="password" id="s_token" value="${esc(c.token)}" autocomplete="off" placeholder="github_pat_…"><span class="hint">Fine-grained token for this repository only. Permissions: Contents and Actions, read and write. Stored in this browser only.</span></label></div>
+      <div class="row"><button class="btn pri" data-act="saveconn">Save and connect</button><button class="btn" data-act="testconn">Test connection</button>${live()?`<button class="btn danger" data-act="disconnect">Disconnect</button>`:""}</div>`,
+    `<span class="mode ${live()?"live":"demo"}">${live()?"Live":"Sample data"}</span>`)
+  + sec("Instagram","@darwixai",`Business account ${S.igId}. The access token is a GitHub secret named <span class="mono">IG_ACCESS_TOKEN</span>, so this page cannot read or show it. When publishing fails with a token error, create a new Page token in Meta and replace the secret.`,
+    `<div class="row"><a class="btn" target="_blank" rel="noopener" href="https://github.com/${esc(c.owner)}/${esc(c.repo)}/settings/secrets/actions">${ico("link",14)}GitHub secrets</a><a class="btn" target="_blank" rel="noopener" href="https://developers.facebook.com/tools/debug/accesstoken/">${ico("link",14)}Meta token debugger</a><a class="btn" target="_blank" rel="noopener" href="https://github.com/${esc(c.owner)}/${esc(c.repo)}/actions">${ico("link",14)}Workflow runs</a></div>`,
+    `<span class="pill ${issue?"s-failed":"s-ok"}"><i></i>${issue?"Needs reconnect":"Connected"}</span>`)
+  + sec("Writing","AI copy and guardrails","",
+    `<div class="form"><label class="f">Anthropic API key<input type="password" id="s_ai" value="${esc(c.aiKey)}" autocomplete="off" placeholder="sk-ant-…"><span class="hint">Optional. Used from this browser to write slides and captions. Billed to your API account.</span></label>
+    <label class="f">Model<input type="text" id="s_model" value="${esc(c.aiModel)}"></label>
+    <label class="f">Default publish time (IST)<input type="text" id="s_time" value="${esc(c.defaultTime)}" placeholder="11:00"></label>
+    <label class="f">Default CTA<input type="text" id="s_cta" value="${esc(c.defaultCta)}"></label>
+    <label class="f full">Default hashtags<input type="text" id="s_tags" value="${esc(c.defaultTags)}"></label>
+    <label class="f full">Banned phrases (comma separated)<textarea id="s_ban">${esc(c.banned)}</textarea></label>
+    <label class="f full">Brand and product notes sent with every generation<textarea id="s_notes" style="min-height:200px">${esc(c.notes)}</textarea></label></div>
+    <div class="row"><button class="btn pri" data-act="savewrite">Save</button></div>`)
+  + sec("Insights setup","Pull performance into this page","Add insights.js and .github/workflows/insights.yml from the handover folder. The workflow writes insights.json every 6 hours. Reach, saves and shares need the instagram_manage_insights permission on the token. Likes and comments work without it.","");
+}
+
+/* ---------- drawer ---------- */
+function drawerHtml(){
+  const p = getPost(S.drawer.id); if (!p) return "";
+  const st = stage(p), m = p.meta ||= {}, slides = m.slides ||= [], sel = S.drawer.slide||0, ck = checks(p), busy = S.busy[p.id];
+  const editable = st !== "published";
+  const when = toLocalInput(p.publish_at || nextSlot());
+  return `<div class="scrim" data-act="closedrawer"><div class="drawer" role="dialog" aria-modal="true" aria-label="Post">
+    <div class="dhead"><div class="row"><b style="font:700 16px var(--font);color:var(--ink)">${esc(m.topic||p.id)}</b>${pillOf(st)}</div><div class="row">
+      ${st==="planned"?`<button class="btn pri" data-act="gen:${p.id}" ${busy?"disabled":""}>${ico("sparkles")}${busy||"Generate"}</button>`:""}
+      <button class="btn" data-act="closedrawer">${ico("x")}Close</button></div></div>
+    <div class="dbody"><div style="display:flex;flex-direction:column;gap:14px">
+      <div class="phone"><div class="ph2"><div class="avatar"><img src="${LOGO}" alt=""></div><b style="font:700 13px var(--font);color:var(--ink)">darwixai</b></div><canvas id="prev" width="1080" height="1350"></canvas><div class="dots">${slides.map((_,i)=>`<i class="${i===sel?"on":""}"></i>`).join("")}</div><div class="pcap">${esc(p.caption||"")}</div></div>
+      <div class="row" style="justify-content:center"><button class="btn sm" data-act="slide:-1">‹ Previous</button><span class="mono" style="font-size:12px">${slides.length?sel+1:0} / ${slides.length}</span><button class="btn sm" data-act="slide:1">Next ›</button></div></div>
+    <div style="display:flex;flex-direction:column;gap:16px;min-width:0">
+      <section class="card pad"><div class="eyebrow">Checks</div><div style="display:flex;flex-direction:column;gap:6px;margin-top:8px">${ck.length?ck.map(x=>`<div class="row" style="gap:8px;align-items:flex-start"><span class="chip ${x.l==="fail"?"q-low":"q-med"}">${x.l==="fail"?"Blocked":"Check"}</span><span style="flex:1;min-width:200px">${esc(x.t)}</span></div>`).join(""):`<div class="row"><span class="chip q-high">Clear</span><span>Length, banned phrases and company names pass. Figures still need your eye.</span></div>`}${(m.flags||[]).map(f=>`<div class="row" style="gap:8px"><span class="chip q-med">Verify</span><span style="flex:1;min-width:200px">${esc(f)}</span></div>`).join("")}</div></section>
+      ${editable?`<section class="card pad"><div class="eyebrow">Caption</div><textarea id="d_cap" style="min-height:170px;margin-top:8px">${esc(p.caption||"")}</textarea>
+        <div class="hint" style="margin-top:6px">${(p.caption||"").length} / 2,200 characters</div></section>
+      <section class="card pad"><div class="row" style="justify-content:space-between"><div class="eyebrow">Slides</div><div class="row"><button class="btn sm" data-act="addslide">${ico("plus")}Add slide</button></div></div><div style="display:flex;flex-direction:column;gap:10px;margin-top:10px">
+        ${slides.map((s,i)=>`<div class="slc ${i===sel?"on":""}" data-act="pick:${i}"><div class="row"><b class="mono" style="font-size:12px">${i+1}</b><select id="k_${i}" style="width:auto"><option ${s.kind==="cover"?"selected":""}>cover</option><option ${s.kind==="content"?"selected":""}>content</option><option ${s.kind==="cta"?"selected":""}>cta</option></select><span class="spacer"></span><button class="btn sm" data-act="shot:${i}">${ico("upload")}${s.screen?"Replace screen":"Add product screen"}</button><button class="btn sm" data-act="up:${i}" aria-label="Move up">↑</button><button class="btn sm" data-act="dn:${i}" aria-label="Move down">↓</button><button class="btn sm danger" data-act="del:${i}" aria-label="Delete slide">${ico("x")}</button></div>
+          <input type="text" id="t_${i}" value="${esc(s.title)}" placeholder="Headline"><textarea id="b_${i}" style="min-height:60px" placeholder="Supporting text (optional)">${esc(s.body||"")}</textarea></div>`).join("")||`<div class="empty">No slides yet. Generate the post or add a slide.</div>`}</div></section>
+      <section class="card pad"><div class="eyebrow">Publish</div>
+        <div class="row" style="margin-top:8px;align-items:flex-end"><label class="f" style="flex:1;min-width:220px">Publish time (IST)<input type="datetime-local" id="d_when" value="${when}"></label>
+        <button class="btn" data-act="savedraft" ${busy?"disabled":""}>Save draft</button>
+        ${st==="scheduled"||st==="publishing"?`<button class="btn" data-act="unapprove:${p.id}">Pull back to review</button><button class="btn pri" data-act="approveagain:${p.id}">Update schedule</button>`:`<button class="btn pri" data-act="approve:${p.id}" ${busy||ck.some(x=>x.l==="fail")?"disabled":""}>${busy||"Approve and schedule"}</button>`}</div>
+        <div class="hint" style="margin-top:8px">Approving renders every slide to a JPEG, uploads it to the repo and marks the post approved. ${live()?"The publisher posts it at the time above.":"Sample mode: nothing is uploaded or posted."}</div></section>
+      <div class="row">${st==="failed"?`<button class="btn" data-act="retry:${p.id}">Retry now</button>`:""}<button class="btn danger" data-act="rm:${p.id}">Delete post</button></div>`
+      :`<section class="card pad"><div class="eyebrow">Published</div><p style="margin:6px 0 0">Posted ${esc(fmtIST(p.published_at))} IST${p.media_id&&p.media_id!=="sample"?` · media ${esc(p.media_id)}`:""}. Edits here do not change the live post.</p></section>`}
+    </div></div></div></div>`;
+}
+async function paintPreview(){
+  if (!S.drawer) return; const p = getPost(S.drawer.id); const cv = $("#prev"); if (!p || !cv) return;
+  const slides = p.meta?.slides || []; if (!slides.length){ const c = cv.getContext("2d"); c.fillStyle="#F3F4FF"; c.fillRect(0,0,1080,1350); c.fillStyle="#8A90A6"; c.font="500 40px Manrope, sans-serif"; c.textAlign="center"; c.fillText("No slides yet", 540, 675); return; }
+  const i = Math.min(S.drawer.slide||0, slides.length-1); await drawSlide(cv, slides[i], i, slides.length, p.meta.topic);
+}
+function pullDrawerInputs(){
+  if (!S.drawer) return; const p = getPost(S.drawer.id); if (!p || stage(p)==="published") return; const slides = p.meta.slides||[];
+  const cap = $("#d_cap"); if (cap) p.caption = cap.value;
+  slides.forEach((s,i) => { const t=$("#t_"+i), b=$("#b_"+i), k=$("#k_"+i); if (t) s.title = t.value; if (b) s.body = b.value; if (k) s.kind = k.value; });
+}
+
+/* ---------- render + events ---------- */
+function render(){
+  const b = byStage(), tabName = TABS.find(t=>t[0]===S.tab)[1];
+  const view = { overview:vOverview, create:vCreate, posts:vPosts, calendar:vCalendar, approvals:vApprovals, insights:vInsights, settings:vSettings }[S.tab]();
+  const y = window.scrollY;
+  $("#app").innerHTML = `<header class="hd"><div class="crumbs"><span>Darwix AI</span><span class="sl">/</span><b>Instagram Studio</b><span class="sl">/</span><span>${tabName}</span></div>
+    <div class="hrow"><div style="display:flex;flex-direction:column;gap:6px;min-width:0"><h1>Instagram Studio</h1><p class="sub">Queue · <b>@darwixai</b> · ${S.posts.length} post${S.posts.length===1?"":"s"} · Instagram carousels</p></div>
+    <div class="hact"><span class="mode ${live()?"live":"demo"}" title="${live()?"Connected to "+esc(S.cfg.owner+"/"+S.cfg.repo):"Showing sample data. Connect GitHub in Settings."}">${live()?"Live · "+esc(S.cfg.repo):"Sample data"}</span>
+    <button class="btn" data-act="reload" ${S.loading?"disabled":""}>${ico("refresh-cw",14)}${S.loading?"Loading":"Refresh"}</button>
+    <button class="btn" data-act="runpub">${ico("send",14)}GitHub publisher</button>
+    <button class="btn pri lg" data-act="tab:create">${ico("plus",16)}Create carousel</button></div></div>
+    <nav class="tabs" role="tablist">${TABS.map(t=>`<button class="tab" role="tab" aria-selected="${S.tab===t[0]}" data-act="tab:${t[0]}">${t[1]}${t[0]==="approvals"&&b.review.length?`<span class="count">${b.review.length}</span>`:""}</button>`).join("")}</nav></header>
+    <div class="page">${S.error?`<div class="banner err" role="alert"><span style="color:var(--err);display:flex">${ico("circle-alert",24)}</span><div class="bt"><b>Could not load from GitHub</b><span class="m">${esc(S.error)}</span></div><button class="btn out" data-act="tab:settings">Check settings</button></div>`:""}${view}</div>${S.drawer?drawerHtml():""}`;
+  window.scrollTo(0,y); paintPreview(); renderToast();
+}
+async function pickScreen(i){
+  const inp = document.createElement("input"); inp.type="file"; inp.accept="image/png,image/jpeg,image/webp";
+  inp.onchange = async () => { const f = inp.files[0]; if (!f) return; pullDrawerInputs(); const p = getPost(S.drawer.id);
+    const dataUrl = await new Promise(r => { const fr = new FileReader(); fr.onload = () => r(fr.result); fr.readAsDataURL(f); });
+    if (live()){ const path = `assets/${p.id}-${i+1}-${Date.now().toString(36)}.${f.type.includes("png")?"png":"jpg"}`; try { await gh.putFile(path, dataUrl.split(",")[1], `studio: screen for ${p.id}`); S.screens[path] = await (async()=>{ const im = new Image(); await new Promise(r=>{ im.onload=r; im.src=dataUrl; }); return im; })(); p.meta.slides[i].screen = path; } catch(e){ toast(e.message); return; } }
+    else { p.meta.slides[i].screen = dataUrl; }
+    render(); };
+  inp.click();
+}
+document.addEventListener("input", e => { if (S.drawer && /^(d_cap|t_|b_|k_)/.test(e.target.id||"")){ pullDrawerInputs(); clearTimeout(window.__pv); window.__pv = setTimeout(paintPreview, 250); const cap = $("#d_cap"); if (cap && cap.nextElementSibling) cap.nextElementSibling.textContent = `${cap.value.length} / 2,200 characters`; } });
+document.addEventListener("click", async e => {
+  const el = e.target.closest("[data-act]"); if (!el) return; const act = el.dataset.act; const [a, arg] = [act.split(":")[0], act.split(":").slice(1).join(":")];
+  if (el.classList.contains("scrim") && e.target !== el) return;
+  const d = S.drawer; const p = d && getPost(d.id);
+  switch(a){
+    case "tab": S.tab = arg; lsSet("tab", arg); S.drawer = null; render(); window.scrollTo(0,0); break;
+    case "reload": await loadAll(); break;
+    case "f": S.fStatus = arg; render(); break;
+    case "calf": S.calFilter = arg; render(); break;
+    case "cal": if (arg==="0") S.calMonth = null; else { let {y,m} = S.calMonth; m += +arg; if (m<0){m=11;y--;} if (m>11){m=0;y++;} S.calMonth = {y,m}; } render(); break;
+    case "open": S.drawer = { id:arg, slide:0 }; render(); break;
+    case "closedrawer": if (el.classList.contains("scrim") || el.tagName==="BUTTON"){ pullDrawerInputs(); S.drawer = null; render(); } break;
+    case "slide": { const n = (p.meta.slides||[]).length; if (n){ d.slide = (d.slide + (+arg) + n) % n; render(); } break; }
+    case "pick": if (!/BUTTON|SELECT|INPUT|TEXTAREA|svg|path/i.test(e.target.tagName)){ pullDrawerInputs(); d.slide = +arg; render(); } break;
+    case "addslide": pullDrawerInputs(); p.meta.slides.splice(Math.max(0,p.meta.slides.length-1), 0, {kind:"content", title:"New slide", body:""}); d.slide = Math.max(0,p.meta.slides.length-2); render(); break;
+    case "del": pullDrawerInputs(); p.meta.slides.splice(+arg,1); d.slide = 0; render(); break;
+    case "up": case "dn": { pullDrawerInputs(); const i = +arg, j = a==="up"?i-1:i+1, s = p.meta.slides; if (j>=0 && j<s.length){ [s[i],s[j]] = [s[j],s[i]]; d.slide = j; render(); } break; }
+    case "shot": pickScreen(+arg); break;
+    case "savedraft": { pullDrawerInputs(); const w = fromLocalInput($("#d_when").value); if (w) p.publish_at = w; try { await savePosts(`studio: edit ${p.id}`); toast("Draft saved."); } catch(err){ toast(err.message); } render(); break; }
+    case "approve": case "approveagain": { pullDrawerInputs(); await approve(arg, fromLocalInput($("#d_when").value)); break; }
+    case "unapprove": pullDrawerInputs(); await unapprove(arg); break;
+    case "rm": if (el.dataset.confirm){ await removePost(arg); } else { el.dataset.confirm="1"; el.textContent="Click again to delete"; } break;
+    case "gen": await generate(arg); break;
+    case "genall": for (const q of S.posts.filter(x=>stage(x)==="planned")) await generate(q.id); break;
+    case "retry": await retry(arg); break;
+    case "now": await publishNow(arg); break;
+    case "runpub": await runPublisher(); break;
+    case "addrow": case "addgen": {
+      const row = { pillar:$("#c_pillar").value.trim(), topic:$("#c_topic").value.trim(), hook:$("#c_hook").value.trim(), direction:$("#c_dir").value.trim(), cta:$("#c_cta").value.trim() };
+      if (!row.topic){ toast("Add a topic first."); break; }
+      try { await addRows([row]); const id = S.posts[S.posts.length-1].id; S.createDraft = null; if (a==="addgen"){ S.tab="approvals"; render(); await generate(id); S.drawer = {id, slide:0}; render(); } else { toast("Added to the queue."); S.tab="approvals"; render(); } } catch(err){ toast(err.message); }
+      break; }
+    case "import": { const rows = parseSheet($("#c_paste").value); if (!rows.length){ toast("No rows found. Check the column order."); break; } try { await addRows(rows); toast(`${rows.length} row${rows.length>1?"s":""} added.`); S.tab="approvals"; render(); } catch(err){ toast(err.message); } break; }
+    case "saveconn": { Object.assign(S.cfg, { owner:$("#s_owner").value.trim(), repo:$("#s_repo").value.trim(), branch:$("#s_branch").value.trim()||"main", token:$("#s_token").value.trim() }); lsSet("cfg", S.cfg); await loadAll(); if (!S.error) toast(live()?"Connected.":"Using sample data."); break; }
+    case "testconn": { Object.assign(S.cfg, { owner:$("#s_owner").value.trim(), repo:$("#s_repo").value.trim(), branch:$("#s_branch").value.trim()||"main", token:$("#s_token").value.trim() }); try { const r = await gh.req(""); const f = await gh.getFile("schedule.json"); toast(`Connected to ${r.full_name}. schedule.json ${f?"found":"not found, it will be created"}.`); } catch(err){ toast(err.message); } break; }
+    case "disconnect": S.cfg.token = ""; lsSet("cfg", S.cfg); await loadAll(); break;
+    case "savewrite": Object.assign(S.cfg, { aiKey:$("#s_ai").value.trim(), aiModel:$("#s_model").value.trim()||"claude-sonnet-5-5", defaultTime:$("#s_time").value.trim()||"11:00", defaultCta:$("#s_cta").value, defaultTags:$("#s_tags").value, banned:$("#s_ban").value, notes:$("#s_notes").value }); lsSet("cfg", S.cfg); toast("Saved in this browser."); render(); break;
+  }
+});
+document.addEventListener("keydown", e => { if (e.key==="Escape" && S.drawer){ pullDrawerInputs(); S.drawer = null; render(); } });
+loadAll();
+</script>
+</body></html>
