@@ -36,5 +36,61 @@
     ],
     "media_id": "18127633801848296",
     "published_at": "2026-10-07T20:33:45.810Z"
+  },
+  {
+    "id": "darwix-ai-i629",
+    "publish_at": "2026-10-12T05:30:00.000Z",
+    "approved": false,
+    "status": "draft",
+    "caption": "A conversation should end in a record, not in someone's memory.\n\nIn most BFSI workflows the important part of an interaction is said once, remembered imperfectly and typed up later. Darwix AI works on the interaction itself. It prepares the context, listens, structures what is said, checks it against documents and systems, guides the person in the room, and keeps the audit trail.\n\nEvery value keeps its source and its state. Consequential decisions stay with a person.\n\nWant to see it on your workflow? Link in bio.\n\n#DarwixAI #BFSI #AIinBFSI #Lending #Insurance #WealthManagement #EnterpriseAI",
+    "images": [],
+    "meta": {
+      "pillar": "Brand",
+      "topic": "Darwix AI",
+      "hook": "A conversation should end in a record, not in someone's memory.",
+      "direction": "Overview: one interaction from preparation to audit trail.",
+      "cta": "See it on your workflow.",
+      "slides": [
+        {
+          "kind": "coverdark",
+          "title": "A conversation should end in a record, not in someone's memory.",
+          "body": "How Darwix AI carries one interaction from preparation to audit."
+        },
+        {
+          "kind": "compare",
+          "title": "Where the facts go today",
+          "body": "Today: The officer remembers it, types it up later, and the reviewer approves the memory. | With Darwix: The value is captured as it is said, tied to its source, and reviewed with its evidence."
+        },
+        {
+          "kind": "steps",
+          "title": "From conversation to record",
+          "body": "Prepare the context before the meeting | Listen, understand and structure the conversation | Reconcile it against documents and systems | Guide the person while there is still time | Write back, measure and keep the audit trail"
+        },
+        {
+          "kind": "grid",
+          "title": "What stays the same in every product",
+          "body": "Source: Every value links to where it came from | State: Captured, derived, pending or in conflict | Human: Consequential decisions stay with a person | Audit: Actions and resolutions are logged"
+        },
+        {
+          "kind": "statement",
+          "title": "Credit, underwriting, medical, legal and acquisition decisions stay with people.",
+          "body": "Darwix prepares the evidence they decide on."
+        },
+        {
+          "kind": "list",
+          "title": "Where it runs",
+          "body": "Lending: Personal discussions, evidence review and alerts | Insurance: Proposals, verification and evidence before issuance | Wealth: Relationship manager signals and meeting briefs | People: Training analysis and recruiter support"
+        },
+        {
+          "kind": "cta",
+          "title": "See it on your workflow.",
+          "body": "Request a demo at darwix.ai"
+        }
+      ],
+      "flags": [
+        "No figures. Confirm the four lines of business listed on slide 6 match what you want to say publicly."
+      ],
+      "generated_by": "sheet"
+    }
   }
 ]
