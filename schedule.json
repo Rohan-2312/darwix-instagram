@@ -102,5 +102,61 @@
     },
     "media_id": "18074776544753832",
     "published_at": "2026-10-08T13:39:01.917Z"
+  },
+  {
+    "id": "alert-intelligence-49ly",
+    "publish_at": "2026-10-13T05:30:00.000Z",
+    "approved": false,
+    "status": "draft",
+    "caption": "Which of today's signals should a relationship manager act on?\n\nAn RM's inbox fills with notifications every week, and most of them change nothing for a client. The skill is knowing which ones do.\n\nAlert Intelligence listens for signals, matches them to each client's holdings and limits, and scores relevance. The reason is shown with the score. The RM sees what happened, who is exposed and a conversation they can have. Contacting the client waits for supervisor approval.\n\nWant to see the triage view on your wealth workflow? Link in bio.\n\n#DarwixAI #AlertIntelligence #WealthManagement #BFSI #RelationshipManagement #AIinBFSI",
+    "images": [],
+    "meta": {
+      "pillar": "Product",
+      "topic": "Alert Intelligence",
+      "hook": "Which of today's signals should a relationship manager act on?",
+      "direction": "Wealth RM signal triage, from signal to governed action.",
+      "cta": "See the triage view on your wealth workflow.",
+      "slides": [
+        {
+          "kind": "coverdark",
+          "title": "Which of today's signals should a relationship manager act on?",
+          "body": "Alert Intelligence for wealth management."
+        },
+        {
+          "kind": "quote",
+          "title": "I don't need to know everything that happened. I need to know which of my clients should hear from me today.",
+          "body": "Relationship manager, product research session"
+        },
+        {
+          "kind": "flow",
+          "title": "From a signal to a governed action",
+          "body": "A signal arrives from a feed or a holding change | It is matched to each client's exposure | It is scored for relevance | A brief is drafted for the RM | Contact waits for supervisor approval"
+        },
+        {
+          "kind": "grid",
+          "title": "Four blocks on every alert",
+          "body": "Recent signal: What happened and when | Client context: Holdings and limits affected | Implication: Marked AI-generated, not a recommendation | Opportunity: Talking points the RM can use"
+        },
+        {
+          "kind": "stat",
+          "title": "92",
+          "body": "An illustrative relevance score out of 100 | Exposure 34, concentration 26, corroboration 18, contact recency 14. The reasons travel with the number."
+        },
+        {
+          "kind": "statement",
+          "title": "Every alert carries its evidence, an owner and a status.",
+          "body": "Contacting the client stays blocked until a supervisor signs off."
+        },
+        {
+          "kind": "cta",
+          "title": "See the triage view on your wealth workflow.",
+          "body": "Request a demo at darwix.ai"
+        }
+      ],
+      "flags": [
+        "Slide 2 quote is from internal product research: confirm you are happy to publish it. Slide 5: 92 and its 34/26/18/14 split are an illustrative worked example from the design case study, labelled illustrative on the slide."
+      ],
+      "generated_by": "sheet"
+    }
   }
 ]
