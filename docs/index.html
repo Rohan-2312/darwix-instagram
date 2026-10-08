@@ -319,25 +319,61 @@ async function loadScreen(path){
   await new Promise(r => { img.onload = r; img.onerror = r; img.src = src; });
   S.screens[path] = img.naturalWidth ? img : null; return S.screens[path];
 }
+const KINDS = ["cover","coverdark","content","statement","focus","stat","compare","steps","list","flow","grid","quote","table","cta"];
+const DARK_KINDS = new Set(["coverdark","statement"]);
+const items = b => String(b||"").split("|").map(s => s.trim()).filter(Boolean);
+const labText = s => { const m = String(s).match(/^([^:]{1,30}):\s+([\s\S]+)$/); return m ? {label:m[1].trim(), text:m[2].trim()} : {label:"", text:String(s).trim()}; };
 async function drawSlide(canvas, slide, idx, total, eyebrow){
-  try { await Promise.all([document.fonts.load("600 40px Manrope"), document.fonts.load("500 20px Manrope"), document.fonts.load("400 40px Manrope")]); } catch {}
-  const W = 1080, H = 1350, M = 90, c = canvas.getContext("2d");
+  try { await Promise.all([document.fonts.load("700 40px Manrope"), document.fonts.load("600 40px Manrope"), document.fonts.load("500 20px Manrope"), document.fonts.load("400 40px Manrope")]); } catch {}
+  const W = 1080, H = 1350, M = 90, c = canvas.getContext("2d"), maxW = W - M*2, BOT = 1215;
   canvas.width = W; canvas.height = H;
-  const g = c.createLinearGradient(0,0,W*0.35,H); g.addColorStop(0,"#FFFFFF"); g.addColorStop(.42,"#FBFBFF"); g.addColorStop(1,"#EFEFFC");
-  c.fillStyle = g; c.fillRect(0,0,W,H);
-  c.strokeStyle = "rgba(86,90,221,.055)"; c.lineWidth = 1;
-  for (let x=M; x<W; x+=90){ c.beginPath(); c.moveTo(x,0); c.lineTo(x,H); c.stroke(); }
-  for (let y=60; y<H; y+=90){ c.beginPath(); c.moveTo(0,y); c.lineTo(W,y); c.stroke(); }
-  const bl = c.createRadialGradient(W*.82,H*.78,0,W*.82,H*.78,520); bl.addColorStop(0,"rgba(86,90,221,.20)"); bl.addColorStop(1,"rgba(86,90,221,0)");
-  c.fillStyle = bl; c.fillRect(0,0,W,H);
-  if (logoImg.complete && logoImg.naturalWidth) c.drawImage(logoImg, W/2-27, 70, 54, 54);
-  c.textBaseline = "alphabetic"; c.fillStyle = "#667085"; c.font = "500 20px Manrope, sans-serif";
+  const kind = KINDS.includes(slide.kind) ? slide.kind : "content", dark = DARK_KINDS.has(kind);
+  const ink = dark ? "#FFFFFF" : "#1F2337", mute = dark ? "rgba(255,255,255,.80)" : "#667085";
+  if (dark){
+    const g = c.createLinearGradient(0,0,W,H); g.addColorStop(0,"#30339A"); g.addColorStop(.55,"#4A4DCB"); g.addColorStop(1,"#6B6FE8"); c.fillStyle = g; c.fillRect(0,0,W,H);
+    c.strokeStyle = "rgba(255,255,255,.06)"; c.lineWidth = 1;
+    for (let x=M; x<W; x+=90){ c.beginPath(); c.moveTo(x,0); c.lineTo(x,H); c.stroke(); }
+    for (let y=60; y<H; y+=90){ c.beginPath(); c.moveTo(0,y); c.lineTo(W,y); c.stroke(); }
+    const gl = c.createRadialGradient(W*.88,H*.12,0,W*.88,H*.12,560); gl.addColorStop(0,"rgba(255,255,255,.18)"); gl.addColorStop(1,"rgba(255,255,255,0)"); c.fillStyle = gl; c.fillRect(0,0,W,H);
+    rr(c, W/2-33, 64, 66, 66, 18); c.fillStyle = "#FFFFFF"; c.fill();
+    if (logoImg.complete && logoImg.naturalWidth) c.drawImage(logoImg, W/2-22, 75, 44, 44);
+  } else {
+    const g = c.createLinearGradient(0,0,W*0.35,H); g.addColorStop(0,"#FFFFFF"); g.addColorStop(.42,"#FBFBFF"); g.addColorStop(1,"#EFEFFC"); c.fillStyle = g; c.fillRect(0,0,W,H);
+    c.strokeStyle = "rgba(86,90,221,.055)"; c.lineWidth = 1;
+    for (let x=M; x<W; x+=90){ c.beginPath(); c.moveTo(x,0); c.lineTo(x,H); c.stroke(); }
+    for (let y=60; y<H; y+=90){ c.beginPath(); c.moveTo(0,y); c.lineTo(W,y); c.stroke(); }
+    const bl = c.createRadialGradient(W*.82,H*.78,0,W*.82,H*.78,520); bl.addColorStop(0,"rgba(86,90,221,.20)"); bl.addColorStop(1,"rgba(86,90,221,0)"); c.fillStyle = bl; c.fillRect(0,0,W,H);
+    if (logoImg.complete && logoImg.naturalWidth) c.drawImage(logoImg, W/2-27, 70, 54, 54);
+  }
+  c.textBaseline = "alphabetic"; c.fillStyle = dark ? "rgba(255,255,255,.72)" : "#667085"; c.font = "500 20px Manrope, sans-serif";
   if (c.letterSpacing !== undefined) c.letterSpacing = "3px";
   c.textAlign = "left"; let eb = (eyebrow||"").toUpperCase(); while (eb.length > 4 && c.measureText(eb).width > 340) eb = eb.slice(0,-2); if (eb !== (eyebrow||"").toUpperCase()) eb = eb.trimEnd() + "…"; c.fillText(eb, M, 104);
   c.textAlign = "right"; c.fillText(String(idx+1).padStart(2,"0")+" / "+String(total).padStart(2,"0"), W-M, 104);
   if (c.letterSpacing !== undefined) c.letterSpacing = "0px";
   c.textAlign = "left";
-  const kind = slide.kind || "content", maxW = W - M*2;
+
+  const fitBox = (t, wt, w, h, sizes, lh=1.3) => {
+    for (const sz of sizes){ c.font = `${wt} ${sz}px Manrope, sans-serif`; const l = wrapLines(c, t, w); if (l.length*sz*lh <= h) return {sz, lines:l}; }
+    const sz = sizes[sizes.length-1]; c.font = `${wt} ${sz}px Manrope, sans-serif`; return {sz, lines: wrapLines(c, t, w).slice(0, Math.max(1, Math.floor(h/(sz*lh))))};
+  };
+  const head = (t, y0=250, lines=3, sizes=[64,58,52,46]) => { const f = fitText(c, t, 600, maxW, lines, sizes); c.fillStyle = ink; c.font = `600 ${f.sz}px Manrope, sans-serif`; let y = y0; f.lines.forEach(l => { c.fillText(l, M, y); y += f.sz*1.12; }); return y; };
+  const card = (x,y,w,h,r,fill,stroke,shadow=true) => { c.save(); if (shadow){ c.shadowColor = "rgba(31,35,55,.10)"; c.shadowBlur = 28; c.shadowOffsetY = 10; } rr(c,x,y,w,h,r); c.fillStyle = fill; c.fill(); c.restore(); if (stroke){ rr(c,x,y,w,h,r); c.strokeStyle = stroke; c.lineWidth = 2; c.stroke(); } };
+  const pill = (x,y,text,bg,fg,sz=22) => { c.font = `600 ${sz}px Manrope, sans-serif`; const tw = c.measureText(text).width, w = tw+36, h = sz+22; rr(c,x,y,w,h,h/2); c.fillStyle = bg; c.fill(); c.fillStyle = fg; c.fillText(text, x+18, y+h/2+sz*0.35); return w; };
+  const check = (cx,cy,r,bg="#565ADD") => { c.beginPath(); c.arc(cx,cy,r,0,Math.PI*2); c.fillStyle = bg; c.fill(); c.strokeStyle = "#FFFFFF"; c.lineWidth = r*0.16; c.lineCap = "round"; c.lineJoin = "round"; c.beginPath(); c.moveTo(cx-r*.42,cy+r*.02); c.lineTo(cx-r*.1,cy+r*.34); c.lineTo(cx+r*.44,cy-r*.3); c.stroke(); };
+  // label + text block drawn left-aligned in a box; returns nothing
+  const labelled = (it, x, y, w, h, tint) => {
+    if (it.label){
+      const lf = fitBox(it.label, 700, w, 54, [44,40,36,32], 1.2);
+      const f = fitBox(it.text, 400, w, Math.max(50, h - lf.sz*1.2 - 16), [38,35,32,29], 1.3);
+      const bh = lf.sz*1.2 + 12 + f.lines.length*f.sz*1.3, top = y + Math.max(0,(h-bh)/2);
+      c.fillStyle = "#1F2337"; c.font = `700 ${lf.sz}px Manrope, sans-serif`; c.fillText(lf.lines[0], x, top + lf.sz*0.95);
+      c.fillStyle = "#667085"; c.font = `400 ${f.sz}px Manrope, sans-serif`; let yy = top + lf.sz*1.2 + 12 + f.sz*0.95; f.lines.forEach(l => { c.fillText(l, x, yy); yy += f.sz*1.3; });
+    } else {
+      const f = fitBox(it.text, 500, w, h, [46,42,38,34,30], 1.28);
+      c.fillStyle = "#1F2337"; c.font = `500 ${f.sz}px Manrope, sans-serif`; const th = f.lines.length*f.sz*1.28; let yy = y + (h-th)/2 + f.sz*0.8; f.lines.forEach(l => { c.fillText(l, x, yy); yy += f.sz*1.28; });
+    }
+  };
+
   if (kind === "cover"){
     const f = fitText(c, slide.title, 600, maxW, 6, [104,92,82,72,64]);
     c.fillStyle = "#1F2337"; c.font = `600 ${f.sz}px Manrope, sans-serif`; let y = 400;
@@ -345,6 +381,82 @@ async function drawSlide(canvas, slide, idx, total, eyebrow){
     if (slide.body){ c.fillStyle = "#667085"; c.font = "400 40px Manrope, sans-serif"; y += 24; wrapLines(c, slide.body, maxW).slice(0,4).forEach(l => { c.fillText(l, M, y); y += 52; }); }
     rr(c, M, 1110, 250, 84, 42); c.fillStyle = "#565ADD"; c.fill();
     c.fillStyle = "#FFFFFF"; c.font = "600 32px Manrope, sans-serif"; c.textAlign = "center"; c.fillText("Swipe  →", M+125, 1163); c.textAlign = "left";
+  } else if (kind === "coverdark"){
+    const f = fitText(c, slide.title, 700, maxW, 6, [108,96,86,76,66]);
+    c.fillStyle = "#FFFFFF"; c.font = `700 ${f.sz}px Manrope, sans-serif`; let y = 400;
+    f.lines.forEach(l => { c.fillText(l, M, y); y += f.sz*1.08; });
+    if (slide.body){ c.fillStyle = mute; c.font = "400 40px Manrope, sans-serif"; y += 24; wrapLines(c, slide.body, maxW).slice(0,4).forEach(l => { c.fillText(l, M, y); y += 52; }); }
+    rr(c, M, 1110, 250, 84, 42); c.fillStyle = "#FFFFFF"; c.fill();
+    c.fillStyle = "#3F42B8"; c.font = "600 32px Manrope, sans-serif"; c.textAlign = "center"; c.fillText("Swipe  →", M+125, 1163); c.textAlign = "left";
+  } else if (kind === "statement"){
+    rr(c, M, 300, 120, 10, 5); c.fillStyle = "rgba(255,255,255,.9)"; c.fill();
+    const f = fitBox(slide.title, 700, maxW, slide.body ? 560 : 700, [96,88,80,72,64,58], 1.12);
+    c.fillStyle = "#FFFFFF"; c.font = `700 ${f.sz}px Manrope, sans-serif`; let y = 400 + f.sz*0.2;
+    f.lines.forEach(l => { c.fillText(l, M, y+f.sz*0.8); y += f.sz*1.12; });
+    if (slide.body){ c.fillStyle = mute; c.font = "400 38px Manrope, sans-serif"; y += 56; wrapLines(c, slide.body, maxW).slice(0,5).forEach(l => { c.fillText(l, M, y); y += 50; }); }
+  } else if (kind === "stat"){
+    rr(c, M, 380, 120, 10, 5); c.fillStyle = "#565ADD"; c.fill();
+    const f = fitText(c, slide.title, 700, maxW, 1, [320,280,240,200,170,140,115,95]);
+    c.fillStyle = "#565ADD"; c.font = `700 ${f.sz}px Manrope, sans-serif`; const base = 450 + f.sz*0.82; c.fillText(f.lines[0], M-6, base);
+    const its = items(slide.body); let y = base + 70;
+    if (its[0]){ const lf = fitBox(its[0], 600, maxW, 260, [58,52,48,44], 1.18); c.fillStyle = "#1F2337"; c.font = `600 ${lf.sz}px Manrope, sans-serif`; lf.lines.forEach(l => { c.fillText(l, M, y); y += lf.sz*1.18; }); y += 20; }
+    if (its[1] && y < 1000){ const bh = Math.min(BOT-y, 280); const sf = fitBox(its[1], 400, maxW-80, bh-70, [38,34,32,30], 1.34); const ph = sf.lines.length*sf.sz*1.34+70; card(M, y, maxW, ph, 30, "#F3F4FF", "#E6E7FB", false); c.fillStyle = "#3A3F55"; c.font = `400 ${sf.sz}px Manrope, sans-serif`; let yy = y+35+sf.sz; sf.lines.forEach(l => { c.fillText(l, M+40, yy); yy += sf.sz*1.34; }); }
+  } else if (kind === "compare"){
+    let y = head(slide.title, 250, 3, [60,54,48]); y += 10;
+    const its = items(slide.body).slice(0,2).map(labText); while (its.length < 2) its.push({label:"", text:""});
+    const gap = 70, h = Math.min(430, (BOT - y - gap)/2), y2 = y + h + gap;
+    [[its[0], y, false],[its[1], y2, true]].forEach(([it, yy, hot]) => {
+      card(M, yy, maxW, h, 34, hot ? "#565ADD" : "#FFFFFF", hot ? null : "#D9DBEA");
+      c.textAlign = "left"; if (it.label) pill(M+40, yy+36, it.label, hot ? "rgba(255,255,255,.2)" : "#EEF0F6", hot ? "#FFFFFF" : "#667085", 24);
+      const top = yy + (it.label ? 120 : 50), f = fitBox(it.text, 500, maxW-80, yy+h-top-36, [46,42,38,34,30], 1.3);
+      c.fillStyle = hot ? "#FFFFFF" : "#1F2337"; c.font = `500 ${f.sz}px Manrope, sans-serif`; let ty = top + f.sz*0.85; f.lines.forEach(l => { c.fillText(l, M+40, ty); ty += f.sz*1.3; });
+    });
+    const cy = y + h + gap/2; c.beginPath(); c.arc(W/2, cy, 36, 0, Math.PI*2); c.fillStyle = "#FFFFFF"; c.fill(); c.strokeStyle = "#D9DBEA"; c.lineWidth = 2; c.stroke(); c.fillStyle = "#565ADD"; c.font = "700 28px Manrope, sans-serif"; c.textAlign = "center"; c.fillText("vs", W/2, cy+10); c.textAlign = "left";
+  } else if (kind === "steps"){
+    let y = head(slide.title, 250, 3, [60,54,48]) + 30; const its = items(slide.body).slice(0,5).map(labText), n = Math.max(1, its.length), rh = Math.min(240, (BOT - y)/n);
+    its.forEach((it,i) => { const cy = y + i*rh + rh/2;
+      if (i < n-1){ c.strokeStyle = "#CFD2F5"; c.lineWidth = 4; c.beginPath(); c.moveTo(M+38, cy+38); c.lineTo(M+38, cy+rh-38); c.stroke(); }
+      c.beginPath(); c.arc(M+38, cy, 36, 0, Math.PI*2); c.fillStyle = i === n-1 ? "#565ADD" : "#FFFFFF"; c.fill(); c.strokeStyle = "#565ADD"; c.lineWidth = 3; c.stroke();
+      c.fillStyle = i === n-1 ? "#FFFFFF" : "#565ADD"; c.font = "700 34px Manrope, sans-serif"; c.textAlign = "center"; c.fillText(String(i+1), M+38, cy+12); c.textAlign = "left";
+      labelled(it, M+110, y + i*rh, maxW-110, rh, "#565ADD"); });
+  } else if (kind === "list"){
+    let y = head(slide.title, 250, 3, [60,54,48]) + 30; const its = items(slide.body).slice(0,6).map(labText), n = Math.max(1, its.length), gap = 20, rh = Math.min(230, (BOT - y - gap*(n-1))/n);
+    its.forEach((it,i) => { const yy = y + i*(rh+gap); card(M, yy, maxW, rh, 26, "#FFFFFF", "#E6E7FB"); check(M+60, yy+rh/2, 26); labelled(it, M+120, yy+10, maxW-150, rh-20, "#565ADD"); });
+  } else if (kind === "flow"){
+    let y = head(slide.title, 250, 3, [60,54,48]) + 30; const its = items(slide.body).slice(0,6).map(labText), n = Math.max(1, its.length), ag = 52, nh = Math.min(215, (BOT - y - ag*(n-1))/n);
+    its.forEach((it,i) => { const yy = y + i*(nh+ag), last = i === n-1;
+      card(M, yy, maxW, nh, 28, last ? "#565ADD" : "#F3F4FF", last ? null : "#E0E2FA", false);
+      if (last){ c.fillStyle = "#FFFFFF"; const f = fitBox(it.label ? it.label+": "+it.text : it.text, 600, maxW-80, nh-30, [42,38,34,30], 1.25); c.font = `600 ${f.sz}px Manrope, sans-serif`; const th = f.lines.length*f.sz*1.25; let ty = yy+(nh-th)/2+f.sz*0.88; f.lines.forEach(l => { c.fillText(l, M+40, ty); ty += f.sz*1.25; }); }
+      else labelled(it, M+40, yy+8, maxW-80, nh-16, "#565ADD");
+      if (!last){ const ax = W/2, ay = yy+nh+ag/2; c.strokeStyle = "#565ADD"; c.lineWidth = 5; c.lineCap = "round"; c.lineJoin = "round"; c.beginPath(); c.moveTo(ax-14, ay-8); c.lineTo(ax, ay+8); c.lineTo(ax+14, ay-8); c.stroke(); } });
+  } else if (kind === "grid"){
+    let y = head(slide.title, 250, 3, [60,54,48]) + 30; const its = items(slide.body).slice(0,4).map(labText), n = Math.max(1, its.length), rows = Math.ceil(n/2), gap = 26, ch = Math.min(540, (BOT - y - gap*(rows-1))/rows), cw = (maxW-gap)/2;
+    its.forEach((it,i) => { const r = Math.floor(i/2), col = i%2, full = (n%2===1 && i===n-1), x = full ? M : M + col*(cw+gap), w = full ? maxW : cw, yy = y + r*(ch+gap);
+      card(M+(x-M), yy, w, ch, 28, "#FFFFFF", "#E6E7FB"); rr(c, x+34, yy+34, 56, 8, 4); c.fillStyle = "#565ADD"; c.fill();
+      let ty = yy+96; if (it.label){ c.font = "700 26px Manrope, sans-serif"; if (c.letterSpacing !== undefined) c.letterSpacing = "2px"; c.fillStyle = "#565ADD"; c.fillText(it.label.toUpperCase().slice(0,24), x+34, ty); if (c.letterSpacing !== undefined) c.letterSpacing = "0px"; ty += 20; }
+      const f = fitBox(it.text, 500, w-68, yy+ch-ty-28, [48,44,40,36,32,28], 1.3); c.fillStyle = "#1F2337"; c.font = `500 ${f.sz}px Manrope, sans-serif`; ty += f.sz*0.95; f.lines.forEach(l => { c.fillText(l, x+34, ty); ty += f.sz*1.3; }); });
+  } else if (kind === "focus"){
+    rr(c, M, 400, 120, 10, 5); c.fillStyle = "#565ADD"; c.fill();
+    const f = fitBox(slide.title, 700, maxW, slide.body ? 560 : 700, [92,84,76,68,60,54], 1.12);
+    c.fillStyle = "#1F2337"; c.font = `700 ${f.sz}px Manrope, sans-serif`; let y = 470;
+    f.lines.forEach(l => { c.fillText(l, M, y+f.sz*0.8); y += f.sz*1.12; });
+    if (slide.body){ c.fillStyle = "#667085"; c.font = "400 38px Manrope, sans-serif"; y += 50; wrapLines(c, slide.body, maxW).slice(0,5).forEach(l => { c.fillText(l, M, y+30); y += 50; }); }
+  } else if (kind === "quote"){
+    c.fillStyle = "rgba(86,90,221,.18)"; c.font = "700 440px Manrope, sans-serif"; c.fillText("“", M-12, 560);
+    const f = fitBox(slide.title, 600, maxW, 560, [64,58,54,50,46,42], 1.2);
+    c.fillStyle = "#1F2337"; c.font = `600 ${f.sz}px Manrope, sans-serif`; let y = 520; f.lines.forEach(l => { c.fillText(l, M, y); y += f.sz*1.2; });
+    y += 20; rr(c, M, y, 120, 8, 4); c.fillStyle = "#565ADD"; c.fill();
+    if (slide.body){ c.fillStyle = "#667085"; c.font = "500 34px Manrope, sans-serif"; y += 70; wrapLines(c, slide.body, maxW).slice(0,3).forEach(l => { c.fillText(l, M, y); y += 46; }); }
+  } else if (kind === "table"){
+    let y = head(slide.title, 250, 3, [60,54,48]) + 24; const its = items(slide.body).slice(0,7).map(labText), avail = BOT - y;
+    let sz = 34, rows, total;
+    for (const s of [38,36,34,32,30,28,26]){ sz = s; c.font = `400 ${s}px Manrope, sans-serif`; rows = its.map(it => { const l = wrapLines(c, it.text, maxW-300); return {it, l, h: Math.max(100, l.length*s*1.32+48)}; }); total = rows.reduce((a,r)=>a+r.h,0); if (total <= avail) break; }
+    const extra = Math.min(60, Math.max(0, (avail-total)/Math.max(1,rows.length))); rows.forEach(r => r.h += extra);
+    const tints = [["#EEEFFF","#3F42B8"],["#F1F2F7","#4A5068"]];
+    rows.forEach((r,i) => { c.strokeStyle = "#E3E5F3"; c.lineWidth = 2; c.beginPath(); c.moveTo(M, y); c.lineTo(W-M, y); c.stroke();
+      const [bg,fg] = tints[i%2]; c.font = "600 26px Manrope, sans-serif"; const lab = r.it.label || "·"; const lw = Math.min(250, c.measureText(lab).width + 36); rr(c, M, y+(r.h-52)/2, lw, 52, 26); c.fillStyle = bg; c.fill(); c.fillStyle = fg; c.fillText(lab.length > 22 ? lab.slice(0,21)+"…" : lab, M+18, y+(r.h-52)/2+35);
+      c.fillStyle = "#1F2337"; c.font = `400 ${sz}px Manrope, sans-serif`; let ty = y + (r.h - r.l.length*sz*1.32)/2 + sz*0.95; r.l.forEach(l => { c.fillText(l, M+290, ty); ty += sz*1.32; }); y += r.h; });
+    c.strokeStyle = "#E3E5F3"; c.lineWidth = 2; c.beginPath(); c.moveTo(M, y); c.lineTo(W-M, y); c.stroke();
   } else if (kind === "cta"){
     rr(c, M, 330, maxW, 700, 30); c.fillStyle = "#565ADD"; c.fill();
     c.fillStyle = "#FFFFFF"; const f = fitText(c, slide.title, 600, maxW-120, 5, [82,74,66,58]);
@@ -371,7 +483,7 @@ async function drawSlide(canvas, slide, idx, total, eyebrow){
       bf.lines.forEach(l => { c.fillText(l, M+40, yy); yy += lh; });
     }
   }
-  c.fillStyle = "#8A90A6"; c.font = "500 22px Manrope, sans-serif"; c.textAlign = "left"; c.fillText("Darwix AI  ·  @darwixai", M, 1290);
+  c.fillStyle = dark ? "rgba(255,255,255,.7)" : "#8A90A6"; c.font = "500 22px Manrope, sans-serif"; c.textAlign = "left"; c.fillText("Darwix AI  ·  @darwixai", M, 1290);
 }
 const canvasToJpeg = cv => new Promise(r => cv.toBlob(r, "image/jpeg", 0.92));
 const blobToB64 = b => new Promise(r => { const f = new FileReader(); f.onload = () => r(String(f.result).split(",")[1]); f.readAsDataURL(b); });
@@ -461,7 +573,7 @@ function fallbackSlides(row){
 }
 async function aiGenerate(row){
   const sys = `You write Instagram carousels for Darwix AI. Return only JSON.\n\n${S.cfg.notes}\n\nBanned phrases: ${S.cfg.banned}.`;
-  const user = `Content row\nPillar: ${row.pillar}\nTopic / use case: ${row.topic}\nCore hook: ${row.hook}\nContent direction: ${row.direction}\nCTA: ${row.cta}\n\nReturn JSON: {"slides":[{"kind":"cover|content|cta","title":"max 90 characters","body":"max 200 characters, optional"}],"caption":"hook line, 2 to 4 short paragraphs, the CTA, then hashtags","flags":["any claim or number a person must verify"]}.\nRules: slide 1 kind cover, last slide kind cta, 5 to 8 slides total, plain sentences, no emoji.`;
+  const user = `Content row\nPillar: ${row.pillar}\nTopic / use case: ${row.topic}\nCore hook: ${row.hook}\nContent direction: ${row.direction}\nCTA: ${row.cta}\n\nReturn JSON: {"slides":[{"kind":"cover|coverdark|content|statement|focus|stat|compare|steps|list|flow|grid|quote|table|cta","title":"max 90 characters","body":"max 200 characters, optional"}],"caption":"hook line, 2 to 4 short paragraphs, the CTA, then hashtags","flags":["any claim or number a person must verify"]}.\nRules: slide 1 kind cover or coverdark, last slide kind cta, 5 to 8 slides total, plain sentences, no emoji. Vary the layouts. Layout encoding: stat = title is the figure, body is "label | supporting sentence". compare = body is "Label: text | Label: text". steps, list and flow = body is items separated by |. grid = body is up to 4 "Label: text" items separated by |. table = body is "Label: definition" items separated by |. quote = title is a real quote, body is the attribution. focus = a single plain statement on a light slide.`;
   const r = await fetch("https://api.anthropic.com/v1/messages", { method:"POST", headers:{ "content-type":"application/json", "x-api-key":S.cfg.aiKey, "anthropic-version":"2023-06-01", "anthropic-dangerous-direct-browser-access":"true" },
     body: JSON.stringify({ model:S.cfg.aiModel, max_tokens:2500, system:sys, messages:[{role:"user", content:user}] }) });
   const j = await r.json(); if (!r.ok) throw new Error(j.error?.message || "AI request failed");
@@ -511,16 +623,48 @@ async function runPublisher(quiet){
 async function refreshRuns(){ if (!live()) return; try { const r = await gh.req("/actions/workflows/publish.yml/runs?per_page=6"); S.runs = r.workflow_runs || []; render(); } catch {} }
 async function removePost(id){ S.posts = S.posts.filter(p => p.id !== id); try { await savePosts(`studio: remove ${id}`); } catch(e){ toast(e.message); } S.drawer = null; render(); }
 function addRows(rows){
-  rows.forEach(r => S.posts.push({ id: slug(r.topic)+"-"+Date.now().toString(36).slice(-4), publish_at:null, approved:false, status:"planned", caption:"", images:[], meta:{ pillar:r.pillar, topic:r.topic, hook:r.hook, direction:r.direction, cta:r.cta||S.cfg.defaultCta, slides:[] } }));
-  return savePosts(`studio: add ${rows.length} planned post(s)`);
+  const tag = () => Math.random().toString(36).slice(2,6);
+  rows.forEach(r => {
+    const full = r.slides && r.slides.length;
+    S.posts.push({ id: slug(r.topic)+"-"+tag(), publish_at: r.publish_at||null, approved:false, status: full ? "draft" : "planned",
+      caption: full ? (r.caption || `${r.hook||r.topic}\n\n${r.cta||S.cfg.defaultCta}\n\n${S.cfg.defaultTags}`) : "", images:[],
+      meta:{ pillar:r.pillar, topic:r.topic, hook:r.hook, direction:r.direction, cta:r.cta||S.cfg.defaultCta, slides: full ? r.slides : [], flags: r.flags||[], generated_by: full ? "sheet" : undefined } });
+  });
+  return savePosts(`studio: add ${rows.length} post(s) from sheet`);
 }
+function parseCells(txt){
+  const t = String(txt||"").replace(/^﻿/,"").trim(); if (!t) return [];
+  const first = t.split(/\r?\n/)[0], sep = first.includes("\t") ? "\t" : ",";
+  const rows = []; let row = [], cur = "", q = false;
+  for (let i=0; i<t.length; i++){ const ch = t[i];
+    if (q){ if (ch === '"'){ if (t[i+1] === '"'){ cur += '"'; i++; } else q = false; } else cur += ch; }
+    else if (ch === '"' && cur === "") q = true;
+    else if (ch === sep){ row.push(cur); cur = ""; }
+    else if (ch === "\n" || ch === "\r"){ if (ch === "\r" && t[i+1] === "\n") i++; row.push(cur); cur = ""; rows.push(row); row = []; }
+    else cur += ch; }
+  row.push(cur); rows.push(row);
+  return rows.map(r => r.map(s => s.trim())).filter(r => r.some(Boolean));
+}
+function parseWhen(v){
+  v = String(v||"").trim(); if (!v) return null; let m;
+  if ((m = v.match(/^(\d{4})-(\d{1,2})-(\d{1,2})[ T](\d{1,2}):(\d{2})/))) return new Date(`${m[1]}-${m[2].padStart(2,"0")}-${m[3].padStart(2,"0")}T${m[4].padStart(2,"0")}:${m[5]}:00+05:30`).toISOString();
+  if ((m = v.match(/^(\d{1,2})\/(\d{1,2})\/(\d{4})[ ,]+(\d{1,2}):(\d{2})/))) return new Date(`${m[3]}-${m[2].padStart(2,"0")}-${m[1].padStart(2,"0")}T${m[4].padStart(2,"0")}:${m[5]}:00+05:30`).toISOString();
+  const d = new Date(v + (/(z|[+-]\d\d:?\d\d)$/i.test(v) ? "" : " GMT+0530")); return isNaN(d) ? null : d.toISOString();
+}
+function parseSlide(cell){
+  const parts = String(cell||"").split("::").map(s => s.trim()); if (!parts[0]) return null;
+  if (parts.length >= 2 && KINDS.includes(parts[0].toLowerCase())) return { kind: parts[0].toLowerCase(), title: parts[1], body: parts.slice(2).join(" :: ") };
+  return { kind:"content", title: parts[0], body: parts.slice(1).join(" :: ") };
+}
+/* Columns: Pillar, Topic, Hook, Direction, CTA, [Publish at IST], [Caption], [Slide 1 to 8: "kind :: title :: body"], [Verify notes] */
 function parseSheet(txt){
-  const lines = txt.trim().split(/\r?\n/).filter(Boolean); if (!lines.length) return [];
-  const sep = lines[0].includes("\t") ? "\t" : ",";
-  const cells = l => { const o=[]; let cur="", q=false; for (const ch of l){ if (ch==='"') q=!q; else if (ch===sep && !q){ o.push(cur); cur=""; } else cur+=ch; } o.push(cur); return o.map(s=>s.trim()); };
-  let rows = lines.map(cells); const head = rows[0].map(h=>h.toLowerCase());
-  if (head.some(h => /pillar|topic|hook/.test(h))) rows = rows.slice(1); else rows = rows;
-  return rows.filter(r => r[1] || r[2]).map(r => ({ pillar:r[0]||"", topic:r[1]||"", hook:r[2]||"", direction:r[3]||"", cta:r[4]||"" }));
+  let rows = parseCells(txt); if (!rows.length) return [];
+  if (/pillar|topic|hook/i.test(rows[0].slice(0,4).join(" "))) rows = rows.slice(1);
+  return rows.filter(r => r[1] || r[2]).map(r => {
+    const slides = r.slice(7,15).map(parseSlide).filter(Boolean);
+    return { pillar:r[0]||"", topic:r[1]||"", hook:r[2]||"", direction:r[3]||"", cta:r[4]||"", publish_at: parseWhen(r[5]), caption:(r[6]||"").replace(/\\n/g,"\n"), slides,
+      flags: String(r[15]||"").split(/\s*\|\s*|\n/).map(x=>x.trim()).filter(Boolean) };
+  });
 }
 
 /* ---------- views ---------- */
@@ -607,7 +751,7 @@ function vCreate(){
     </div>
     <div class="row"><button class="btn pri lg" data-act="addgen">${ico("sparkles",16)}Add and generate</button><button class="btn lg" data-act="addrow">Add to queue only</button><span class="hint">${S.cfg.aiKey ? `Copy is written by ${esc(S.cfg.aiModel)}.` : "No Anthropic key set. Slides are built straight from your direction. Add a key in Settings for written copy."}</span></div></div></section>
   <section class="sec"><div class="secb"><div><span class="lbl">2 · Or paste rows from your content plan</span><div style="font:700 18px var(--font);color:var(--ink);margin-top:2px">Import from a sheet</div></div>
-    <p class="sub" style="margin:0">Copy rows from Google Sheets in this order: Content Pillar, Topic / Use Case, Core Hook, Content Direction, CTA. A header row is fine.</p>
+    <p class="sub" style="margin:0">Copy rows from Google Sheets in this order: Content Pillar, Topic / Use Case, Core Hook, Content Direction, CTA. A header row is fine. The Studio Import tab of the Darwix content sheet also carries a publish time, caption and finished slides, so each row arrives as a ready draft in Needs review.</p>
     <textarea id="c_paste" style="min-height:130px;font-family:var(--mono);font-size:12.5px" placeholder="Product&#9;Live PD Automation&#9;The PD report writes itself&#9;Show the live flow&#9;Link in bio."></textarea>
     <div class="row"><button class="btn pri" data-act="import">${ico("upload",16)}Add rows to queue</button></div></div></section>`;
 }
@@ -703,7 +847,7 @@ function drawerHtml(){
       ${editable?`<section class="card pad"><div class="eyebrow">Caption</div><textarea id="d_cap" style="min-height:170px;margin-top:8px">${esc(p.caption||"")}</textarea>
         <div class="hint" style="margin-top:6px">${(p.caption||"").length} / 2,200 characters</div></section>
       <section class="card pad"><div class="row" style="justify-content:space-between"><div class="eyebrow">Slides</div><div class="row"><button class="btn sm" data-act="addslide">${ico("plus")}Add slide</button></div></div><div style="display:flex;flex-direction:column;gap:10px;margin-top:10px">
-        ${slides.map((s,i)=>`<div class="slc ${i===sel?"on":""}" data-act="pick:${i}"><div class="row"><b class="mono" style="font-size:12px">${i+1}</b><select id="k_${i}" style="width:auto"><option ${s.kind==="cover"?"selected":""}>cover</option><option ${s.kind==="content"?"selected":""}>content</option><option ${s.kind==="cta"?"selected":""}>cta</option></select><span class="spacer"></span><button class="btn sm" data-act="shot:${i}">${ico("upload")}${s.screen?"Replace screen":"Add product screen"}</button><button class="btn sm" data-act="up:${i}" aria-label="Move up">↑</button><button class="btn sm" data-act="dn:${i}" aria-label="Move down">↓</button><button class="btn sm danger" data-act="del:${i}" aria-label="Delete slide">${ico("x")}</button></div>
+        ${slides.map((s,i)=>`<div class="slc ${i===sel?"on":""}" data-act="pick:${i}"><div class="row"><b class="mono" style="font-size:12px">${i+1}</b><select id="k_${i}" style="width:auto">${KINDS.map(k=>`<option ${s.kind===k?"selected":""}>${k}</option>`).join("")}</select><span class="spacer"></span><button class="btn sm" data-act="shot:${i}">${ico("upload")}${s.screen?"Replace screen":"Add product screen"}</button><button class="btn sm" data-act="up:${i}" aria-label="Move up">↑</button><button class="btn sm" data-act="dn:${i}" aria-label="Move down">↓</button><button class="btn sm danger" data-act="del:${i}" aria-label="Delete slide">${ico("x")}</button></div>
           <input type="text" id="t_${i}" value="${esc(s.title)}" placeholder="Headline"><textarea id="b_${i}" style="min-height:60px" placeholder="Supporting text (optional)">${esc(s.body||"")}</textarea></div>`).join("")||`<div class="empty">No slides yet. Generate the post or add a slide.</div>`}</div></section>
       <section class="card pad"><div class="eyebrow">Publish</div>
         <div class="row" style="margin-top:8px;align-items:flex-end"><label class="f" style="flex:1;min-width:220px">Publish time (IST)<input type="datetime-local" id="d_when" value="${when}"></label>
@@ -782,7 +926,7 @@ document.addEventListener("click", async e => {
       if (!row.topic){ toast("Add a topic first."); break; }
       try { await addRows([row]); const id = S.posts[S.posts.length-1].id; S.createDraft = null; if (a==="addgen"){ S.tab="approvals"; render(); await generate(id); S.drawer = {id, slide:0}; render(); } else { toast("Added to the queue."); S.tab="approvals"; render(); } } catch(err){ toast(err.message); }
       break; }
-    case "import": { const rows = parseSheet($("#c_paste").value); if (!rows.length){ toast("No rows found. Check the column order."); break; } try { await addRows(rows); toast(`${rows.length} row${rows.length>1?"s":""} added.`); S.tab="approvals"; render(); } catch(err){ toast(err.message); } break; }
+    case "import": { const rows = parseSheet($("#c_paste").value); if (!rows.length){ toast("No rows found. Check the column order."); break; } try { await addRows(rows); toast(rows.some(r=>r.slides&&r.slides.length) ? `${rows.length} draft${rows.length>1?"s":""} added to Needs review.` : `${rows.length} row${rows.length>1?"s":""} added.`); S.tab="approvals"; render(); } catch(err){ toast(err.message); } break; }
     case "saveconn": { Object.assign(S.cfg, { owner:$("#s_owner").value.trim(), repo:$("#s_repo").value.trim(), branch:$("#s_branch").value.trim()||"main", token:$("#s_token").value.trim() }); lsSet("cfg", S.cfg); await loadAll(); if (!S.error) toast(live()?"Connected.":"Using sample data."); break; }
     case "testconn": { Object.assign(S.cfg, { owner:$("#s_owner").value.trim(), repo:$("#s_repo").value.trim(), branch:$("#s_branch").value.trim()||"main", token:$("#s_token").value.trim() }); try { const r = await gh.req(""); const f = await gh.getFile("schedule.json"); toast(`Connected to ${r.full_name}. schedule.json ${f?"found":"not found, it will be created"}.`); } catch(err){ toast(err.message); } break; }
     case "disconnect": S.cfg.token = ""; lsSet("cfg", S.cfg); await loadAll(); break;
