@@ -171,11 +171,19 @@
   },
   {
     "id": "video-pivc-i5iw",
-    "publish_at": "2026-10-14T05:30:00.000Z",
-    "approved": false,
+    "publish_at": "2026-10-09T13:35:00.000Z",
+    "approved": true,
     "status": "draft",
     "caption": "A recorded Yes does not prove the customer understood the policy.\n\nA scripted verification call confirms that a customer said yes. It does not show whether they understood the premium term, the product type or what was sold to them.\n\nVideo PIVC verifies the exact policy on the proposal. It checks identity, tests understanding, records informed consent and flags where the customer's words differ from the form. The reviewer sees the exception with its evidence, not the whole recording.\n\nThe insurer remains the issuing authority.\n\nWant to see Video PIVC on your issuance workflow? Link in bio.\n\n#DarwixAI #PIVC #LifeInsurance #InsurTech #BFSI #AIinBFSI",
-    "images": [],
+    "images": [
+      "posts/video-pivc-i5iw/01.jpg",
+      "posts/video-pivc-i5iw/02.jpg",
+      "posts/video-pivc-i5iw/03.jpg",
+      "posts/video-pivc-i5iw/04.jpg",
+      "posts/video-pivc-i5iw/05.jpg",
+      "posts/video-pivc-i5iw/06.jpg",
+      "posts/video-pivc-i5iw/07.jpg"
+    ],
     "meta": {
       "pillar": "Product",
       "topic": "Video PIVC",
@@ -184,7 +192,7 @@
       "cta": "See Video PIVC on your issuance workflow.",
       "slides": [
         {
-          "kind": "coverdark",
+          "kind": "cover",
           "title": "A recorded Yes does not prove understanding.",
           "body": "Video PIVC for life insurance."
         },
