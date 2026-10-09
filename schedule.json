@@ -294,11 +294,18 @@
   },
   {
     "id": "voice-agent-and-assist-lzu0",
-    "publish_at": "2026-10-16T05:30:00.000Z",
-    "approved": false,
+    "publish_at": "2026-10-09T13:45:00.000Z",
+    "approved": true,
     "status": "draft",
     "caption": "Voice conducts the conversation. Assist guides the person having it.\n\nThey are easy to confuse because both listen to calls. The difference is who is speaking. A Voice Agent holds the conversation itself, within approved knowledge, and hands off to a person when it should. Real-Time Assist stays behind a human agent, with prompts, context and compliance checks that the customer never sees.\n\nSame listening. Different job.\n\nWant to hear a Voice Agent on your use case? Link in bio.\n\n#DarwixAI #VoiceAI #AgentAssist #ConversationalAI #ContactCentre #BFSI",
-    "images": [],
+    "images": [
+      "posts/voice-agent-and-assist-lzu0/01.jpg",
+      "posts/voice-agent-and-assist-lzu0/02.jpg",
+      "posts/voice-agent-and-assist-lzu0/03.jpg",
+      "posts/voice-agent-and-assist-lzu0/04.jpg",
+      "posts/voice-agent-and-assist-lzu0/05.jpg",
+      "posts/voice-agent-and-assist-lzu0/06.jpg"
+    ],
     "meta": {
       "pillar": "Explainer",
       "topic": "Voice Agent and Assist",
@@ -307,7 +314,7 @@
       "cta": "Hear a Voice Agent on your use case.",
       "slides": [
         {
-          "kind": "coverdark",
+          "kind": "focus",
           "title": "Voice conducts. Assist guides.",
           "body": "Two products that are easy to confuse."
         },
