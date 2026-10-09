@@ -290,62 +290,6 @@
     }
   },
   {
-    "id": "video-pivc-6b1o",
-    "publish_at": "2026-10-14T05:30:00.000Z",
-    "approved": false,
-    "status": "draft",
-    "caption": "A recorded Yes does not prove the customer understood the policy.\n\nA scripted verification call confirms that a customer said yes. It does not show whether they understood the premium term, the product type or what was sold to them.\n\nVideo PIVC verifies the exact policy on the proposal. It checks identity, tests understanding, records informed consent and flags where the customer's words differ from the form. The reviewer sees the exception with its evidence, not the whole recording.\n\nThe insurer remains the issuing authority.\n\nWant to see Video PIVC on your issuance workflow? Link in bio.\n\n#DarwixAI #PIVC #LifeInsurance #InsurTech #BFSI #AIinBFSI",
-    "images": [],
-    "meta": {
-      "pillar": "Product",
-      "topic": "Video PIVC",
-      "hook": "A recorded Yes does not prove the customer understood the policy.",
-      "direction": "Pre-issuance verification of identity, policy understanding and consent.",
-      "cta": "See Video PIVC on your issuance workflow.",
-      "slides": [
-        {
-          "kind": "coverdark",
-          "title": "A recorded Yes does not prove understanding.",
-          "body": "Video PIVC for life insurance."
-        },
-        {
-          "kind": "compare",
-          "title": "Same call. Two different policies.",
-          "body": "The customer says: The premium is for five years and the plan works like a fixed deposit. | The proposal says: A ten-year premium term on a unit-linked plan."
-        },
-        {
-          "kind": "table",
-          "title": "Five things the call verifies",
-          "body": "Identity: Presence, liveness and face match where approved | Policy: The exact policy on the proposal, not a generic script | Mis-selling: Gaps between what was sold and what was understood | Consent: Informed audio-visual consent | Audit: Evidence a reviewer can inspect"
-        },
-        {
-          "kind": "list",
-          "title": "What the reviewer opens",
-          "body": "The field: Which proposal value was tested | The statement: What the customer actually said | The evidence: Timestamp, clip and confidence | The route: Verified, exception or re-verify"
-        },
-        {
-          "kind": "table",
-          "title": "Six possible outcomes",
-          "body": "Verified: Identity, policy and consent confirmed | With exception: Confirmed, with a recorded exception | Needs review: A reviewer decides | Re-PIVC: The call is repeated | Declined: The customer did not proceed | Failed: Verification did not pass"
-        },
-        {
-          "kind": "statement",
-          "title": "It never forces disagreement into a false confirmation.",
-          "body": "If understanding differs from the proposal, the call records the gap. The insurer remains the issuing authority."
-        },
-        {
-          "kind": "cta",
-          "title": "See Video PIVC on your issuance workflow.",
-          "body": "Request a demo at darwix.ai"
-        }
-      ],
-      "flags": [
-        "Slide 2 is an illustrative example of the kind of gap the call surfaces, not a real case. Slide 5 outcome names come from the product definition; confirm the one-line meanings."
-      ],
-      "generated_by": "sheet"
-    }
-  },
-  {
     "id": "live-pd-assist-kv79",
     "publish_at": "2026-10-10T05:30:00.000Z",
     "approved": true,
