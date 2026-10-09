@@ -344,5 +344,56 @@
       ],
       "generated_by": "sheet"
     }
+  },
+  {
+    "id": "live-pd-assist-kv79",
+    "publish_at": "2026-10-15T05:30:00.000Z",
+    "approved": false,
+    "status": "draft",
+    "caption": "Every value in a PD report should say where it came from.\n\nLive PD Assist fills a personal discussion report while the officer talks, and every value carries a state: captured, derived, system fetched, needs confirmation, pending or conflict. When a borrower gives two different figures, both stay visible with their timestamps until the officer confirms one.\n\nNothing is averaged away and nothing is overwritten. The credit reviewer opens a report that carries its own evidence.\n\nCredit decisions stay with the credit team.\n\nWant to see Live PD Assist on your PD workflow? Link in bio.\n\n#DarwixAI #LivePD #HousingFinance #LendingOps #CreditUnderwriting #BFSI",
+    "images": [],
+    "meta": {
+      "pillar": "Trust",
+      "topic": "Live PD Assist",
+      "hook": "Every value in a PD report should say where it came from.",
+      "direction": "Six value states, conflicts kept visible, confidence routing.",
+      "cta": "See Live PD Assist on your PD workflow.",
+      "slides": [
+        {
+          "kind": "cover",
+          "title": "Every value should say where it came from.",
+          "body": "Six states a value can be in, in a Live PD report."
+        },
+        {
+          "kind": "table",
+          "title": "Six states a value can be in",
+          "body": "Captured: Heard in the conversation, tied to the sentence | Derived: Calculated from captured values | System fetched: Pulled from a system of record | Needs confirmation: Disagrees with a system source | Pending: Not yet heard | Conflict: Two statements disagree and both stay visible"
+        },
+        {
+          "kind": "compare",
+          "title": "Why conflicts stay visible",
+          "body": "Last statement wins: The later figure replaces the earlier one and the first answer disappears. | Both stay on record: Both figures sit side by side with their timestamps until the officer confirms one."
+        },
+        {
+          "kind": "steps",
+          "title": "Confidence decides what the screen does",
+          "body": "Low confidence values wait for confirmation | Mid confidence values are offered for a quick check | High confidence values are filled in | Any disagreement with a system source asks first"
+        },
+        {
+          "kind": "statement",
+          "title": "The model drafts. The officer and the credit team decide.",
+          "body": "Consent is taken before capture, and Pause stops the audio."
+        },
+        {
+          "kind": "cta",
+          "title": "See Live PD Assist on your PD workflow.",
+          "body": "Request a demo at darwix.ai"
+        }
+      ],
+      "flags": [
+        "No figures. Confidence behaviour on slide 4 is described without thresholds on purpose."
+      ],
+      "generated_by": "sheet"
+    }
   }
 ]
