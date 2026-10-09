@@ -291,5 +291,56 @@
       ],
       "generated_by": "sheet"
     }
+  },
+  {
+    "id": "voice-agent-and-assist-lzu0",
+    "publish_at": "2026-10-16T05:30:00.000Z",
+    "approved": false,
+    "status": "draft",
+    "caption": "Voice conducts the conversation. Assist guides the person having it.\n\nThey are easy to confuse because both listen to calls. The difference is who is speaking. A Voice Agent holds the conversation itself, within approved knowledge, and hands off to a person when it should. Real-Time Assist stays behind a human agent, with prompts, context and compliance checks that the customer never sees.\n\nSame listening. Different job.\n\nWant to hear a Voice Agent on your use case? Link in bio.\n\n#DarwixAI #VoiceAI #AgentAssist #ConversationalAI #ContactCentre #BFSI",
+    "images": [],
+    "meta": {
+      "pillar": "Explainer",
+      "topic": "Voice Agent and Assist",
+      "hook": "Voice conducts the conversation. Assist guides the person having it.",
+      "direction": "Two products that are easy to confuse.",
+      "cta": "Hear a Voice Agent on your use case.",
+      "slides": [
+        {
+          "kind": "coverdark",
+          "title": "Voice conducts. Assist guides.",
+          "body": "Two products that are easy to confuse."
+        },
+        {
+          "kind": "compare",
+          "title": "Who is on the call?",
+          "body": "Voice Agent: The AI holds the conversation. It qualifies, follows up, collects and hands off to a person when needed. | Real-Time Assist: A person holds the conversation. The AI listens, prompts and checks compliance as it happens."
+        },
+        {
+          "kind": "grid",
+          "title": "Where Voice Agent is used",
+          "body": "Sales: Lead qualification and follow-up | Servicing: Renewals, reminders and welcome calls | Collections: Pre-due and post-due conversations | Operations: Appointments, callbacks and claims intake"
+        },
+        {
+          "kind": "list",
+          "title": "What a good call sounds like",
+          "body": "Short: Short sentences, one question at a time | Contextual: It knows the account before it speaks | Multilingual: Hindi, English and mixed speech | Honest: It hands off to a person when it should"
+        },
+        {
+          "kind": "steps",
+          "title": "A Voice Agent call, end to end",
+          "body": "It opens with context the customer should not have to repeat | It holds the conversation inside approved knowledge | It takes the action: callback, message or payment | It hands off to a person when needed | It writes the outcome back to the CRM"
+        },
+        {
+          "kind": "cta",
+          "title": "Hear a Voice Agent on your use case.",
+          "body": "Request a demo at darwix.ai"
+        }
+      ],
+      "flags": [
+        "No figures. Slide 4: confirm Hindi and English wording matches the languages you want to name."
+      ],
+      "generated_by": "sheet"
+    }
   }
 ]
