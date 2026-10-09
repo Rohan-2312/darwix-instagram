@@ -1,11 +1,11 @@
 {
-  "updated": "2026-10-08T18:37:49.249Z",
+  "updated": "2026-10-09T05:17:27.449Z",
   "posts": [
     {
       "id": "real-time-pd-001",
       "media_id": "17969569449345213",
-      "like_count": 6,
-      "comments_count": 0,
+      "like_count": null,
+      "comments_count": null,
       "reach": null,
       "saved": null,
       "shares": null
@@ -13,8 +13,8 @@
     {
       "id": "housing-ei-001",
       "media_id": "18127633801848296",
-      "like_count": 4,
-      "comments_count": 0,
+      "like_count": null,
+      "comments_count": null,
       "reach": null,
       "saved": null,
       "shares": null
@@ -22,8 +22,8 @@
     {
       "id": "darwix-ai-i629",
       "media_id": "18074776544753832",
-      "like_count": 1,
-      "comments_count": 0,
+      "like_count": null,
+      "comments_count": null,
       "reach": null,
       "saved": null,
       "shares": null
