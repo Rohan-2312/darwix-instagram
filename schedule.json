@@ -173,7 +173,7 @@
     "id": "video-pivc-i5iw",
     "publish_at": "2026-10-09T13:44:56.091Z",
     "approved": true,
-    "status": "draft",
+    "status": "failed",
     "caption": "A recorded Yes does not prove the customer understood the policy.\n\nA scripted verification call confirms that a customer said yes. It does not show whether they understood the premium term, the product type or what was sold to them.\n\nVideo PIVC verifies the exact policy on the proposal. It checks identity, tests understanding, records informed consent and flags where the customer's words differ from the form. The reviewer sees the exception with its evidence, not the whole recording.\n\nThe insurer remains the issuing authority.\n\nWant to see Video PIVC on your issuance workflow? Link in bio.\n\n#DarwixAI #PIVC #LifeInsurance #InsurTech #BFSI #AIinBFSI",
     "images": [
       "posts/video-pivc-i5iw/01.jpg",
@@ -231,7 +231,8 @@
         "Slide 2 is an illustrative example of the kind of gap the call surfaces, not a real case. Slide 5 outcome names come from the product definition; confirm the one-line meanings."
       ],
       "generated_by": "sheet"
-    }
+    },
+    "error": "17841412465345449/media: {\"message\":\"Any of the pages_read_engagement, pages_manage_metadata,\\n        pages_read_user_content, pages_manage_ads, pages_show_list or\\n        pages_messaging permission(s) must be granted before impersonating a\\n        user's page.\",\"type\":\"OAuthException\",\"code\":190,\"fbtrace_id\":\"AvlqhmYvdxaGK-4RntwjGXM\"}"
   },
   {
     "id": "live-pd-assist-kv79",
@@ -295,7 +296,7 @@
     "id": "voice-agent-and-assist-lzu0",
     "publish_at": "2026-10-09T13:45:00.000Z",
     "approved": true,
-    "status": "draft",
+    "status": "failed",
     "caption": "Voice conducts the conversation. Assist guides the person having it.\n\nThey are easy to confuse because both listen to calls. The difference is who is speaking. A Voice Agent holds the conversation itself, within approved knowledge, and hands off to a person when it should. Real-Time Assist stays behind a human agent, with prompts, context and compliance checks that the customer never sees.\n\nSame listening. Different job.\n\nWant to hear a Voice Agent on your use case? Link in bio.\n\n#DarwixAI #VoiceAI #AgentAssist #ConversationalAI #ContactCentre #BFSI",
     "images": [
       "posts/voice-agent-and-assist-lzu0/01.jpg",
@@ -347,6 +348,7 @@
         "No figures. Slide 4: confirm Hindi and English wording matches the languages you want to name."
       ],
       "generated_by": "sheet"
-    }
+    },
+    "error": "17841412465345449/media: {\"message\":\"Any of the pages_read_engagement, pages_manage_metadata,\\n        pages_read_user_content, pages_manage_ads, pages_show_list or\\n        pages_messaging permission(s) must be granted before impersonating a\\n        user's page.\",\"type\":\"OAuthException\",\"code\":190,\"fbtrace_id\":\"AFjljrY_vaiNDhCXA-p2Ajz\"}"
   }
 ]
