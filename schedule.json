@@ -173,7 +173,7 @@
     "id": "video-pivc-i5iw",
     "publish_at": "2026-10-09T13:35:00.000Z",
     "approved": true,
-    "status": "draft",
+    "status": "failed",
     "caption": "A recorded Yes does not prove the customer understood the policy.\n\nA scripted verification call confirms that a customer said yes. It does not show whether they understood the premium term, the product type or what was sold to them.\n\nVideo PIVC verifies the exact policy on the proposal. It checks identity, tests understanding, records informed consent and flags where the customer's words differ from the form. The reviewer sees the exception with its evidence, not the whole recording.\n\nThe insurer remains the issuing authority.\n\nWant to see Video PIVC on your issuance workflow? Link in bio.\n\n#DarwixAI #PIVC #LifeInsurance #InsurTech #BFSI #AIinBFSI",
     "images": [
       "posts/video-pivc-i5iw/01.jpg",
@@ -231,7 +231,8 @@
         "Slide 2 is an illustrative example of the kind of gap the call surfaces, not a real case. Slide 5 outcome names come from the product definition; confirm the one-line meanings."
       ],
       "generated_by": "sheet"
-    }
+    },
+    "error": "17841412465345449/media: {\"message\":\"Any of the pages_read_engagement, pages_manage_metadata,\\n        pages_read_user_content, pages_manage_ads, pages_show_list or\\n        pages_messaging permission(s) must be granted before impersonating a\\n        user's page.\",\"type\":\"OAuthException\",\"code\":190,\"fbtrace_id\":\"AVuKfQ20S5W9pQfLna3tlNd\"}"
   },
   {
     "id": "live-pd-assist-kv79",
