@@ -1,12 +1,12 @@
-<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"></head><body><title>Darwix Instagram Studio</title>
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"></head><body><title>Darwix Content Studio</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700&family=Inter:wght@500;600&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@500;600;700;800&family=Manrope:wght@400;500;600;700&family=Inter:wght@500;600&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
 <style>
 /* Layout: the design team's console. Full-width page, white header with tabs, 14px-radius hairline cards, one indigo accent, Manrope + Inter pills + JetBrains Mono for times. */
 :root{
-  --bg:#FAFAFB; --surface:#FFFFFF; --sunken:#F4F5F9; --tint:#EEEFFF; --track:#EDEEF6;
+  --bg:#F5F4FB; --surface:#FFFFFF; --sunken:#F1F0F9; --tint:#EEEFFF; --track:#EDEEF6;
   --ink:#141416; --ink2:#515153; --ink3:#686868; --ink4:#8A92A8; --label:#6B7185;
-  --line:#E6E7F0; --line2:#DBDBDC; --line3:#C5CADF; --hair:#F1F1F1; --hair2:#F8F8F8; --strong:#949395;
+  --line:#E8E7F3; --line2:#DBDBDC; --line3:#C5CADF; --hair:#F1F1F1; --hair2:#F8F8F8; --strong:#949395;
   --brand:#565ADD; --brand-ink:#4344B8; --brand-hover:#4F4FE8; --on-brand:#FFFFFF;
   --ok:#17AA2E; --err:#D93A3A;
   --rev-bg:#FFF5DB; --rev-fg:#7A5300; --rev-dot:#C98A00;
@@ -14,7 +14,7 @@
   --sch-bg:#EEEFFF; --sch-fg:#4344B8; --sch-dot:#565ADD;
   --pub-bg:#F1F1F1; --pub-fg:#494848; --pln-bg:#EDEEF6; --pln-fg:#6B7185;
   --fail-bg:#FCEBEB; --fail-fg:#A82828; --ban-bg:#FDF3F3; --ban-line:#F3CFCF;
-  --shadow:0 1px 2px rgba(14,19,48,.12); --shadow2:0 2px 8px rgba(14,19,48,.06);
+  --shadow:0 1px 2px rgba(14,19,48,.12); --shadow2:0 2px 8px rgba(14,19,48,.06); --lift:0 1px 2px rgba(40,40,110,.05),0 10px 28px -14px rgba(60,60,150,.20); --disp:"Bricolage Grotesque",Manrope,system-ui,sans-serif;
   color-scheme:light;
   --font:Manrope,system-ui,-apple-system,"Segoe UI",sans-serif; --pill:Inter,Manrope,system-ui,sans-serif; --mono:"JetBrains Mono",ui-monospace,Menlo,Consolas,monospace;
 }
@@ -210,6 +210,57 @@ select{width:auto;height:36px;padding:0 10px}
 .slc.on{border-color:var(--brand);background:var(--tint)}
 .toast{position:fixed;left:50%;transform:translateX(-50%);bottom:calc(20px + env(safe-area-inset-bottom,0px));background:var(--ink);color:var(--bg);padding:10px 16px;border-radius:10px;font:600 13px var(--font);z-index:90;box-shadow:var(--shadow2);max-width:calc(100% - 32px)}
 @media (prefers-reduced-motion:no-preference){.drawer{animation:in .18s ease-out}@keyframes in{from{transform:translateX(24px);opacity:.6}to{transform:none;opacity:1}}}
+
+/* ===== Studio polish: soft paper, rounder shapes, one hero moment ===== */
+body{background:var(--bg)}
+.hd{background:rgba(255,255,255,.84);-webkit-backdrop-filter:saturate(1.5) blur(16px);backdrop-filter:saturate(1.5) blur(16px);padding-bottom:12px;gap:14px;border-bottom-color:var(--line)}
+h1,.big,.kpi b,.sec-h h2,.pipe b,.hh{font-family:var(--disp)}
+h1{font-weight:700;letter-spacing:-1px}
+.tabs{gap:4px;margin-bottom:0}
+.tab{border-radius:999px;border:0;padding:8px 14px;transition:background .15s,color .15s}
+.tab:hover{background:var(--sunken)}
+.tab[aria-selected=true]{background:var(--tint);color:var(--brand-ink)}
+.sec,.card{border-radius:22px;border-color:var(--line);box-shadow:var(--lift)}
+.tile{border-radius:16px;background:var(--hair2)}
+.pc{border-radius:20px;box-shadow:var(--lift);transition:transform .18s ease,box-shadow .18s ease,border-color .18s}
+button.pc:hover{transform:translateY(-2px);border-color:var(--line3);box-shadow:0 16px 34px -16px rgba(60,60,150,.32)}
+.post{transition:transform .18s ease,box-shadow .18s ease}
+.post:hover{transform:translateY(-2px);box-shadow:0 18px 38px -18px rgba(60,60,150,.30)}
+.sec-h{padding:18px 22px}.ri{padding:14px 22px;transition:background .15s}.ri:hover{background:var(--hair2)}
+.btn{border-radius:12px;transition:background .15s,transform .12s,box-shadow .15s,border-color .15s}
+.btn:active{transform:translateY(1px)}
+.btn.pri{background:linear-gradient(180deg,#6A6EEA,#565ADD);box-shadow:0 8px 18px -8px rgba(86,90,221,.65),inset 0 1px 0 rgba(255,255,255,.22)}
+.btn.pri:hover{background:linear-gradient(180deg,#7478F0,#5A5EE4);transform:translateY(-1px)}
+.btn.sm.pri{box-shadow:0 4px 10px -4px rgba(86,90,221,.6)}
+.pill,.chip{height:24px;padding:0 10px}
+input[type=text],input[type=password],input[type=datetime-local],select,textarea{border-radius:14px;transition:box-shadow .15s,background .15s}
+input:focus,select:focus,textarea:focus{outline:0;background:#fff;box-shadow:0 0 0 2px var(--brand),0 6px 18px -8px rgba(86,90,221,.4)}
+.banner{border-radius:18px}
+.empty .ring{width:52px;height:52px}
+.scrim{background:rgba(22,22,52,.42);-webkit-backdrop-filter:blur(3px);backdrop-filter:blur(3px)}
+.phone{border-radius:24px}
+.slc{border-radius:16px}
+.toast{border-radius:14px;box-shadow:0 14px 34px -10px rgba(20,20,60,.45)}
+.pbar{height:8px;border-radius:4px}
+.pbar>i,.jbar>i{border-radius:4px;transform-origin:left}
+.pbar>i{background:linear-gradient(90deg,#8A8DF0,#565ADD)}
+.cal .day.today .n{box-shadow:0 4px 10px -3px rgba(86,90,221,.6)}
+.ev{border-radius:8px;transition:filter .15s}.ev:hover{filter:brightness(.96)}
+/* hero */
+.hero{position:relative;display:grid;grid-template-columns:minmax(0,1.15fr) minmax(280px,.85fr);gap:24px;align-items:center;padding:40px 44px;border-radius:30px;border:1px solid #E2E0F7;overflow:hidden;background:radial-gradient(120% 140% at 100% 100%,#FFEBD6 0%,rgba(255,235,214,0) 46%),linear-gradient(135deg,#EAE9FF 0%,#F4EFFF 60%,#F8F1FF 100%);box-shadow:0 24px 50px -30px rgba(70,70,170,.45)}
+.hh{margin:0 0 12px;font:800 44px/1.04 var(--disp);letter-spacing:-1.6px;color:#1B1B3A;text-wrap:balance}
+.hcopy p{margin:0 0 22px;max-width:44ch;font:500 16.5px/1.55 var(--font);color:#4A4C6A}
+.fan{position:relative;height:310px}
+.fc{position:absolute;left:50%;top:50%;width:196px;aspect-ratio:4/5;border-radius:18px;overflow:hidden;background:#fff;border:5px solid #fff;box-shadow:0 22px 44px -18px rgba(40,40,120,.5);transform:translate(-50%,-50%) translateX(var(--x)) rotate(var(--r))}
+.fc img{display:block;width:100%;height:100%;object-fit:cover}
+.fc .ghost{width:100%;height:100%;display:flex;align-items:flex-end;padding:14px;font:700 14px/1.25 var(--disp);color:var(--brand-ink);background:linear-gradient(160deg,#F3F2FF,#E3E2FB)}
+@media(prefers-reduced-motion:no-preference){
+  .fan.play .fc{animation:fan .95s cubic-bezier(.2,.85,.25,1) both;animation-delay:var(--d)}
+  @keyframes fan{from{transform:translate(-50%,-50%) translateX(0) rotate(0) scale(.92);opacity:0}}
+  .pbar>i.play{animation:grow 1s .25s cubic-bezier(.2,.8,.2,1) both}
+  @keyframes grow{from{transform:scaleX(0)}}
+}
+@media(max-width:820px){.hero{grid-template-columns:1fr;padding:28px 22px}.hh{font-size:34px}.fan{height:250px}.fc{width:158px;transform:translate(-50%,-50%) translateX(calc(var(--x)*.6)) rotate(var(--r))}}
 </style>
 
 
@@ -255,7 +306,7 @@ const S = {
   tab: lsGet("tab","overview"), posts: [], sha: null, runs: [], insights: null, loading: false, error: null,
   cfg: Object.assign({ owner:"Rohan-2312", repo:"darwix-instagram", branch:"main", token:"", aiKey:"", aiModel:"claude-sonnet-5-5",
     notes: DEFAULT_NOTES, banned: DEFAULT_BANNED, defaultTime:"11:00", defaultCta:"Link in bio.", defaultTags:"#darwixai #bfsi" }, lsGet("cfg", {})),
-  li: [], liSha: null, liRuns: [], liDraft: null, liBusy: null, liFiles: {},
+  fanImgs: {}, li: [], liSha: null, liRuns: [], liDraft: null, liBusy: null, liFiles: {},
   fStatus: "all", calMonth: null, drawer: null, busy: {}, toast: null, igId: "17841412465345449", screens: {}
 };
 const live = () => !!S.cfg.token;
@@ -820,6 +871,28 @@ async function paintLi(){
   try { await drawSlide(cv, slides[i], i, slides.length, S.liDraft.topic || S.liDraft.title); } finally { drawSlide.footer = null; }
 }
 
+/* ---------- overview hero: real slide covers ---------- */
+const fanKey = p => `${p.id}:${(p.meta?.slides?.[0]?.title||"")}:${(p.meta?.slides?.[0]?.kind||"")}`;
+function fanPicks(){
+  const hasSl = p => (p.meta?.slides||[]).length;
+  const up = S.posts.filter(p=>hasSl(p) && ["scheduled","publishing"].includes(stage(p))).sort((a,b)=>new Date(a.publish_at)-new Date(b.publish_at));
+  const rv = S.posts.filter(p=>hasSl(p) && stage(p)==="review");
+  const pb = S.posts.filter(p=>hasSl(p) && stage(p)==="published").sort((a,b)=>new Date(b.published_at||0)-new Date(a.published_at||0));
+  return [...up,...rv,...pb].slice(0,3);
+}
+async function paintFan(){
+  if (S.tab !== "overview" || Object.keys(S.busy).length) return;
+  for (const q of fanPicks()){
+    const k = fanKey(q); if (S.fanImgs[k]) continue;
+    try {
+      const cv = $("#work"); await drawSlide(cv, q.meta.slides[0], 0, q.meta.slides.length, q.meta.topic);
+      const sm = document.createElement("canvas"); sm.width = 400; sm.height = 500; sm.getContext("2d").drawImage(cv, 0, 0, 400, 500);
+      S.fanImgs[k] = sm.toDataURL("image/jpeg", 0.82);
+      const el = [...document.querySelectorAll(".fc")].find(e => e.dataset.key === k); if (el) el.innerHTML = `<img alt="" src="${S.fanImgs[k]}">`;
+    } catch {}
+  }
+}
+
 /* ---------- views ---------- */
 const TABS = [["overview","Overview"],["create","Create"],["posts","Posts"],["linkedin","LinkedIn"],["calendar","Calendar"],["approvals","Approvals"],["insights","Insights"],["settings","Settings"]];
 const byStage = () => { const o = {planned:[],review:[],scheduled:[],publishing:[],published:[],failed:[]}; S.posts.forEach(p => o[stage(p)].push(p)); return o; };
@@ -851,17 +924,24 @@ function vOverview(){
   const upcoming = [...b.failed, ...b.publishing, ...b.scheduled].sort((a,c)=>new Date(a.publish_at)-new Date(c.publish_at)).slice(0,5);
   const runs = S.runs.slice(0,6), cnt = k => S.posts.filter(p=>stage(p)===k).length;
   const brk = [["review","Needs review"],["scheduled","Scheduled"],["published","Published"],["failed","Failed"],["planned","Planned"]].filter(([k])=>cnt(k)).map(([k,l])=>`<span class="pill s-${k}" style="height:22px">${cnt(k)} ${l.toLowerCase()}</span>`).join("");
+  const play = !S._hero; S._hero = true;
+  const hr = (new Date(Date.now()+19800000)).getUTCHours(), greet = hr<5?"Burning the midnight oil.":hr<12?"Good morning.":hr<17?"Good afternoon.":"Good evening.";
+  const nextUp = [...b.scheduled,...b.publishing].sort((x,y)=>new Date(x.publish_at)-new Date(y.publish_at))[0];
+  const hsent = [failed?`1 post needs attention.`:"", b.review.length?`${b.review.length} draft${b.review.length>1?"s are":" is"} waiting for your review.`:"", nextUp?`Next post goes out ${fmtIST(nextUp.publish_at)} IST.`:(!b.review.length&&!failed?"Nothing is scheduled yet. Add a row to start the next carousel.":"")].filter(Boolean).join(" ");
+  const fanPosts = fanPicks(), FX = [[-118,-9],[0,0],[118,9]], off = fanPosts.length===1?[FX[1]]:fanPosts.length===2?[FX[0],FX[2]]:FX;
+  const hero = `<section class="hero"><div class="hcopy"><h2 class="hh">${greet}</h2><p>${esc(hsent)}</p><div class="row">${nextBtn(next[2], next[3])}${b.planned.length?`<button class="btn lg" data-act="genall">${ico("sparkles",16)}Generate ${b.planned.length} planned</button>`:""}</div></div>
+    <div class="fan ${play?"play":""}" aria-hidden="true">${fanPosts.length?fanPosts.map((q,i)=>{ const k = fanKey(q); return `<div class="fc" data-key="${esc(k)}" style="--x:${off[i][0]}px;--r:${off[i][1]}deg;--d:${i*110}ms;z-index:${i===1||fanPosts.length===1?3:1}">${S.fanImgs[k]?`<img alt="" src="${S.fanImgs[k]}">`:`<div class="ghost">${esc(q.meta?.topic||"")}</div>`}</div>`; }).join(""):`<div class="fc" style="--x:0px;--r:-4deg"><div class="ghost">Your next carousel starts here</div></div>`}</div></section>`;
   return `
+  ${hero}
   ${issue ? `<div class="banner err" role="alert"><span style="color:var(--err);display:flex">${ico("circle-alert",24)}</span><div class="bt"><b>Publishing failed</b><span class="m">${esc(issue.meta?.topic||issue.id)} carousel · ${esc(fmtIST(issue.publish_at))} IST · ${esc((issue.error||"").slice(0,180))}</span></div><div class="row"><button class="btn out" data-act="tab:settings">Reconnect account</button><button class="btn tx" data-act="retry:${issue.id}">Retry</button></div></div>`:""}
   <section class="sec" style="padding:24px;display:flex;flex-direction:column;gap:22px">
     <div class="row" style="justify-content:space-between;align-items:flex-end;gap:20px">
       <div style="display:flex;flex-direction:column;gap:4px;min-width:0"><span class="lbl">Content queue</span><span style="font:700 22px/30px var(--font);letter-spacing:-.5px;color:var(--ink)">@darwixai carousels</span><span class="sub">${cur<0?"All steps complete":`Step ${cur+1} of 6 · ${steps[cur].l}`}</span></div>
-      <div style="display:flex;flex-direction:column;gap:8px;align-items:flex-end"><div style="display:flex;align-items:baseline;gap:6px"><span class="big">${pct}%</span><span style="font-size:13px;color:var(--ink3)">complete</span></div><div class="pbar"><i style="width:${pct}%"></i></div></div>
+      <div style="display:flex;flex-direction:column;gap:8px;align-items:flex-end"><div style="display:flex;align-items:baseline;gap:6px"><span class="big">${pct}%</span><span style="font-size:13px;color:var(--ink3)">complete</span></div><div class="pbar"><i class="${play?"play":""}" style="width:${pct}%"></i></div></div>
     </div>
     <div style="overflow-x:auto;margin:0 -4px;padding:0 4px"><div class="jgrid">${steps.map((s,i)=>`
       <button class="js ${s.st}" data-act="tab:${["create","approvals","approvals","calendar","calendar","insights"][i]}"><div class="rl"><span class="ring">${s.st==="done"?ico("check",14):s.st==="err"?ico("circle-alert",16):(s.st==="cur"||s.st==="up"?i+1:"")}</span>${i<5?`<span class="hl"></span>`:""}</div><span class="lab">${s.l}</span><span class="met">${esc(s.m)}</span>${s.badge?`<span class="pill ${s.badge[1]==="err"?"s-failed":"s-scheduled"}" style="font-family:var(--pill)">${s.badge[0]}</span>`:""}${(s.st==="cur"||s.st==="err"||(s.st==="up"&&s.f>0))?`<div class="jbar"><i style="width:${Math.max(4,Math.round(100*Math.min(1,s.f)))}%"></i></div>`:""}</button>`).join("")}</div></div>
     <div class="ntgrid">
-      <div class="tile" style="padding:16px 18px;display:flex;align-items:center;gap:16px;flex-wrap:wrap"><div style="flex:1;min-width:200px;display:flex;flex-direction:column;gap:4px"><span class="lbl">Next step</span><span style="font:600 16px/24px var(--font);color:var(--ink)">${next[0]}</span><span style="font:400 12.5px/19px var(--font);color:var(--ink3)">${next[1]}</span></div>${nextBtn(next[2], next[3]).replace("btn pri lg","btn pri lg")}</div>
       <div class="tile" style="padding:12px 14px;background:var(--surface);display:flex;flex-direction:column;gap:8px"><span class="lbl" style="font:700 10px var(--pill);letter-spacing:1.4px">Waiting on you</span>
         <div class="wait"><button data-act="tab:approvals"><div class="row" style="gap:8px;flex-wrap:nowrap"><span style="color:#C98A00;display:flex">${ico("file-text",16)}</span><b>${b.review.length}</b></div><span class="l">Needs review</span></button><button data-act="tab:approvals"><div class="row" style="gap:8px;flex-wrap:nowrap"><span style="color:var(--brand);display:flex">${ico("calendar",16)}</span><b>${b.planned.length}</b></div><span class="l">Planned, no slides</span></button><button data-act="tab:posts"><div class="row" style="gap:8px;flex-wrap:nowrap"><span style="color:var(--err);display:flex">${ico("circle-alert",16)}</span><b>${b.failed.length}</b></div><span class="l">Failed</span></button></div></div>
     </div>
@@ -878,7 +958,6 @@ function vOverview(){
       <div class="pgrid">
         <button class="pc" data-act="tab:posts"><div class="row" style="gap:10px;flex-wrap:nowrap">${igBox("s28")}<b style="font:700 15px var(--font);color:var(--ink)">Instagram</b><span style="margin-left:auto;font:600 13px var(--font);color:var(--ink2)">${n} posts</span></div><div class="row" style="gap:6px">${brk||`<span style="font-size:12px;color:var(--ink3)">No posts yet</span>`}</div><div class="ft"><span class="dot ${issue?"bad":""}"></span>${issue?"Connection expired":"@darwixai · connected"}${issue?`<span class="btn sm out" style="margin-left:auto;height:28px" data-act="tab:settings">Reconnect</span>`:""}</div></button>
         <button class="pc" data-act="tab:linkedin"><div class="row" style="gap:10px;flex-wrap:nowrap">${liBox("s28")}<b style="font:700 15px var(--font);color:var(--ink)">LinkedIn</b><span style="margin-left:auto;font:600 13px var(--font);color:var(--ink2)">${S.li.length} posts</span></div><div class="row" style="gap:6px">${["review","scheduled","published","failed"].filter(k=>S.li.some(p=>stage(p)===k)).map(k=>`<span class="pill s-${k}" style="height:22px">${S.li.filter(p=>stage(p)===k).length} ${STAGE_L[k].toLowerCase()}</span>`).join("")||`<span style="font-size:12px;color:var(--ink3)">No posts yet</span>`}</div><div class="ft"><span class="dot ${S.li.some(p=>p.status==="failed")?"bad":""}"></span>Darwix AI page · own queue</div></button>
-        ${[["X","@darwix_ai"],["Facebook","Darwix AI page"]].map(([nm,acc])=>`<div class="pc dim"><div class="row" style="gap:10px;flex-wrap:nowrap"><span class="lb s28"></span><b style="font:700 15px var(--font);color:var(--ink)">${nm}</b><span style="margin-left:auto;font:600 13px var(--font);color:var(--ink3)">Later</span></div><div class="row" style="gap:6px"><span class="pill s-planned">not connected</span></div><div class="ft"><span class="dot off"></span>Not part of this build</div></div>`).join("")}
       </div></section>
     <section class="sec" style="flex:1 1 340px"><div class="sec-h"><h2>Publisher runs</h2><button class="btn sm tx" data-act="runpub">${ico("refresh-cw",14)}Run now</button></div>
       ${runs.length ? runs.map(r=>`<div class="run"><span class="led ${r.status!=="completed"?"run":r.conclusion==="success"?"ok":"bad"}"></span><div style="flex:1;min-width:0;display:flex;flex-direction:column;gap:1px"><span style="font:600 13px var(--font);color:var(--ink)">${esc(r.name||"publish-instagram")}</span><span style="font:400 12px var(--font);color:var(--ink3);white-space:nowrap;overflow:hidden;text-overflow:ellipsis">${esc(r.display_title||"")}${r.status!=="completed"?" · running":" · "+esc(r.conclusion||"")}</span></div><div style="display:flex;flex-direction:column;align-items:flex-end;gap:1px"><span class="mono" style="font-size:11.5px;color:var(--ink2)">${esc(fmtIST(r.created_at,{day:undefined,month:undefined}))}</span><span class="mono" style="font-size:11px;color:var(--ink3)">IST</span></div></div>`).join("") : `<div class="empty"><b>No runs yet</b>The publisher checks the schedule every 15 minutes.</div>`}</section>
@@ -1088,7 +1167,7 @@ function render(){
     <button class="btn pri lg" data-act="tab:create">${ico("plus",16)}Create carousel</button></div></div>
     <nav class="tabs" role="tablist">${TABS.map(t=>`<button class="tab" role="tab" aria-selected="${S.tab===t[0]}" data-act="tab:${t[0]}">${t[1]}${t[0]==="approvals"&&b.review.length?`<span class="count">${b.review.length}</span>`:""}</button>`).join("")}</nav></header>
     <div class="page">${S.error?`<div class="banner err" role="alert"><span style="color:var(--err);display:flex">${ico("circle-alert",24)}</span><div class="bt"><b>Could not load from GitHub</b><span class="m">${esc(S.error)}</span></div><button class="btn out" data-act="tab:settings">Check settings</button></div>`:""}${view}</div>${S.drawer?drawerHtml():""}`;
-  window.scrollTo(0,y); paintPreview(); paintLi(); renderToast();
+  window.scrollTo(0,y); paintPreview(); paintLi(); paintFan(); renderToast();
 }
 async function pickScreen(i){
   const inp = document.createElement("input"); inp.type="file"; inp.accept="image/png,image/jpeg,image/webp";
