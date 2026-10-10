@@ -255,12 +255,76 @@ input:focus,select:focus,textarea:focus{outline:0;background:#fff;box-shadow:0 0
 .fc img{display:block;width:100%;height:100%;object-fit:cover}
 .fc .ghost{width:100%;height:100%;display:flex;align-items:flex-end;padding:14px;font:700 14px/1.25 var(--disp);color:var(--brand-ink);background:linear-gradient(160deg,#F3F2FF,#E3E2FB)}
 @media(prefers-reduced-motion:no-preference){
-  .fan.play .fc{animation:fan .95s cubic-bezier(.2,.85,.25,1) both;animation-delay:var(--d)}
+  .fan.play .fc{animation:fan .95s cubic-bezier(.2,.85,.25,1) backwards;animation-delay:var(--d)}
   @keyframes fan{from{transform:translate(-50%,-50%) translateX(0) rotate(0) scale(.92);opacity:0}}
   .pbar>i.play{animation:grow 1s .25s cubic-bezier(.2,.8,.2,1) both}
   @keyframes grow{from{transform:scaleX(0)}}
 }
-@media(max-width:820px){.hero{grid-template-columns:1fr;padding:28px 22px}.hh{font-size:34px}.fan{height:250px}.fc{width:158px;transform:translate(-50%,-50%) translateX(calc(var(--x)*.6)) rotate(var(--r))}}
+@media(max-width:820px){.hero{grid-template-columns:1fr;padding:28px 22px}.hh{font-size:34px}.fan{height:250px}.fc{width:158px}}
+
+/* ===== WOW layer ===== */
+body{background:var(--bg);position:relative}
+body::before{content:"";position:fixed;inset:0;z-index:0;pointer-events:none;background:radial-gradient(700px 500px at 8% -5%,rgba(120,110,255,.16),transparent 60%),radial-gradient(600px 460px at 100% 12%,rgba(255,170,120,.14),transparent 60%),radial-gradient(rgba(86,90,221,.11) 1px,transparent 1.2px) 0 0/24px 24px;-webkit-mask:linear-gradient(#000 0,#000 420px,transparent 900px);mask:linear-gradient(#000 0,#000 420px,transparent 900px)}
+.page{position:relative;z-index:1}
+/* cursor spotlight + glowing edge on every card */
+.sec,.pc,.post,.tile,.kpi,.wait button{position:relative}
+.sec::before,.pc::before,.post::before,.tile::before,.kpi::before{content:"";position:absolute;inset:0;border-radius:inherit;pointer-events:none;z-index:0;opacity:0;transition:opacity .3s;background:radial-gradient(380px circle at var(--sx,50%) var(--sy,50%),rgba(110,114,240,.13),transparent 45%)}
+.sec::after,.pc::after,.post::after,.tile::after,.kpi::after{content:"";position:absolute;inset:-1px;border-radius:inherit;padding:1.5px;pointer-events:none;z-index:2;opacity:0;transition:opacity .3s;background:radial-gradient(240px circle at var(--sx,50%) var(--sy,50%),#6A6EEA,rgba(255,150,110,.8) 40%,transparent 70%);-webkit-mask:linear-gradient(#000 0 0) content-box,linear-gradient(#000 0 0);-webkit-mask-composite:xor;mask:linear-gradient(#000 0 0) content-box exclude,linear-gradient(#000 0 0)}
+.sec:hover::before,.pc:hover::before,.post:hover::before,.tile:hover::before,.kpi:hover::before,.sec:hover::after,.pc:hover::after,.post:hover::after,.tile:hover::after,.kpi:hover::after{opacity:1}
+.sec>*,.pc>*,.post>*{position:relative;z-index:1}
+.pipe .sec,.kpi{transition:transform .2s}.pipe .sec:hover,.kpi:hover{transform:translateY(-3px)}
+/* buttons: sheen sweep */
+.btn.pri{position:relative;overflow:hidden}
+.btn.pri::after{content:"";position:absolute;top:0;left:-70%;width:45%;height:100%;background:linear-gradient(100deg,transparent,rgba(255,255,255,.5),transparent);transform:skewX(-20deg);transition:left .7s ease}
+.btn.pri:hover::after{left:140%}
+.btn:not(.pri):not(.sm):hover{border-color:var(--brand);color:var(--brand-ink);box-shadow:0 8px 18px -10px rgba(86,90,221,.5);transform:translateY(-1px)}
+/* sliding tab indicator */
+.tabs{position:relative}.tab{position:relative;z-index:1}
+.tabs.ind .tab[aria-selected=true]{background:none}
+.tabind{position:absolute;top:0;bottom:0;border-radius:999px;background:var(--tint);box-shadow:inset 0 0 0 1px rgba(86,90,221,.18),0 6px 14px -8px rgba(86,90,221,.5);transition:left .38s cubic-bezier(.3,1.2,.4,1),width .38s cubic-bezier(.3,1.2,.4,1);z-index:0}
+/* live-state pulses */
+.s-publishing i,.dot:not(.off):not(.bad){animation:pls 2s infinite}
+.js.cur .ring{animation:pls 2.2s infinite}
+@keyframes pls{0%{box-shadow:0 0 0 0 rgba(86,90,221,.45)}70%{box-shadow:0 0 0 8px rgba(86,90,221,0)}100%{box-shadow:0 0 0 0 rgba(86,90,221,0)}}
+.js .ring{transition:transform .2s}.js:hover .ring{transform:scale(1.14)}.js:hover .lab{color:var(--brand-ink)}
+.hl,.js .hl{transition:background .3s}
+/* posts */
+.strip>*{transition:transform .3s cubic-bezier(.3,1.3,.5,1)}
+.post:hover .strip>*:nth-child(odd){transform:translateY(-5px) rotate(-1.6deg)}
+.post:hover .strip>*:nth-child(even){transform:translateY(-2px) rotate(1.4deg)}
+.ev{transition:transform .15s}.ev:hover{transform:scale(1.03)}
+/* HERO: dark aurora */
+.hero{background:#15133F;border-color:#2A2766;color:#fff;padding:52px 52px;box-shadow:0 40px 80px -40px rgba(40,36,140,.8);isolation:isolate}
+.hero .aur{position:absolute;border-radius:50%;filter:blur(60px);z-index:-1;opacity:.85;will-change:transform}
+.hero .a1{width:520px;height:520px;left:-120px;top:-180px;background:#5B5FEA;animation:dr1 16s ease-in-out infinite alternate}
+.hero .a2{width:460px;height:460px;right:-80px;bottom:-200px;background:#C75BD6;opacity:.6;animation:dr2 19s ease-in-out infinite alternate}
+.hero .a3{width:340px;height:340px;right:22%;top:-160px;background:#FF9A6B;opacity:.45;animation:dr1 22s ease-in-out infinite alternate-reverse}
+@keyframes dr1{to{transform:translate(90px,60px) scale(1.15)}}@keyframes dr2{to{transform:translate(-80px,-50px) scale(1.2)}}
+.hero::after{content:"";position:absolute;inset:0;z-index:-1;pointer-events:none;opacity:.14;mix-blend-mode:overlay;background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='160' height='160'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2' stitchTiles='stitch'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>")}
+.hh{color:#fff;font-size:clamp(40px,5.2vw,68px);line-height:1;letter-spacing:-2.2px;text-shadow:0 8px 40px rgba(20,16,90,.5)}
+.hcopy p{color:rgba(255,255,255,.74);font-size:17px}
+.hero .btn.pri{background:#fff;color:#2B2A7A;border-color:#fff;box-shadow:0 14px 34px -10px rgba(255,255,255,.45)}
+.hero .btn.pri:hover{background:#fff;transform:translateY(-2px) scale(1.02)}
+.hero .btn.pri::after{background:linear-gradient(100deg,transparent,rgba(86,90,221,.25),transparent)}
+.hero .btn:not(.pri){background:rgba(255,255,255,.1);border-color:rgba(255,255,255,.28);color:#fff;-webkit-backdrop-filter:blur(10px);backdrop-filter:blur(10px)}
+.hero .btn:not(.pri):hover{background:rgba(255,255,255,.2);color:#fff;border-color:rgba(255,255,255,.5);box-shadow:none}
+.hero .i{background:currentColor}
+.fan{perspective:1000px;height:330px}
+.fc{--xs:1;--lift:0px;--sc:1;border-width:4px;border-color:rgba(255,255,255,.95);box-shadow:0 36px 60px -24px rgba(8,6,60,.85),0 0 0 1px rgba(255,255,255,.2),0 0 80px -10px rgba(130,120,255,.55);transform:translate(-50%,-50%) translateX(calc(var(--x)*var(--xs))) rotate(var(--r)) translate3d(calc(var(--mx,0)*var(--pz,10)*1px),calc(var(--my,0)*var(--pz,10)*.7px),0) rotateY(calc(var(--mx,0)*14deg)) rotateX(calc(var(--my,0)*-10deg)) translateY(var(--lift)) scale(var(--sc));transition:transform .35s cubic-bezier(.2,.9,.3,1.1),box-shadow .35s}
+.fc:hover{--lift:-18px;--sc:1.07;z-index:6!important;box-shadow:0 50px 80px -24px rgba(8,6,60,.9),0 0 0 1px rgba(255,255,255,.4),0 0 110px -6px rgba(160,150,255,.85)}
+@media(prefers-reduced-motion:no-preference){@keyframes fan{from{transform:translate(-50%,-50%) translateX(0) rotate(0) scale(.9);opacity:0}}}
+.hchip{position:absolute;z-index:7;display:flex;align-items:center;gap:8px;padding:8px 14px 8px 10px;border-radius:999px;font:600 13px var(--font);color:#fff;background:rgba(255,255,255,.13);border:1px solid rgba(255,255,255,.28);-webkit-backdrop-filter:blur(14px);backdrop-filter:blur(14px);box-shadow:0 14px 30px -14px rgba(5,4,50,.7);animation:flt 6s ease-in-out infinite alternate;white-space:nowrap}
+.hchip b{display:grid;place-items:center;min-width:24px;height:24px;padding:0 6px;border-radius:999px;background:#fff;color:#2B2A7A;font:700 12.5px var(--disp)}
+.hchip.c1{left:-8px;top:14px}.hchip.c2{left:6%;bottom:6px;animation-delay:-2s}.hchip.c3{right:4%;top:2px;animation-delay:-4s}
+@keyframes flt{to{transform:translateY(-8px)}}
+@media(max-width:820px){.hero{padding:32px 22px}.fc{--xs:.6}.hchip.c1{left:0}.hchip.c3{display:none}}
+/* page entrance on tab switch */
+.page.enter>*{animation:up .6s cubic-bezier(.2,.8,.2,1) backwards;animation-delay:calc(var(--i,0)*70ms)}
+@keyframes up{from{opacity:0;transform:translateY(18px)}}
+/* confetti */
+.cf{position:fixed;z-index:200;width:9px;height:14px;border-radius:2px;pointer-events:none;animation:cf 1.3s cubic-bezier(.15,.7,.3,1) forwards}
+@keyframes cf{0%{transform:translate(0,0) rotate(0);opacity:1}100%{transform:translate(var(--dx),var(--dy)) rotate(var(--rot));opacity:0}}
+@media(prefers-reduced-motion:reduce){.hero .aur,.hchip,.s-publishing i,.dot,.js.cur .ring{animation:none}.page.enter>*{animation:none}.cf{display:none}}
 </style>
 
 
@@ -663,7 +727,7 @@ async function approve(id, whenISO){
     }
     p.images = paths; p.publish_at = whenISO; p.approved = true; p.status = "draft"; delete p.error;
     await savePosts(`studio: approve ${p.id}`);
-    toast(live() ? "Approved. The publisher posts it at the scheduled time." : "Approved in sample mode. Connect GitHub in Settings to publish for real.");
+    toast(live() ? "Approved. The publisher posts it at the scheduled time." : "Approved in sample mode. Connect GitHub in Settings to publish for real."); burst();
   } catch(e){ toast("Approve failed: " + e.message); }
   delete S.busy[id]; render();
 }
@@ -831,7 +895,7 @@ async function liApprove(){
     }
     p.publish_at = when; p.approved = true; p.status = "draft"; delete p.error; d.when = toLocalInput(when);
     await saveLi(`studio: linkedin approve ${p.id}`);
-    toast(live() ? "Approved. The LinkedIn publisher posts it at the scheduled time." : "Approved in sample mode. Connect GitHub in Settings to publish for real.");
+    toast(live() ? "Approved. The LinkedIn publisher posts it at the scheduled time." : "Approved in sample mode. Connect GitHub in Settings to publish for real."); burst();
   } catch(e){ toast("Approve failed: " + e.message); }
   S.liBusy = null; render();
 }
@@ -929,8 +993,8 @@ function vOverview(){
   const nextUp = [...b.scheduled,...b.publishing].sort((x,y)=>new Date(x.publish_at)-new Date(y.publish_at))[0];
   const hsent = [failed?`1 post needs attention.`:"", b.review.length?`${b.review.length} draft${b.review.length>1?"s are":" is"} waiting for your review.`:"", nextUp?`Next post goes out ${fmtIST(nextUp.publish_at)} IST.`:(!b.review.length&&!failed?"Nothing is scheduled yet. Add a row to start the next carousel.":"")].filter(Boolean).join(" ");
   const fanPosts = fanPicks(), FX = [[-118,-9],[0,0],[118,9]], off = fanPosts.length===1?[FX[1]]:fanPosts.length===2?[FX[0],FX[2]]:FX;
-  const hero = `<section class="hero"><div class="hcopy"><h2 class="hh">${greet}</h2><p>${esc(hsent)}</p><div class="row">${nextBtn(next[2], next[3])}${b.planned.length?`<button class="btn lg" data-act="genall">${ico("sparkles",16)}Generate ${b.planned.length} planned</button>`:""}</div></div>
-    <div class="fan ${play?"play":""}" aria-hidden="true">${fanPosts.length?fanPosts.map((q,i)=>{ const k = fanKey(q); return `<div class="fc" data-key="${esc(k)}" style="--x:${off[i][0]}px;--r:${off[i][1]}deg;--d:${i*110}ms;z-index:${i===1||fanPosts.length===1?3:1}">${S.fanImgs[k]?`<img alt="" src="${S.fanImgs[k]}">`:`<div class="ghost">${esc(q.meta?.topic||"")}</div>`}</div>`; }).join(""):`<div class="fc" style="--x:0px;--r:-4deg"><div class="ghost">Your next carousel starts here</div></div>`}</div></section>`;
+  const hero = `<section class="hero"><i class="aur a1"></i><i class="aur a2"></i><i class="aur a3"></i><div class="hcopy"><h2 class="hh">${greet}</h2><p>${esc(hsent)}</p><div class="row">${nextBtn(next[2], next[3])}${b.planned.length?`<button class="btn lg" data-act="genall">${ico("sparkles",16)}Generate ${b.planned.length} planned</button>`:""}</div></div>
+    <div class="fan ${play?"play":""}" aria-hidden="true">${fanPosts.length?fanPosts.map((q,i)=>{ const k = fanKey(q); return `<div class="fc" data-key="${esc(k)}" style="--x:${off[i][0]}px;--r:${off[i][1]}deg;--d:${i*110}ms;--pz:${[10,24,38][i]};z-index:${i===1||fanPosts.length===1?3:1}">${S.fanImgs[k]?`<img alt="" src="${S.fanImgs[k]}">`:`<div class="ghost">${esc(q.meta?.topic||"")}</div>`}</div>`; }).join(""):`<div class="fc" style="--x:0px;--r:-4deg"><div class="ghost">Your next carousel starts here</div></div>`}<span class="hchip c1"><b>${b.review.length}</b>to review</span><span class="hchip c2"><b>${b.scheduled.length+b.publishing.length}</b>scheduled</span><span class="hchip c3"><b>${b.published.length}</b>live</span></div></section>`;
   return `
   ${hero}
   ${issue ? `<div class="banner err" role="alert"><span style="color:var(--err);display:flex">${ico("circle-alert",24)}</span><div class="bt"><b>Publishing failed</b><span class="m">${esc(issue.meta?.topic||issue.id)} carousel · ${esc(fmtIST(issue.publish_at))} IST · ${esc((issue.error||"").slice(0,180))}</span></div><div class="row"><button class="btn out" data-act="tab:settings">Reconnect account</button><button class="btn tx" data-act="retry:${issue.id}">Retry</button></div></div>`:""}
@@ -1154,6 +1218,41 @@ function pullDrawerInputs(){
   slides.forEach((s,i) => { const t=$("#t_"+i), b=$("#b_"+i), k=$("#k_"+i); if (t) s.title = t.value; if (b) s.body = b.value; if (k) s.kind = k.value; });
 }
 
+
+/* ---------- effects: spotlight, parallax, tab indicator, count-up, confetti ---------- */
+(function(){
+  let raf = 0;
+  document.addEventListener("mousemove", e => {
+    if (raf) return; const t = e.target;
+    raf = requestAnimationFrame(() => { raf = 0;
+      const card = t.closest && t.closest(".sec,.pc,.post,.tile,.kpi");
+      if (card){ const r = card.getBoundingClientRect(); card.style.setProperty("--sx", (e.clientX-r.left)+"px"); card.style.setProperty("--sy", (e.clientY-r.top)+"px"); }
+      const hero = t.closest && t.closest(".hero");
+      if (hero){ const r = hero.getBoundingClientRect(), fan = hero.querySelector(".fan"); if (fan){ fan.style.setProperty("--mx", ((e.clientX-r.left)/r.width*2-1).toFixed(3)); fan.style.setProperty("--my", ((e.clientY-r.top)/r.height*2-1).toFixed(3)); } }
+    });
+  }, {passive:true});
+  document.addEventListener("mouseleave", () => { const f = document.querySelector(".fan"); if (f){ f.style.setProperty("--mx",0); f.style.setProperty("--my",0); } });
+})();
+function burst(){
+  if (matchMedia("(prefers-reduced-motion:reduce)").matches) return;
+  const cols = ["#565ADD","#8A8DF0","#FF9A6B","#C75BD6","#17AA2E","#FFD166"];
+  for (let i=0;i<46;i++){ const d = document.createElement("i"); d.className = "cf"; const a = Math.random()*Math.PI*2, v = 160+Math.random()*320;
+    d.style.cssText = `left:50%;top:42%;background:${cols[i%cols.length]};--dx:${Math.cos(a)*v}px;--dy:${Math.sin(a)*v-120+Math.random()*340}px;--rot:${Math.random()*900-450}deg;animation-delay:${Math.random()*80}ms`;
+    document.body.appendChild(d); setTimeout(()=>d.remove(), 1600); }
+}
+function afterRender(){
+  const nav = $(".tabs"); if (nav){
+    let ind = nav.querySelector(".tabind"); const on = nav.querySelector('[aria-selected="true"]');
+    if (on){ if (!ind){ ind = document.createElement("span"); ind.className = "tabind"; nav.prepend(ind); }
+      const prev = S._ti; const set = () => { ind.style.left = on.offsetLeft+"px"; ind.style.width = on.offsetWidth+"px"; S._ti = {l:on.offsetLeft,w:on.offsetWidth}; };
+      if (prev){ ind.style.transition = "none"; ind.style.left = prev.l+"px"; ind.style.width = prev.w+"px"; ind.offsetWidth; ind.style.transition = ""; requestAnimationFrame(set); } else set();
+      nav.classList.add("ind"); }
+  }
+  if (S._enter){ S._enter = false; const pg = $(".page"); if (pg){ [...pg.children].forEach((c,i)=>c.style.setProperty("--i", Math.min(i,8))); pg.classList.add("enter"); setTimeout(()=>pg.classList.remove("enter"), 1400); }
+    if (!matchMedia("(prefers-reduced-motion:reduce)").matches) document.querySelectorAll(".big,.wait b,.pipe b,.kpi b").forEach(el => { const m = /^(\d+)(%?)$/.exec(el.textContent.trim()); if (!m) return; const to = +m[1], suf = m[2], t0 = performance.now(); const tick = t => { const k = Math.min(1,(t-t0)/900), e = 1-Math.pow(1-k,3); el.textContent = Math.round(to*e)+suf; if (k<1) requestAnimationFrame(tick); }; el.textContent = "0"+suf; requestAnimationFrame(tick); });
+  }
+}
+
 /* ---------- render + events ---------- */
 function render(){
   const b = byStage(), tabName = TABS.find(t=>t[0]===S.tab)[1];
@@ -1167,7 +1266,7 @@ function render(){
     <button class="btn pri lg" data-act="tab:create">${ico("plus",16)}Create carousel</button></div></div>
     <nav class="tabs" role="tablist">${TABS.map(t=>`<button class="tab" role="tab" aria-selected="${S.tab===t[0]}" data-act="tab:${t[0]}">${t[1]}${t[0]==="approvals"&&b.review.length?`<span class="count">${b.review.length}</span>`:""}</button>`).join("")}</nav></header>
     <div class="page">${S.error?`<div class="banner err" role="alert"><span style="color:var(--err);display:flex">${ico("circle-alert",24)}</span><div class="bt"><b>Could not load from GitHub</b><span class="m">${esc(S.error)}</span></div><button class="btn out" data-act="tab:settings">Check settings</button></div>`:""}${view}</div>${S.drawer?drawerHtml():""}`;
-  window.scrollTo(0,y); paintPreview(); paintLi(); paintFan(); renderToast();
+  window.scrollTo(0,y); paintPreview(); paintLi(); paintFan(); afterRender(); renderToast();
 }
 async function pickScreen(i){
   const inp = document.createElement("input"); inp.type="file"; inp.accept="image/png,image/jpeg,image/webp";
@@ -1184,7 +1283,7 @@ document.addEventListener("click", async e => {
   if (el.classList.contains("scrim") && e.target !== el) return;
   const d = S.drawer; const p = d && getPost(d.id);
   switch(a){
-    case "tab": S.tab = arg; lsSet("tab", arg); S.drawer = null; render(); window.scrollTo(0,0); break;
+    case "tab": S._enter = true; S.tab = arg; lsSet("tab", arg); S.drawer = null; render(); window.scrollTo(0,0); break;
     case "reload": await loadAll(); break;
     case "f": S.fStatus = arg; render(); break;
     case "calf": S.calFilter = arg; render(); break;
@@ -1234,6 +1333,7 @@ document.addEventListener("click", async e => {
 });
 document.addEventListener("input", e => { if (S.tab==="linkedin" && S.liDraft && /^l_/.test(e.target.id||"")){ liPull(); liLive(); if (e.target.id==="l_cap"){ const c = $("#l_cnt"); if (c) c.textContent = `${S.liDraft.caption.length} / 3,000 characters`; } if (e.target.id==="l_slides"){ clearTimeout(window.__lpv); window.__lpv = setTimeout(paintLi, 250); } } });
 document.addEventListener("keydown", e => { if (e.key==="Escape" && S.drawer){ pullDrawerInputs(); S.drawer = null; render(); } });
+S._enter = true;
 loadAll();
 </script>
 </body></html>
