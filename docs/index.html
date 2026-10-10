@@ -255,6 +255,7 @@ const S = {
   tab: lsGet("tab","overview"), posts: [], sha: null, runs: [], insights: null, loading: false, error: null,
   cfg: Object.assign({ owner:"Rohan-2312", repo:"darwix-instagram", branch:"main", token:"", aiKey:"", aiModel:"claude-sonnet-5-5",
     notes: DEFAULT_NOTES, banned: DEFAULT_BANNED, defaultTime:"11:00", defaultCta:"Link in bio.", defaultTags:"#darwixai #bfsi" }, lsGet("cfg", {})),
+  li: [], liSha: null, liRuns: [], liDraft: null, liBusy: null, liFiles: {},
   fStatus: "all", calMonth: null, drawer: null, busy: {}, toast: null, igId: "17841412465345449", screens: {}
 };
 const live = () => !!S.cfg.token;
@@ -324,6 +325,7 @@ const DARK_KINDS = new Set(["coverdark","statement"]);
 const items = b => String(b||"").split("|").map(s => s.trim()).filter(Boolean);
 const labText = s => { const m = String(s).match(/^([^:]{1,30}):\s+([\s\S]+)$/); return m ? {label:m[1].trim(), text:m[2].trim()} : {label:"", text:String(s).trim()}; };
 async function drawSlide(canvas, slide, idx, total, eyebrow){
+  const FOOT = drawSlide.footer || "Darwix AI  ·  @darwixai";
   try { await Promise.all([document.fonts.load("700 40px Manrope"), document.fonts.load("600 40px Manrope"), document.fonts.load("500 20px Manrope"), document.fonts.load("400 40px Manrope")]); } catch {}
   const W = 1080, H = 1350, M = 90, c = canvas.getContext("2d"), maxW = W - M*2, BOT = 1215;
   canvas.width = W; canvas.height = H;
@@ -483,7 +485,7 @@ async function drawSlide(canvas, slide, idx, total, eyebrow){
       bf.lines.forEach(l => { c.fillText(l, M+40, yy); yy += lh; });
     }
   }
-  c.fillStyle = dark ? "rgba(255,255,255,.7)" : "#8A90A6"; c.font = "500 22px Manrope, sans-serif"; c.textAlign = "left"; c.fillText("Darwix AI  ·  @darwixai", M, 1290);
+  c.fillStyle = dark ? "rgba(255,255,255,.7)" : "#8A90A6"; c.font = "500 22px Manrope, sans-serif"; c.textAlign = "left"; c.fillText(FOOT, M, 1290);
 }
 const canvasToJpeg = cv => new Promise(r => cv.toBlob(r, "image/jpeg", 0.92));
 const blobToB64 = b => new Promise(r => { const f = new FileReader(); f.onload = () => r(String(f.result).split(",")[1]); f.readAsDataURL(b); });
@@ -510,7 +512,9 @@ async function loadAll(){
       S.posts = f ? JSON.parse(f.text) : []; S.sha = f ? f.sha : null;
       try { const r = await gh.req("/actions/workflows/publish.yml/runs?per_page=6"); S.runs = r.workflow_runs || []; } catch { S.runs = []; }
       try { const i = await gh.getFile("insights.json"); S.insights = i ? JSON.parse(i.text) : null; } catch { S.insights = null; }
-    } else { S.posts = lsGet("demoPosts", null) || seedPosts(); S.runs = seedRuns(); S.insights = seedInsights(); }
+      try { const l = await gh.getFile("linkedin.json"); S.li = l ? JSON.parse(l.text) : []; S.liSha = l ? l.sha : null; } catch { S.li = []; }
+      try { const r = await gh.req("/actions/workflows/publish-linkedin.yml/runs?per_page=5"); S.liRuns = r.workflow_runs || []; } catch { S.liRuns = []; }
+    } else { S.posts = lsGet("demoPosts", null) || seedPosts(); S.runs = seedRuns(); S.insights = seedInsights(); S.li = lsGet("demoLi", []); S.liRuns = []; }
   } catch(e){ S.error = e.message; }
   S.loading = false; render();
 }
@@ -667,8 +671,157 @@ function parseSheet(txt){
   });
 }
 
+/* ---------- LinkedIn: separate queue (linkedin.json), PDF carousels, video, text ---------- */
+const LI_ORG = "75131201", LI_FOOT = "Darwix AI  ·  darwix.ai";
+const LI_TYPES = { carousel:"Carousel (PDF)", video:"Video", text:"Text post" };
+const liDefault = () => ({ id:null, type:"carousel", title:"", topic:"", direction:"", caption:"", slidesTxt:"", when:"" });
+const getLi = id => S.li.find(p => p.id === id);
+const liBox = (cls="") => `<span class="lb ${cls}" style="background:#0A66C2;border-color:#0A66C2;color:#fff;font:800 ${cls==="s28"?12:14}px var(--font);letter-spacing:-.5px">in</span>`;
+const slidesToTxt = sl => (sl||[]).map(s => [s.kind||"content", s.title||"", s.body||""].join(" :: ").replace(/ :: $/,"")).join("\n");
+const txtToSlides = t => String(t||"").split("\n").map(parseSlide).filter(Boolean);
+function liChecks(p){
+  const out = [], cap = p.caption || "", m = p.meta || {};
+  if (!cap.trim()) out.push({l:"fail", t:"Caption is empty."});
+  if (cap.length > 3000) out.push({l:"fail", t:`Caption is ${cap.length} characters. LinkedIn allows 3,000.`});
+  if (p.type === "carousel"){ const n = (m.slides||[]).length; if (n < 3 || n > 20) out.push({l:"fail", t:`Carousels work best at 3 to 20 slides. This one has ${n}.`}); }
+  if (p.type === "video" && !p.video && !S.liFiles[p.id]) out.push({l:"fail", t:"Choose an MP4 video file."});
+  const text = [cap, ...(m.slides||[]).map(s => (s.title||"")+" "+(s.body||""))].join("\n");
+  S.cfg.banned.split(",").map(x=>x.trim()).filter(Boolean).forEach(w => { if (text.toLowerCase().includes(w.toLowerCase())) out.push({l:"fail", t:`Banned phrase: "${w}".`}); });
+  BRANDS.forEach(b => { if (text.includes(b)) out.push({l:"warn", t:`Names a real company (${b}). Use a neutral label unless it is cleared.`}); });
+  const tags = cap.match(/#\w+/g) || []; if (tags.length > 5) out.push({l:"warn", t:`${tags.length} hashtags. Three to five reads better on LinkedIn.`});
+  if ((cap.split("\n")[0]||"").length > 210) out.push({l:"warn", t:"The first line is over 210 characters. LinkedIn cuts it at 'see more', so put the hook first."});
+  const nums = [...new Set(text.match(/\b\d[\d,.]*\s?(%|x|×|ms|s|min|crore|lakh|cr)?/gi) || [])].slice(0,4);
+  if (nums.length) out.push({l:"warn", t:`Verify figures against a source: ${nums.map(n=>n.trim()).join(", ")}.`});
+  return out;
+}
+async function saveLi(msg){
+  if (!live()){ lsSet("demoLi", S.li); return; }
+  const doSave = () => gh.putFile("linkedin.json", b64e(JSON.stringify(S.li, null, 2) + "\n"), msg, S.liSha);
+  let r;
+  try { r = await doSave(); }
+  catch(e){
+    if (!/does not match|conflict|sha/i.test(e.message)) throw e;
+    const f = await gh.getFile("linkedin.json"); const remote = f ? JSON.parse(f.text) : []; S.liSha = f ? f.sha : null;
+    const byId = Object.fromEntries(remote.map(p => [p.id, p]));
+    S.li = S.li.map(p => { const q = byId[p.id]; return q && (q.status==="published"||q.status==="failed") ? { ...p, status:q.status, post_urn:q.post_urn, published_at:q.published_at, error:q.error } : p; });
+    remote.forEach(q => { if (!S.li.find(p => p.id === q.id)) S.li.push(q); });
+    r = await doSave();
+  }
+  S.liSha = r.content.sha;
+}
+function makePdf(pages){ /* pages: [{bytes:Uint8Array(JPEG), w, h}] -> Blob */
+  const enc = new TextEncoder(), parts = [], offs = []; let len = 0;
+  const push = b => { const u = typeof b === "string" ? enc.encode(b) : b; parts.push(u); len += u.length; };
+  const obj = (n, body) => { offs[n] = len; push(`${n} 0 obj\n${body}\nendobj\n`); };
+  push("%PDF-1.4\n");
+  const kids = pages.map((_, i) => `${3+3*i} 0 R`).join(" ");
+  obj(1, "<< /Type /Catalog /Pages 2 0 R >>");
+  obj(2, `<< /Type /Pages /Kids [${kids}] /Count ${pages.length} >>`);
+  pages.forEach((pg, i) => {
+    const w = pg.w/2, h = pg.h/2, pn = 3+3*i, cn = pn+1, im = pn+2, cs = `q ${w} 0 0 ${h} 0 0 cm /Im0 Do Q`;
+    obj(pn, `<< /Type /Page /Parent 2 0 R /MediaBox [0 0 ${w} ${h}] /Resources << /XObject << /Im0 ${im} 0 R >> >> /Contents ${cn} 0 R >>`);
+    obj(cn, `<< /Length ${cs.length} >>\nstream\n${cs}\nendstream`);
+    offs[im] = len; push(`${im} 0 obj\n<< /Type /XObject /Subtype /Image /Width ${pg.w} /Height ${pg.h} /ColorSpace /DeviceRGB /BitsPerComponent 8 /Filter /DCTDecode /Length ${pg.bytes.length} >>\nstream\n`); push(pg.bytes); push("\nendstream\nendobj\n");
+  });
+  const n = 3 + 3*pages.length, xr = len;
+  push(`xref\n0 ${n}\n0000000000 65535 f \n` + offs.slice(1, n).map(o => String(o).padStart(10,"0") + " 00000 n \n").join(""));
+  push(`trailer\n<< /Size ${n} /Root 1 0 R >>\nstartxref\n${xr}\n%%EOF\n`);
+  return new Blob(parts, { type:"application/pdf" });
+}
+async function renderPdf(slides, topic){
+  const cv = $("#work"), pages = []; drawSlide.footer = LI_FOOT;
+  try { for (let i=0;i<slides.length;i++){ await drawSlide(cv, slides[i], i, slides.length, topic); const b = await new Promise(r => cv.toBlob(r, "image/jpeg", 0.9)); pages.push({ bytes:new Uint8Array(await b.arrayBuffer()), w:1080, h:1350 }); } }
+  finally { drawSlide.footer = null; }
+  return makePdf(pages);
+}
+function liPull(){
+  const d = S.liDraft; if (!d || !$("#l_cap") ) return;
+  const g = id => { const e = $("#"+id); return e ? e.value : null; };
+  for (const [k,id] of [["title","l_title"],["topic","l_topic"],["direction","l_dir"],["caption","l_cap"],["slidesTxt","l_slides"],["when","l_when"]]){ const v = g(id); if (v !== null) d[k] = v; }
+}
+function liBuild(){
+  const d = S.liDraft, old = d.id && getLi(d.id);
+  const id = d.id || slug(d.title || d.topic) + "-" + Math.random().toString(36).slice(2,6);
+  const slides = d.type === "carousel" ? txtToSlides(d.slidesTxt) : [];
+  const changed = old && (old.caption !== d.caption || old.type !== d.type || JSON.stringify(old.meta?.slides||[]) !== JSON.stringify(slides));
+  const p = { ...(old||{}), id, type:d.type, title:d.title.trim() || d.topic.trim() || "Darwix AI", caption:d.caption,
+    publish_at: d.when ? fromLocalInput(d.when) : (old?.publish_at || null),
+    approved: old && !changed && old.status !== "failed" ? old.approved : false, status: "draft",
+    meta:{ ...(old?.meta||{}), topic:d.topic.trim(), direction:d.direction, slides } };
+  if (old && old.status === "published") return old;
+  if (changed) { delete p.document; if (d.type !== "video") delete p.video; }
+  if (old) Object.assign(old, p); else S.li.push(p);
+  d.id = id; return old || p;
+}
+async function liSaveDraft(){
+  liPull(); const d = S.liDraft; if (!d.title.trim() && !d.topic.trim() && !d.caption.trim()){ toast("Add a title or a caption first."); return; }
+  const p = liBuild();
+  try { await saveLi(`studio: linkedin draft ${p.id}`); toast("LinkedIn draft saved."); } catch(e){ toast(e.message); }
+  render();
+}
+async function liApprove(){
+  liPull(); const d = S.liDraft; const p = liBuild(); const ck = liChecks(p);
+  if (ck.some(x=>x.l==="fail")){ toast("Fix the blocked items first."); render(); return; }
+  let when = d.when ? fromLocalInput(d.when) : null; if (!when){ toast("Pick a publish time."); return; }
+  if (new Date(when) < new Date(Date.now() - 60000)) when = new Date().toISOString();
+  S.liBusy = "Preparing"; render();
+  try {
+    if (p.type === "carousel"){
+      S.liBusy = "Rendering PDF"; render();
+      const blob = await renderPdf(p.meta.slides, p.meta.topic || p.title);
+      const path = `linkedin/${p.id}/carousel.pdf`;
+      if (live()){ S.liBusy = "Uploading PDF"; render(); const sha = await gh.sha(path); await gh.putFile(path, await blobToB64(blob), `studio: linkedin pdf ${p.id}`, sha); }
+      p.document = path;
+    } else if (p.type === "video"){
+      const f = S.liFiles[p.id];
+      if (f){ const path = `linkedin/${p.id}/video.mp4`;
+        if (live()){ S.liBusy = "Uploading video"; render(); const sha = await gh.sha(path); await gh.putFile(path, await blobToB64(f), `studio: linkedin video ${p.id}`, sha); }
+        p.video = path; delete S.liFiles[p.id]; }
+    }
+    p.publish_at = when; p.approved = true; p.status = "draft"; delete p.error; d.when = toLocalInput(when);
+    await saveLi(`studio: linkedin approve ${p.id}`);
+    toast(live() ? "Approved. The LinkedIn publisher posts it at the scheduled time." : "Approved in sample mode. Connect GitHub in Settings to publish for real.");
+  } catch(e){ toast("Approve failed: " + e.message); }
+  S.liBusy = null; render();
+}
+async function liUnapprove(id){ const p = getLi(id); p.approved = false; try { await saveLi(`studio: linkedin unapprove ${id}`); toast("Pulled back to draft."); } catch(e){ toast(e.message); } render(); }
+async function liRetry(id){ const p = getLi(id); p.status = "draft"; p.approved = true; delete p.error; p.publish_at = new Date().toISOString(); try { await saveLi(`studio: linkedin retry ${id}`); if (live()) await runLiPublisher(true); toast("Queued for the LinkedIn publisher."); } catch(e){ toast(e.message); } render(); }
+async function liNow(id){ const p = getLi(id); p.publish_at = new Date().toISOString(); try { await saveLi(`studio: linkedin publish now ${id}`); if (live()) await runLiPublisher(true); toast(live() ? "LinkedIn publisher started." : "Sample mode: nothing was posted."); } catch(e){ toast(e.message); } render(); }
+async function runLiPublisher(quiet){
+  if (!live()){ toast("Connect GitHub in Settings to run the publisher."); return; }
+  try { await gh.req("/actions/workflows/publish-linkedin.yml/dispatches", { method:"POST", body: JSON.stringify({ ref:S.cfg.branch }) }); if (!quiet) toast("LinkedIn publisher started. Results appear in a minute."); setTimeout(async () => { try { const r = await gh.req("/actions/workflows/publish-linkedin.yml/runs?per_page=5"); S.liRuns = r.workflow_runs || []; render(); } catch {} }, 8000); }
+  catch(e){ toast(/Not Found/.test(e.message) ? "publish-linkedin.yml is not in the repo yet." : e.message); }
+}
+async function liRemove(id){ S.li = S.li.filter(p => p.id !== id); if (S.liDraft?.id === id) S.liDraft = liDefault(); try { await saveLi(`studio: linkedin remove ${id}`); } catch(e){ toast(e.message); } render(); }
+async function liAi(){
+  liPull(); const d = S.liDraft; if (!(d.topic||d.title).trim()){ toast("Add a topic first."); return; }
+  S.liBusy = "Drafting"; render();
+  try {
+    let out;
+    const row = { topic:d.topic||d.title, hook:d.title, direction:d.direction, cta:"Learn more at darwix.ai." };
+    if (S.cfg.aiKey){
+      const sys = `You write LinkedIn posts for the Darwix AI company page. Audience: risk, credit, operations and compliance leaders in banks, NBFCs, housing finance, insurers and asset reconstruction companies. Return only JSON.\n\n${S.cfg.notes}\n\nBanned phrases: ${S.cfg.banned}.`;
+      const kind = d.type === "carousel" ? `"slides":[{"kind":"cover|coverdark|content|statement|focus|stat|compare|steps|list|flow|grid|quote|table|cta","title":"max 90 characters","body":"max 200 characters, optional"}],` : "";
+      const user = `Post type: ${LI_TYPES[d.type]}\nTopic: ${row.topic}\nWorking title: ${d.title}\nDirection: ${d.direction}\n\nReturn JSON: {${kind}"caption":"..."}.\nCaption rules: first line is the hook, under 140 characters, and it must stand alone. Short paragraphs, 900 to 1500 characters in total, plain sentences, no emoji, no hype, written for LinkedIn readers who will read it in the feed. Close with one specific question or call to action. Three to five hashtags on the last line.\n${d.type==="carousel" ? "Slide rules: 7 to 10 slides, first kind cover or coverdark, last kind cta. This is a document read slide by slide, so each slide carries one idea. Layout encoding: stat = title is the figure, body is 'label | supporting sentence'. compare = body is 'Label: text | Label: text'. steps, list and flow = body items separated by |. grid = up to 4 'Label: text' items separated by |. table = 'Label: definition' items separated by |. quote = title is a real quote, body is the attribution." : ""}`;
+      const r = await fetch("https://api.anthropic.com/v1/messages", { method:"POST", headers:{ "content-type":"application/json", "x-api-key":S.cfg.aiKey, "anthropic-version":"2023-06-01", "anthropic-dangerous-direct-browser-access":"true" }, body: JSON.stringify({ model:S.cfg.aiModel, max_tokens:3000, system:sys, messages:[{role:"user", content:user}] }) });
+      const j = await r.json(); if (!r.ok) throw new Error(j.error?.message || "AI request failed");
+      const m = (j.content||[]).map(b=>b.text||"").join("").match(/\{[\s\S]*\}/); if (!m) throw new Error("AI reply was not JSON"); out = JSON.parse(m[0]);
+    } else out = { slides: fallbackSlides(row), caption: `${row.hook || row.topic}\n\n${row.direction}\n\n${row.cta}\n\n#darwixai #bfsi` };
+    d.caption = out.caption || d.caption; if (d.type === "carousel" && out.slides) d.slidesTxt = slidesToTxt(out.slides); d.sel = 0;
+    toast(S.cfg.aiKey ? "Draft ready. Edit it before approving." : "Draft built from your direction. Add an Anthropic key in Settings for written copy.");
+  } catch(e){ toast("Draft failed: " + e.message); }
+  S.liBusy = null; render();
+}
+async function paintLi(){
+  const cv = $("#liprev"); if (!cv || !S.liDraft) return;
+  const slides = txtToSlides(S.liDraft.slidesTxt); const c = cv.getContext("2d");
+  if (!slides.length){ cv.width = 1080; cv.height = 1350; c.fillStyle="#F3F4FF"; c.fillRect(0,0,1080,1350); c.fillStyle="#8A90A6"; c.font="500 40px Manrope, sans-serif"; c.textAlign="center"; c.fillText("Slides appear here", 540, 675); return; }
+  const i = Math.min(S.liDraft.sel||0, slides.length-1); drawSlide.footer = LI_FOOT;
+  try { await drawSlide(cv, slides[i], i, slides.length, S.liDraft.topic || S.liDraft.title); } finally { drawSlide.footer = null; }
+}
+
 /* ---------- views ---------- */
-const TABS = [["overview","Overview"],["create","Create"],["posts","Posts"],["calendar","Calendar"],["approvals","Approvals"],["insights","Insights"],["settings","Settings"]];
+const TABS = [["overview","Overview"],["create","Create"],["posts","Posts"],["linkedin","LinkedIn"],["calendar","Calendar"],["approvals","Approvals"],["insights","Insights"],["settings","Settings"]];
 const byStage = () => { const o = {planned:[],review:[],scheduled:[],publishing:[],published:[],failed:[]}; S.posts.forEach(p => o[stage(p)].push(p)); return o; };
 const cover = p => p.images && p.images[0] && live() ? `https://raw.githubusercontent.com/${S.cfg.owner}/${S.cfg.repo}/${S.cfg.branch}/${p.images[0]}` : "";
 const igBox = (cls="") => `<span class="lb ${cls}"><span class="i ig" style="--u:url(${ICONS.instagram});width:56%;height:56%"></span></span>`;
@@ -721,10 +874,11 @@ function vOverview(){
       ${upcoming.map(upItem).join("") || `<div class="empty"><span class="ring" style="background:var(--tint);color:var(--brand)">${ico("calendar",22)}</span><b>Nothing scheduled</b>Approve a draft and pick a time. It will appear here.</div>`}</section>
   </div>
   <div class="wrapflex" style="align-items:flex-start">
-    <section style="flex:1 1 420px;min-width:0;display:flex;flex-direction:column;gap:12px"><div class="row" style="justify-content:space-between"><h2 style="margin:0;font:700 18px var(--font);color:var(--ink)">By platform</h2><span style="font-size:13px;color:var(--ink3)">${n} post${n===1?"":"s"} · Instagram only for now</span></div>
+    <section style="flex:1 1 420px;min-width:0;display:flex;flex-direction:column;gap:12px"><div class="row" style="justify-content:space-between"><h2 style="margin:0;font:700 18px var(--font);color:var(--ink)">By platform</h2><span style="font-size:13px;color:var(--ink3)">${n} post${n===1?"":"s"} · Instagram and LinkedIn</span></div>
       <div class="pgrid">
         <button class="pc" data-act="tab:posts"><div class="row" style="gap:10px;flex-wrap:nowrap">${igBox("s28")}<b style="font:700 15px var(--font);color:var(--ink)">Instagram</b><span style="margin-left:auto;font:600 13px var(--font);color:var(--ink2)">${n} posts</span></div><div class="row" style="gap:6px">${brk||`<span style="font-size:12px;color:var(--ink3)">No posts yet</span>`}</div><div class="ft"><span class="dot ${issue?"bad":""}"></span>${issue?"Connection expired":"@darwixai · connected"}${issue?`<span class="btn sm out" style="margin-left:auto;height:28px" data-act="tab:settings">Reconnect</span>`:""}</div></button>
-        ${[["LinkedIn","Darwix AI page"],["X","@darwix_ai"],["Facebook","Darwix AI page"]].map(([nm,acc])=>`<div class="pc dim"><div class="row" style="gap:10px;flex-wrap:nowrap"><span class="lb s28"></span><b style="font:700 15px var(--font);color:var(--ink)">${nm}</b><span style="margin-left:auto;font:600 13px var(--font);color:var(--ink3)">Later</span></div><div class="row" style="gap:6px"><span class="pill s-planned">not connected</span></div><div class="ft"><span class="dot off"></span>Not part of this build</div></div>`).join("")}
+        <button class="pc" data-act="tab:linkedin"><div class="row" style="gap:10px;flex-wrap:nowrap">${liBox("s28")}<b style="font:700 15px var(--font);color:var(--ink)">LinkedIn</b><span style="margin-left:auto;font:600 13px var(--font);color:var(--ink2)">${S.li.length} posts</span></div><div class="row" style="gap:6px">${["review","scheduled","published","failed"].filter(k=>S.li.some(p=>stage(p)===k)).map(k=>`<span class="pill s-${k}" style="height:22px">${S.li.filter(p=>stage(p)===k).length} ${STAGE_L[k].toLowerCase()}</span>`).join("")||`<span style="font-size:12px;color:var(--ink3)">No posts yet</span>`}</div><div class="ft"><span class="dot ${S.li.some(p=>p.status==="failed")?"bad":""}"></span>Darwix AI page · own queue</div></button>
+        ${[["X","@darwix_ai"],["Facebook","Darwix AI page"]].map(([nm,acc])=>`<div class="pc dim"><div class="row" style="gap:10px;flex-wrap:nowrap"><span class="lb s28"></span><b style="font:700 15px var(--font);color:var(--ink)">${nm}</b><span style="margin-left:auto;font:600 13px var(--font);color:var(--ink3)">Later</span></div><div class="row" style="gap:6px"><span class="pill s-planned">not connected</span></div><div class="ft"><span class="dot off"></span>Not part of this build</div></div>`).join("")}
       </div></section>
     <section class="sec" style="flex:1 1 340px"><div class="sec-h"><h2>Publisher runs</h2><button class="btn sm tx" data-act="runpub">${ico("refresh-cw",14)}Run now</button></div>
       ${runs.length ? runs.map(r=>`<div class="run"><span class="led ${r.status!=="completed"?"run":r.conclusion==="success"?"ok":"bad"}"></span><div style="flex:1;min-width:0;display:flex;flex-direction:column;gap:1px"><span style="font:600 13px var(--font);color:var(--ink)">${esc(r.name||"publish-instagram")}</span><span style="font:400 12px var(--font);color:var(--ink3);white-space:nowrap;overflow:hidden;text-overflow:ellipsis">${esc(r.display_title||"")}${r.status!=="completed"?" · running":" · "+esc(r.conclusion||"")}</span></div><div style="display:flex;flex-direction:column;align-items:flex-end;gap:1px"><span class="mono" style="font-size:11.5px;color:var(--ink2)">${esc(fmtIST(r.created_at,{day:undefined,month:undefined}))}</span><span class="mono" style="font-size:11px;color:var(--ink3)">IST</span></div></div>`).join("") : `<div class="empty"><b>No runs yet</b>The publisher checks the schedule every 15 minutes.</div>`}</section>
@@ -817,6 +971,9 @@ function vSettings(){
   + sec("Instagram","@darwixai",`Business account ${S.igId}. The access token is a GitHub secret named <span class="mono">IG_ACCESS_TOKEN</span>, so this page cannot read or show it. When publishing fails with a token error, create a new Page token in Meta and replace the secret.`,
     `<div class="row"><a class="btn" target="_blank" rel="noopener" href="https://github.com/${esc(c.owner)}/${esc(c.repo)}/settings/secrets/actions">${ico("link",14)}GitHub secrets</a><a class="btn" target="_blank" rel="noopener" href="https://developers.facebook.com/tools/debug/accesstoken/">${ico("link",14)}Meta token debugger</a><a class="btn" target="_blank" rel="noopener" href="https://github.com/${esc(c.owner)}/${esc(c.repo)}/actions">${ico("link",14)}Workflow runs</a></div>`,
     `<span class="pill ${issue?"s-failed":"s-ok"}"><i></i>${issue?"Needs reconnect":"Connected"}</span>`)
+  + sec("LinkedIn","Darwix AI company page",`Organization ${LI_ORG}. Posts publish through the LinkedIn Community Management API. The access token is a GitHub secret named <span class="mono">LI_ACCESS_TOKEN</span>, so this page cannot read it. LinkedIn tokens last about 60 days. When publishing fails with a token error, generate a new token in the LinkedIn developer portal and replace the secret.`,
+    `<div class="row"><a class="btn" target="_blank" rel="noopener" href="https://github.com/${esc(c.owner)}/${esc(c.repo)}/settings/secrets/actions">${ico("link",14)}GitHub secrets</a><a class="btn" target="_blank" rel="noopener" href="https://www.linkedin.com/developers/apps">${ico("link",14)}LinkedIn developer portal</a><a class="btn" target="_blank" rel="noopener" href="https://www.linkedin.com/developers/tools/oauth/token-generator">${ico("link",14)}Token generator</a><a class="btn" target="_blank" rel="noopener" href="https://github.com/${esc(c.owner)}/${esc(c.repo)}/actions/workflows/publish-linkedin.yml">${ico("link",14)}Workflow runs</a></div>`,
+    `<span class="pill ${S.li.some(p=>p.status==="failed"&&/token/i.test(p.error||""))?"s-failed":"s-ok"}"><i></i>${S.li.some(p=>p.status==="failed"&&/token/i.test(p.error||""))?"Needs new token":"Page "+LI_ORG}</span>`)
   + sec("Writing","AI copy and guardrails","",
     `<div class="form"><label class="f">Anthropic API key<input type="password" id="s_ai" value="${esc(c.aiKey)}" autocomplete="off" placeholder="sk-ant-…"><span class="hint">Optional. Used from this browser to write slides and captions. Billed to your API account.</span></label>
     <label class="f">Model<input type="text" id="s_model" value="${esc(c.aiModel)}"></label>
@@ -827,6 +984,55 @@ function vSettings(){
     <label class="f full">Brand and product notes sent with every generation<textarea id="s_notes" style="min-height:200px">${esc(c.notes)}</textarea></label></div>
     <div class="row"><button class="btn pri" data-act="savewrite">Save</button></div>`)
   + sec("Insights setup","Pull performance into this page","Add insights.js and .github/workflows/insights.yml from the handover folder. The workflow writes insights.json every 6 hours. Reach, saves and shares need the instagram_manage_insights permission on the token. Likes and comments work without it.","");
+}
+
+const liCkHtml = ck => ck.map(x=>`<div class="row" style="gap:8px;align-items:flex-start"><span class="chip ${x.l==="fail"?"q-low":"q-med"}">${x.l==="fail"?"Blocked":"Check"}</span><span style="flex:1;min-width:200px">${esc(x.t)}</span></div>`).join("");
+function liLive(){
+  const d = S.liDraft, slides = txtToSlides(d.slidesTxt), ck = liChecks({ id:d.id||"_", type:d.type, caption:d.caption, meta:{ slides } });
+  const c = $("#l_ck"); if (c) c.innerHTML = liCkHtml(ck);
+  const a = document.querySelector('[data-act="liapprove"]'); if (a) a.disabled = !!S.liBusy || ck.some(x=>x.l==="fail");
+  const pd = document.querySelector('[data-act="lipdf"]'); if (pd) pd.disabled = !slides.length;
+  const sc = $("#l_sc"); if (sc) sc.textContent = `${slides.length?Math.min(d.sel||0,slides.length-1)+1:0} / ${slides.length}`;
+}
+function vLinkedIn(){
+  const d = S.liDraft ||= liDefault(), busy = S.liBusy;
+  const slides = txtToSlides(d.slidesTxt), cur = d.id && getLi(d.id);
+  const draftPost = { id:d.id||"_", type:d.type, caption:d.caption, meta:{ slides } };
+  const ck = liChecks(draftPost), sel = Math.min(d.sel||0, Math.max(0, slides.length-1));
+  const locked = cur && cur.status === "published";
+  const nStage = k => S.li.filter(p => stage(p) === k).length;
+  const rows = [...S.li].sort((a,b) => (new Date(b.publish_at||0)) - (new Date(a.publish_at||0)));
+  const chip = (t) => `<button class="fchip" aria-pressed="${d.type===t}" data-act="litype:${t}">${LI_TYPES[t]}</button>`;
+  const file = d.id && S.liFiles[d.id];
+  return `<section class="banner info"><span style="color:var(--brand);display:flex">${ico("file-text",22)}</span><div class="bt"><b>LinkedIn has its own queue</b><span class="m">Posts here are written for LinkedIn and published to the Darwix AI company page through the LinkedIn API. They never reuse the Instagram images or captions. Carousels go out as a PDF document, which LinkedIn shows as a swipeable post.</span></div><button class="btn out" data-act="lirun">${ico("send",14)}Check now</button></section>
+  <section class="sec"><div class="secb"><div class="row" style="justify-content:space-between"><div><span class="lbl">${cur?"Editing":"New LinkedIn post"}</span><div style="font:700 18px var(--font);color:var(--ink);margin-top:2px">${esc(d.title || d.topic || "Compose")}</div></div>${cur?`<button class="btn sm" data-act="linew">${ico("plus",14)}New post</button>`:""}</div>
+    ${locked?`<p class="sub">This post is live on LinkedIn. Edits here do not change it.</p>`:`
+    <div class="row">${chip("carousel")}${chip("video")}${chip("text")}</div>
+    <div class="form">
+      <label class="f">Title (used for the PDF and the video)<input type="text" id="l_title" value="${esc(d.title)}" placeholder="Why verified fields beat extracted fields"></label>
+      <label class="f">Topic<input type="text" id="l_topic" value="${esc(d.topic)}" placeholder="Evidence Intelligence"></label>
+      <label class="f full">Direction for the draft (optional)<textarea id="l_dir" style="min-height:70px" placeholder="What the post should argue, and for whom.">${esc(d.direction)}</textarea></label>
+      <label class="f full">Caption<textarea id="l_cap" style="min-height:190px" placeholder="Hook line first. LinkedIn shows about 210 characters before 'see more'.">${esc(d.caption)}</textarea><span class="hint" id="l_cnt">${d.caption.length} / 3,000 characters</span></label>
+    </div>
+    ${d.type==="carousel"?`<div class="wrapflex" style="align-items:flex-start;gap:20px"><div style="flex:1 1 360px;min-width:0;display:flex;flex-direction:column;gap:8px"><span class="lbl">Slides · one per line</span><textarea id="l_slides" style="min-height:300px;font-family:var(--mono);font-size:12.5px" placeholder="cover :: Title of the carousel :: Subtitle&#10;content :: One idea :: Supporting sentence&#10;cta :: Talk to us :: darwix.ai">${esc(d.slidesTxt)}</textarea><span class="hint">Format: <span class="mono">kind :: title :: body</span>. Kinds: ${KINDS.join(", ")}. Separate list items with |.</span></div>
+      <div style="flex:0 0 300px;display:flex;flex-direction:column;gap:8px;align-items:center"><canvas id="liprev" width="1080" height="1350" style="width:300px;border-radius:12px;border:1px solid var(--line)"></canvas><div class="row"><button class="btn sm" data-act="lislide:-1">‹ Previous</button><span class="mono" style="font-size:12px" id="l_sc">${slides.length?sel+1:0} / ${slides.length}</span><button class="btn sm" data-act="lislide:1">Next ›</button></div></div></div>`:""}
+    ${d.type==="video"?`<div class="row"><button class="btn" data-act="lifile">${ico("upload",14)}${file||cur?.video?"Replace video":"Choose MP4 video"}</button><span class="hint">${file?esc(file.name)+" · "+(file.size/1048576).toFixed(1)+" MB":cur?.video?esc(cur.video):"MP4, up to about 60 MB. Vertical 9:16 or square works best."}</span></div>`:""}
+    <div id="l_ck" style="display:flex;flex-direction:column;gap:6px">${liCkHtml(ck)}</div>
+    <div class="row" style="align-items:flex-end"><label class="f" style="min-width:220px">Publish time (IST)<input type="datetime-local" id="l_when" value="${esc(d.when || (cur?.publish_at ? toLocalInput(cur.publish_at) : ""))}"></label>
+      <button class="btn" data-act="liai" ${busy?"disabled":""}>${ico("sparkles",14)}${busy==="Drafting"?"Drafting…":"Draft with AI"}</button>
+      ${d.type==="carousel"?`<button class="btn" data-act="lipdf" ${slides.length?"":"disabled"}>${ico("file-text",14)}Download PDF</button>`:""}
+      <button class="btn" data-act="lisave" ${busy?"disabled":""}>Save draft</button>
+      ${cur&&cur.approved&&stage(cur)!=="failed"?`<button class="btn" data-act="liunapprove:${cur.id}">Pull back to draft</button>`:""}
+      <button class="btn pri" data-act="liapprove" ${busy||ck.some(x=>x.l==="fail")?"disabled":""}>${busy&&busy!=="Drafting"?busy+"…":"Approve and schedule"}</button></div>
+    <div class="hint">Approving ${d.type==="carousel"?"renders the slides into one PDF, uploads it":d.type==="video"?"uploads the video":"locks the text"} and marks the post approved. Nothing goes out until the time you set. ${live()?"":"Sample mode: nothing is uploaded or posted."}</div>`}
+  </div></section>
+  <section class="sec"><div class="sec-h"><h2>LinkedIn queue</h2><span class="mono">${S.li.length}</span><small>${nStage("review")} draft · ${nStage("scheduled")+nStage("publishing")} scheduled · ${nStage("published")} published${nStage("failed")?` · ${nStage("failed")} failed`:""}</small></div>
+    ${rows.length?rows.map(p=>{ const st = stage(p); return `<div class="ri">${liBox()}<div class="tt"><span class="t1">${LI_TYPES[p.type]||p.type} · ${esc(p.title||p.id)}</span><span class="t2">${st==="failed"?esc((p.error||"Publishing failed.").slice(0,140)):esc((p.caption||"").split("\n")[0]||"No caption yet.")}</span></div><span class="mono" style="font-size:11.5px;color:var(--ink3)">${p.publish_at?esc(fmtIST(p.publish_at))+" IST":""}</span>${pillOf(st)}
+      ${p.post_urn?`<a class="btn sm" target="_blank" rel="noopener" href="https://www.linkedin.com/feed/update/${esc(p.post_urn)}">${ico("link",14)}View</a>`:`<button class="btn sm" data-act="liedit:${p.id}">Edit</button>`}
+      ${st==="failed"?`<button class="btn sm out" data-act="liretry:${p.id}">${ico("refresh-cw",14)}Retry</button>`:(st==="scheduled"||st==="publishing")?`<button class="btn sm" data-act="linow:${p.id}">${ico("send",14)}Publish now</button>`:""}
+      <button class="btn sm danger" data-act="lirm:${p.id}" aria-label="Delete">${ico("x",14)}</button></div>`; }).join(""):`<div class="empty"><span class="ring" style="background:var(--tint);color:var(--brand)">${ico("calendar",22)}</span><b>No LinkedIn posts yet</b>Compose one above. It stays a draft until you approve it.</div>`}</section>
+  <section class="sec"><div class="sec-h"><h2>LinkedIn publisher runs</h2><button class="btn sm tx" data-act="lirun">${ico("refresh-cw",14)}Run now</button></div>
+    ${S.liRuns.length?S.liRuns.slice(0,5).map(r=>`<div class="run"><span class="led ${r.status!=="completed"?"run":r.conclusion==="success"?"ok":"bad"}"></span><div style="flex:1;min-width:0"><span style="font:600 13px var(--font);color:var(--ink)">publish-linkedin</span><br><span style="font:400 12px var(--font);color:var(--ink3)">${r.status!=="completed"?"running":esc(r.conclusion||"")}</span></div><span class="mono" style="font-size:11.5px;color:var(--ink2)">${esc(fmtIST(r.created_at))} IST</span></div>`).join(""):`<div class="empty"><b>No runs yet</b>The workflow checks linkedin.json every 15 minutes once it is in the repo.</div>`}</section>`;
 }
 
 /* ---------- drawer ---------- */
@@ -872,17 +1078,17 @@ function pullDrawerInputs(){
 /* ---------- render + events ---------- */
 function render(){
   const b = byStage(), tabName = TABS.find(t=>t[0]===S.tab)[1];
-  const view = { overview:vOverview, create:vCreate, posts:vPosts, calendar:vCalendar, approvals:vApprovals, insights:vInsights, settings:vSettings }[S.tab]();
+  const view = { overview:vOverview, create:vCreate, posts:vPosts, linkedin:vLinkedIn, calendar:vCalendar, approvals:vApprovals, insights:vInsights, settings:vSettings }[S.tab]();
   const y = window.scrollY;
-  $("#app").innerHTML = `<header class="hd"><div class="crumbs"><span>Darwix AI</span><span class="sl">/</span><b>Instagram Studio</b><span class="sl">/</span><span>${tabName}</span></div>
-    <div class="hrow"><div style="display:flex;flex-direction:column;gap:6px;min-width:0"><h1>Instagram Studio</h1><p class="sub">Queue · <b>@darwixai</b> · ${S.posts.length} post${S.posts.length===1?"":"s"} · Instagram carousels</p></div>
+  $("#app").innerHTML = `<header class="hd"><div class="crumbs"><span>Darwix AI</span><span class="sl">/</span><b>Content Studio</b><span class="sl">/</span><span>${tabName}</span></div>
+    <div class="hrow"><div style="display:flex;flex-direction:column;gap:6px;min-width:0"><h1>Content Studio</h1><p class="sub">Queue · <b>@darwixai</b> · ${S.posts.length} post${S.posts.length===1?"":"s"} · Instagram · LinkedIn ${S.li.length}</p></div>
     <div class="hact"><span class="mode ${live()?"live":"demo"}" title="${live()?"Connected to "+esc(S.cfg.owner+"/"+S.cfg.repo):"Showing sample data. Connect GitHub in Settings."}">${live()?"Live · "+esc(S.cfg.repo):"Sample data"}</span>
     <button class="btn" data-act="reload" ${S.loading?"disabled":""}>${ico("refresh-cw",14)}${S.loading?"Loading":"Refresh"}</button>
     <button class="btn" data-act="runpub">${ico("send",14)}GitHub publisher</button>
     <button class="btn pri lg" data-act="tab:create">${ico("plus",16)}Create carousel</button></div></div>
     <nav class="tabs" role="tablist">${TABS.map(t=>`<button class="tab" role="tab" aria-selected="${S.tab===t[0]}" data-act="tab:${t[0]}">${t[1]}${t[0]==="approvals"&&b.review.length?`<span class="count">${b.review.length}</span>`:""}</button>`).join("")}</nav></header>
     <div class="page">${S.error?`<div class="banner err" role="alert"><span style="color:var(--err);display:flex">${ico("circle-alert",24)}</span><div class="bt"><b>Could not load from GitHub</b><span class="m">${esc(S.error)}</span></div><button class="btn out" data-act="tab:settings">Check settings</button></div>`:""}${view}</div>${S.drawer?drawerHtml():""}`;
-  window.scrollTo(0,y); paintPreview(); renderToast();
+  window.scrollTo(0,y); paintPreview(); paintLi(); renderToast();
 }
 async function pickScreen(i){
   const inp = document.createElement("input"); inp.type="file"; inp.accept="image/png,image/jpeg,image/webp";
@@ -927,12 +1133,27 @@ document.addEventListener("click", async e => {
       try { await addRows([row]); const id = S.posts[S.posts.length-1].id; S.createDraft = null; if (a==="addgen"){ S.tab="approvals"; render(); await generate(id); S.drawer = {id, slide:0}; render(); } else { toast("Added to the queue."); S.tab="approvals"; render(); } } catch(err){ toast(err.message); }
       break; }
     case "import": { const rows = parseSheet($("#c_paste").value); if (!rows.length){ toast("No rows found. Check the column order."); break; } try { await addRows(rows); const need = rows.filter(r=>!(r.slides&&r.slides.length)).length; toast(need ? `${rows.length} row${rows.length>1?"s":""} added. Generating ${need} draft${need>1?"s":""}…` : `${rows.length} draft${rows.length>1?"s":""} added to Needs review.`); S.tab="approvals"; render(); if (need){ for (const q of S.posts.filter(x=>stage(x)==="planned")) await generate(q.id); toast("Generated. Review the drafts before approving."); } } catch(err){ toast(err.message); } break; }
+    case "litype": liPull(); S.liDraft.type = arg; render(); break;
+    case "liedit": { const q = getLi(arg); S.liDraft = { id:q.id, type:q.type, title:q.title||"", topic:q.meta?.topic||"", direction:q.meta?.direction||"", caption:q.caption||"", slidesTxt:slidesToTxt(q.meta?.slides), when:q.publish_at?toLocalInput(q.publish_at):"", sel:0 }; render(); window.scrollTo(0,0); break; }
+    case "linew": S.liDraft = liDefault(); render(); break;
+    case "lisave": await liSaveDraft(); break;
+    case "liapprove": await liApprove(); break;
+    case "liunapprove": liPull(); await liUnapprove(arg); break;
+    case "liai": await liAi(); break;
+    case "lislide": { liPull(); const n = txtToSlides(S.liDraft.slidesTxt).length; if (n){ S.liDraft.sel = ((S.liDraft.sel||0) + (+arg) + n) % n; render(); } break; }
+    case "lipdf": { liPull(); const sl = txtToSlides(S.liDraft.slidesTxt); toast("Building PDF…"); const blob = await renderPdf(sl, S.liDraft.topic || S.liDraft.title); const a2 = document.createElement("a"); a2.href = URL.createObjectURL(blob); a2.download = (slug(S.liDraft.title||S.liDraft.topic)||"carousel")+".pdf"; a2.click(); break; }
+    case "lifile": { liPull(); const inp = document.createElement("input"); inp.type="file"; inp.accept="video/mp4"; inp.onchange = () => { const f = inp.files[0]; if (!f) return; if (f.size > 60*1048576){ toast("That file is over 60 MB. Compress it first."); return; } const id = S.liDraft.id || (S.liDraft.id = slug(S.liDraft.title||S.liDraft.topic||"video")+"-"+Math.random().toString(36).slice(2,6)); S.liFiles[id] = f; render(); }; inp.click(); break; }
+    case "lirm": if (el.dataset.confirm){ await liRemove(arg); } else { el.dataset.confirm="1"; el.textContent="Delete?"; } break;
+    case "liretry": await liRetry(arg); break;
+    case "linow": await liNow(arg); break;
+    case "lirun": await runLiPublisher(); break;
     case "saveconn": { Object.assign(S.cfg, { owner:$("#s_owner").value.trim(), repo:$("#s_repo").value.trim(), branch:$("#s_branch").value.trim()||"main", token:$("#s_token").value.trim() }); lsSet("cfg", S.cfg); await loadAll(); if (!S.error) toast(live()?"Connected.":"Using sample data."); break; }
     case "testconn": { Object.assign(S.cfg, { owner:$("#s_owner").value.trim(), repo:$("#s_repo").value.trim(), branch:$("#s_branch").value.trim()||"main", token:$("#s_token").value.trim() }); try { const r = await gh.req(""); const f = await gh.getFile("schedule.json"); toast(`Connected to ${r.full_name}. schedule.json ${f?"found":"not found, it will be created"}.`); } catch(err){ toast(err.message); } break; }
     case "disconnect": S.cfg.token = ""; lsSet("cfg", S.cfg); await loadAll(); break;
     case "savewrite": Object.assign(S.cfg, { aiKey:$("#s_ai").value.trim(), aiModel:$("#s_model").value.trim()||"claude-sonnet-5-5", defaultTime:$("#s_time").value.trim()||"11:00", defaultCta:$("#s_cta").value, defaultTags:$("#s_tags").value, banned:$("#s_ban").value, notes:$("#s_notes").value }); lsSet("cfg", S.cfg); toast("Saved in this browser."); render(); break;
   }
 });
+document.addEventListener("input", e => { if (S.tab==="linkedin" && S.liDraft && /^l_/.test(e.target.id||"")){ liPull(); liLive(); if (e.target.id==="l_cap"){ const c = $("#l_cnt"); if (c) c.textContent = `${S.liDraft.caption.length} / 3,000 characters`; } if (e.target.id==="l_slides"){ clearTimeout(window.__lpv); window.__lpv = setTimeout(paintLi, 250); } } });
 document.addEventListener("keydown", e => { if (e.key==="Escape" && S.drawer){ pullDrawerInputs(); S.drawer = null; render(); } });
 loadAll();
 </script>
