@@ -240,7 +240,7 @@
     "id": "live-pd-assist-kv79",
     "publish_at": "2026-10-10T05:30:00.000Z",
     "approved": true,
-    "status": "draft",
+    "status": "published",
     "caption": "Every value in a PD report should say where it came from.\n\nLive PD Assist fills a personal discussion report while the officer talks, and every value carries a state: captured, derived, system fetched, needs confirmation, pending or conflict. When a borrower gives two different figures, both stay visible with their timestamps until the officer confirms one.\n\nNothing is averaged away and nothing is overwritten. The credit reviewer opens a report that carries its own evidence.\n\nCredit decisions stay with the credit team.\n\nWant to see Live PD Assist on your PD workflow? Link in bio.\n\n#DarwixAI #LivePD #HousingFinance #LendingOps #CreditUnderwriting #BFSI",
     "images": [
       "posts/live-pd-assist-kv79/01.jpg",
@@ -292,7 +292,9 @@
         "No figures. Confidence behaviour on slide 4 is described without thresholds on purpose."
       ],
       "generated_by": "sheet"
-    }
+    },
+    "media_id": "17968035357188761",
+    "published_at": "2026-10-10T07:35:35.420Z"
   },
   {
     "id": "voice-agent-and-assist-lzu0",
