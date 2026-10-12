@@ -416,5 +416,69 @@
     },
     "media_id": "17936303136394810",
     "published_at": "2026-10-12T05:38:33.931Z"
+  },
+  {
+    "id": "sherpa-investigation-001",
+    "publish_at": "2026-10-12T05:49:30.109Z",
+    "approved": true,
+    "status": "draft",
+    "caption": "The investigator talks to the hospital. Sherpa keeps the file.\n\nSherpa Live Investigation Assist works alongside a health insurance claims investigator during the visit.\n\nIt records the conversation with the hospital, structures admission, diagnosis, doctor, billing and discharge, compares each fact with the claim form, bill and records, and surfaces contradictions and missing evidence. It also suggests neutral follow-up questions.\n\nIt never declares fraud. Contradictions are leads, not verdicts, and the decision stays with the claims team.\n\nWant to see Sherpa on your investigation workflow? Link in bio.\n\n#DarwixAI #Sherpa #HealthInsurance #ClaimsInvestigation #InsurTech #BFSI",
+    "images": [
+      "posts/sherpa-investigation-001/01.jpg",
+      "posts/sherpa-investigation-001/02.jpg",
+      "posts/sherpa-investigation-001/03.jpg",
+      "posts/sherpa-investigation-001/04.jpg",
+      "posts/sherpa-investigation-001/05.jpg",
+      "posts/sherpa-investigation-001/06.jpg",
+      "posts/sherpa-investigation-001/07.jpg"
+    ],
+    "media_id": null,
+    "published_at": null,
+    "meta": {
+      "pillar": "Product",
+      "topic": "Sherpa Investigation",
+      "hook": "The investigator talks to the hospital. Sherpa keeps the file.",
+      "direction": "Live claim investigation assist for health insurance.",
+      "cta": "See Sherpa Live Investigation Assist.",
+      "flags": [],
+      "generated_by": "custom",
+      "slides": [
+        {
+          "kind": "cover",
+          "title": "The investigator talks. The case file builds itself.",
+          "body": "Sherpa Live Investigation Assist for health insurance claims."
+        },
+        {
+          "kind": "content",
+          "title": "What the investigator no longer carries",
+          "body": ""
+        },
+        {
+          "kind": "steps",
+          "title": "While the visit is happening",
+          "body": ""
+        },
+        {
+          "kind": "table",
+          "title": "Every fact, checked as it is said",
+          "body": ""
+        },
+        {
+          "kind": "compare",
+          "title": "Two sources. One day apart.",
+          "body": ""
+        },
+        {
+          "kind": "focus",
+          "title": "It never classifies a claim as fraud.",
+          "body": ""
+        },
+        {
+          "kind": "cta",
+          "title": "See Sherpa Live Investigation Assist",
+          "body": "Request a demo at darwix.ai"
+        }
+      ]
+    }
   }
 ]
