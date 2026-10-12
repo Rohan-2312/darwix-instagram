@@ -360,10 +360,17 @@
   {
     "id": "retail-asset-evidence-iflp",
     "publish_at": "2026-10-12T05:33:00.000Z",
-    "approved": false,
+    "approved": true,
     "status": "draft",
     "caption": "Verify the asset behind the seller tape.\n\nA seller tape is a set of claims about a pool of stressed retail loans. The documents in the data room are the evidence. Retail Asset Evidence Intelligence matches one to the other, account by account, and shows where they disagree.\n\nThe seller's value is never overwritten. Each field keeps three values side by side: what the seller says, what the evidence supports, and what the reviewer adopts. Missing evidence becomes a query to the seller.\n\nThe acquisition decision stays with the ARC.\n\nWant to see it on your next pool? Link in bio.\n\n#DarwixAI #AssetReconstruction #ARC #DueDiligence #StressedAssets #BFSI",
-    "images": [],
+    "images": [
+      "posts/retail-asset-evidence-iflp/01.jpg",
+      "posts/retail-asset-evidence-iflp/02.jpg",
+      "posts/retail-asset-evidence-iflp/03.jpg",
+      "posts/retail-asset-evidence-iflp/04.jpg",
+      "posts/retail-asset-evidence-iflp/05.jpg",
+      "posts/retail-asset-evidence-iflp/06.jpg"
+    ],
     "meta": {
       "pillar": "Product",
       "topic": "Retail Asset Evidence",
@@ -382,7 +389,7 @@
           "body": "Seller value: What the tape says | Supported value: What the documents support | ARC-adopted value: What the reviewer chooses, and why"
         },
         {
-          "kind": "steps",
+          "kind": "table",
           "title": "From data room to review pack",
           "body": "Ingest the data room | Match documents to accounts | Reconcile the tape against the evidence | Raise missing evidence and seller queries | Reviewer adopts values and the review pack is compiled"
         },
