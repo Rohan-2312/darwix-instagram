@@ -361,7 +361,7 @@
     "id": "retail-asset-evidence-iflp",
     "publish_at": "2026-10-12T05:36:18.892Z",
     "approved": true,
-    "status": "draft",
+    "status": "published",
     "caption": "Verify the asset behind the seller tape.\n\nA seller tape is a set of claims about a pool of stressed retail loans. The documents in the data room are the evidence. Retail Asset Evidence Intelligence matches one to the other, account by account, and shows where they disagree.\n\nThe seller's value is never overwritten. Each field keeps three values side by side: what the seller says, what the evidence supports, and what the reviewer adopts. Missing evidence becomes a query to the seller.\n\nThe acquisition decision stays with the ARC.\n\nWant to see it on your next pool? Link in bio.\n\n#DarwixAI #AssetReconstruction #ARC #DueDiligence #StressedAssets #BFSI",
     "images": [
       "posts/retail-asset-evidence-iflp/01.jpg",
@@ -413,6 +413,8 @@
         "No figures. Confirm you are comfortable naming ARCs as the audience."
       ],
       "generated_by": "sheet"
-    }
+    },
+    "media_id": "17936303136394810",
+    "published_at": "2026-10-12T05:38:33.931Z"
   }
 ]
