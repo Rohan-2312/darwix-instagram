@@ -480,5 +480,133 @@
         }
       ]
     }
+  },
+  {
+    "id": "proposal-automation-001",
+    "publish_at": "2026-10-13T08:34:43.971Z",
+    "approved": true,
+    "status": "draft",
+    "caption": "The advisor is not a data-entry operator.\n\nA life insurance proposal is a long form, and filling it in competes with the conversation it comes from. Proposal Automation lets the conversation do the work. The proposal is pre-filled from what is already known, answers are captured as they are given, and follow-up questions open when an answer calls for them.\n\nGaps and contradictions are flagged before submission, with the source of every value.\n\nUnderwriting decisions stay with the insurer.\n\nWant to see a proposal completed from a conversation? Link in bio.\n\n#DarwixAI #LifeInsurance #ProposalAutomation #InsurTech #BFSI #AIinBFSI",
+    "images": [
+      "posts/proposal-automation-001/01.jpg",
+      "posts/proposal-automation-001/02.jpg",
+      "posts/proposal-automation-001/03.jpg",
+      "posts/proposal-automation-001/04.jpg",
+      "posts/proposal-automation-001/05.jpg",
+      "posts/proposal-automation-001/06.jpg",
+      "posts/proposal-automation-001/07.jpg"
+    ],
+    "media_id": null,
+    "published_at": null,
+    "meta": {
+      "pillar": "Product",
+      "topic": "Proposal Automation",
+      "hook": "The advisor is not a data-entry operator.",
+      "direction": "Life insurance proposal completed from the customer conversation.",
+      "cta": "See a proposal completed from a conversation.",
+      "slides": [
+        {
+          "kind": "cover",
+          "title": "The customer talks. The proposal fills in.",
+          "body": ""
+        },
+        {
+          "kind": "flow",
+          "title": "From conversation to submission",
+          "body": ""
+        },
+        {
+          "kind": "grid",
+          "title": "Questions that adapt",
+          "body": ""
+        },
+        {
+          "kind": "table",
+          "title": "Every value knows its source",
+          "body": ""
+        },
+        {
+          "kind": "compare",
+          "title": "The advisor is not a data-entry operator.",
+          "body": ""
+        },
+        {
+          "kind": "statement",
+          "title": "Not automated underwriting.",
+          "body": ""
+        },
+        {
+          "kind": "cta",
+          "title": "See a proposal completed from a conversation",
+          "body": "Request a demo at darwix.ai"
+        }
+      ],
+      "flags": [],
+      "generated_by": "custom"
+    }
+  },
+  {
+    "id": "pre-meet-intelligence-001",
+    "publish_at": "2026-10-13T08:34:43.972Z",
+    "approved": true,
+    "status": "draft",
+    "caption": "Walk into every meeting already knowing what matters.\n\nA customer profile tells you who someone is. A Pre-Meet brief tells you what to do with the next conversation: what happened last time, what each side promised, what is still open, what to verify, and what not to ask again.\n\nIt works for collections, lending, insurance, wealth and branch teams. When a detail is stale or uncertain, the brief says so instead of guessing.\n\nWant to see a brief for your own meetings? Link in bio.\n\n#DarwixAI #PreMeet #FieldSales #RelationshipManagement #BFSI #AIinBFSI",
+    "images": [
+      "posts/pre-meet-intelligence-001/01.jpg",
+      "posts/pre-meet-intelligence-001/02.jpg",
+      "posts/pre-meet-intelligence-001/03.jpg",
+      "posts/pre-meet-intelligence-001/04.jpg",
+      "posts/pre-meet-intelligence-001/05.jpg",
+      "posts/pre-meet-intelligence-001/06.jpg",
+      "posts/pre-meet-intelligence-001/07.jpg"
+    ],
+    "media_id": null,
+    "published_at": null,
+    "meta": {
+      "pillar": "Product",
+      "topic": "Pre-Meet Intelligence",
+      "hook": "Walk into every meeting already knowing what matters.",
+      "direction": "A meeting brief, not a customer profile.",
+      "cta": "See a Pre-Meet brief.",
+      "slides": [
+        {
+          "kind": "cover",
+          "title": "Walk in already knowing what matters.",
+          "body": ""
+        },
+        {
+          "kind": "compare",
+          "title": "A profile and a brief are not the same",
+          "body": ""
+        },
+        {
+          "kind": "table",
+          "title": "What is in the brief",
+          "body": ""
+        },
+        {
+          "kind": "list",
+          "title": "Promises are kept on both sides",
+          "body": ""
+        },
+        {
+          "kind": "steps",
+          "title": "Before, during, after",
+          "body": ""
+        },
+        {
+          "kind": "focus",
+          "title": "Unknown stays unknown.",
+          "body": ""
+        },
+        {
+          "kind": "cta",
+          "title": "See a Pre-Meet brief",
+          "body": "Request a demo at darwix.ai"
+        }
+      ],
+      "flags": [],
+      "generated_by": "custom"
+    }
   }
 ]
