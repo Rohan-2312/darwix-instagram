@@ -1,5 +1,5 @@
 {
-  "updated": "2026-10-13T00:20:11.629Z",
+  "updated": "2026-10-13T13:50:07.836Z",
   "posts": [
     {
       "id": "real-time-pd-001",
@@ -76,6 +76,24 @@
     {
       "id": "sherpa-investigation-001",
       "media_id": "18142662148720225",
+      "like_count": 1,
+      "comments_count": 0,
+      "reach": null,
+      "saved": null,
+      "shares": null
+    },
+    {
+      "id": "proposal-automation-001",
+      "media_id": "17978585471917151",
+      "like_count": 0,
+      "comments_count": 0,
+      "reach": null,
+      "saved": null,
+      "shares": null
+    },
+    {
+      "id": "pre-meet-intelligence-001",
+      "media_id": "17948209032340938",
       "like_count": 1,
       "comments_count": 0,
       "reach": null,
