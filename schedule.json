@@ -736,5 +736,57 @@
       "flags": [],
       "generated_by": "custom"
     }
+  },
+  {
+    "id": "time-back-001",
+    "publish_at": "2026-11-04T13:05:47.516Z",
+    "approved": true,
+    "status": "draft",
+    "caption": "Time is your team's most valuable resource. Don't let manual work take it away.\n\nWith Darwix AI, intelligent automation takes care of repetitive tasks, streamlines workflows and empowers frontline teams to focus on what truly matters: people, decisions and outcomes.\n\nLess busywork. More meaningful work.\n\nGive your teams their time back with Darwix AI.\n\nDiscover more at darwix.ai\n\n#DarwixAI #AgenticAI #AI #ArtificialIntelligence #BFSI #FinTech #InsurTech #FrontlineTeams #IntelligentAutomation #EnterpriseAI #WorkflowAutomation #BusinessAutomation #DigitalTransformation #FutureOfWork #AIInnovation #OperationalEfficiency #WorkforceProductivity #CustomerExperience #AIinBanking #AIinInsurance",
+    "images": [
+      "posts/time-back-001/01.jpg",
+      "posts/time-back-001/02.jpg",
+      "posts/time-back-001/03.jpg",
+      "posts/time-back-001/04.jpg",
+      "posts/time-back-001/05.jpg"
+    ],
+    "media_id": null,
+    "published_at": null,
+    "meta": {
+      "pillar": "Brand",
+      "topic": "Give frontline teams their time back",
+      "hook": "Better evidence. Faster review.",
+      "direction": "Brand carousel",
+      "cta": "Book a demo",
+      "slides": [
+        {
+          "kind": "cover",
+          "title": "Better evidence. Faster review.",
+          "body": ""
+        },
+        {
+          "kind": "visual",
+          "title": "Give frontline teams their time back.",
+          "body": ""
+        },
+        {
+          "kind": "list",
+          "title": "Cut manual entry. Fewer clarifications.",
+          "body": ""
+        },
+        {
+          "kind": "list",
+          "title": "Time comes back at every stage.",
+          "body": ""
+        },
+        {
+          "kind": "cta",
+          "title": "Spend time on the customer.",
+          "body": ""
+        }
+      ],
+      "flags": [],
+      "generated_by": "custom"
+    }
   }
 ]
