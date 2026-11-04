@@ -741,7 +741,7 @@
     "id": "time-back-001",
     "publish_at": "2026-11-04T13:05:47.516Z",
     "approved": true,
-    "status": "draft",
+    "status": "published",
     "caption": "Time is your team's most valuable resource. Don't let manual work take it away.\n\nWith Darwix AI, intelligent automation takes care of repetitive tasks, streamlines workflows and empowers frontline teams to focus on what truly matters: people, decisions and outcomes.\n\nLess busywork. More meaningful work.\n\nGive your teams their time back with Darwix AI.\n\nDiscover more at darwix.ai\n\n#DarwixAI #AgenticAI #AI #ArtificialIntelligence #BFSI #FinTech #InsurTech #FrontlineTeams #IntelligentAutomation #EnterpriseAI #WorkflowAutomation #BusinessAutomation #DigitalTransformation #FutureOfWork #AIInnovation #OperationalEfficiency #WorkforceProductivity #CustomerExperience #AIinBanking #AIinInsurance",
     "images": [
       "posts/time-back-001/01.jpg",
@@ -750,8 +750,8 @@
       "posts/time-back-001/04.jpg",
       "posts/time-back-001/05.jpg"
     ],
-    "media_id": null,
-    "published_at": null,
+    "media_id": "18035748311902220",
+    "published_at": "2026-11-04T13:07:35.411Z",
     "meta": {
       "pillar": "Brand",
       "topic": "Give frontline teams their time back",
