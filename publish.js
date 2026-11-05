@@ -15,8 +15,8 @@ async function api(path, params, method = 'POST') {
   if (!res.ok || json.error) throw new Error(`${path}: ${JSON.stringify(json.error || json)}`);
   return json;
 }
-async function waitFinished(id) {
-  for (let i = 0; i < 30; i++) {
+async function waitFinished(id, tries = 30) {
+  for (let i = 0; i < tries; i++) {
     const s = await api(id, { fields: 'status_code' }, 'GET');
     if (s.status_code === 'FINISHED') return;
     if (s.status_code === 'ERROR' || s.status_code === 'EXPIRED') throw new Error(`container ${id} ${s.status_code}`);
@@ -25,6 +25,15 @@ async function waitFinished(id) {
   throw new Error(`container ${id} timed out`);
 }
 async function publish(post) {
+  if (post.video) {
+    const [o, r] = (process.env.GITHUB_REPOSITORY || 'Rohan-2312/darwix-instagram').split('/');
+    const vurl = `https://${o.toLowerCase()}.github.io/${r}/${post.video}`;
+    if (DRY) { console.log('DRY RUN would publish reel', post.id, vurl); return 'dry-run'; }
+    const c = await api(`${IG_USER_ID}/media`, { media_type: 'REELS', video_url: vurl, caption: post.caption, share_to_feed: 'true' });
+    await waitFinished(c.id, 90);
+    const out = await api(`${IG_USER_ID}/media_publish`, { creation_id: c.id });
+    return out.id;
+  }
   const urls = post.images.map(p => `${IMAGE_BASE_URL}/${p}`);
   if (urls.length < 2 || urls.length > 10) throw new Error('carousel needs 2-10 images');
   if (DRY) { console.log('DRY RUN would publish', post.id, urls); return 'dry-run'; }
