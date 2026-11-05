@@ -904,5 +904,26 @@
       "flags": [],
       "generated_by": "custom"
     }
+  },
+  {
+    "id": "diwali-reel-001",
+    "publish_at": "2026-11-05T14:41:00.203Z",
+    "approved": true,
+    "status": "draft",
+    "caption": "Diwali clears the clutter at home. 🪔\nWhat clears it at work?\n\nYour team still asks a generic chatbot and gets a smart guess. No source. No idea of their role. No way to open the case.\n\nMeet the AI Internal Assistant from Darwix AI. Not another chatbot. A colleague that has read every circular, policy and SOP, and answers with the source attached.\n\nWhat it does in 30 seconds:\n✨ Briefs every person on what changed for their role, before they ask\n✨ Answers real cases with sources and a due diligence checklist\n✨ Policy Time Machine: what applied on any date\n✨ Reads documents and flags what is missing\n✨ Speaks English, Hindi and Tamil by voice\n✨ Opens the case and drafts the next step\n\nThis Diwali, light up every answer. 🪔\n\n💬 Comment ASSISTANT and we will show you a live demo.\n🔁 Send this to the teammate who answers the same policy question 20 times a day.\n📌 Save it for your next AI automation roadmap.\n\nBook a demo at darwix.ai (link in bio)\n\n#DarwixAI #AIAutomation #EnterpriseAI #AIAssistant #GenerativeAI #AIAgents #BFSI #Banking #Fintech #InsurTech #WorkflowAutomation #KnowledgeManagement #FutureOfWork #ConversationalAI #ArtificialIntelligence #Diwali #HappyDiwali #Diwali2026 #AIinBanking #DigitalTransformation",
+    "images": [],
+    "video": "reels/diwali-001/reel.mp4",
+    "media_id": null,
+    "published_at": null,
+    "meta": {
+      "pillar": "product",
+      "topic": "AI Internal Assistant x Diwali reel",
+      "hook": "Everyone cleans house for Diwali. Nobody cleans up the policy PDFs.",
+      "direction": "30s reel, Reel Design System v1.0",
+      "cta": "Book a demo at darwix.ai",
+      "slides": [],
+      "flags": [],
+      "generated_by": "custom"
+    }
   }
 ]
