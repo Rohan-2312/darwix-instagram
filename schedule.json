@@ -976,5 +976,212 @@
     "status": "draft",
     "media_id": null,
     "published_at": null
+  },
+  {
+    "id": "d62c",
+    "publish_at": "2026-11-17T07:00:00.000Z",
+    "approved": true,
+    "status": "draft",
+    "caption": "One video call. Five layers of proof. 🎥\n\nA video PIVC should do more than match a face. Swipe for the five layers:\n1. Identity: is this the right person, and are they really there?\n2. Policy understanding: does the customer understand what they are buying?\n3. Mis-selling and discrepancy: does what was sold match what was declared?\n4. Informed consent: did they agree, knowing what they agreed to?\n5. Audit evidence: can anyone check it later, without replaying the call?\n\nSave this for your next PIVC design review. 🔖\n\nIllustrative content. Product screens are synthetic recreations.\n\n#VideoPIVC #Insurance #LifeInsurance #Underwriting #BFSI #AIinBanking #DigitalLending #InsurTech #FinTechIndia #ConversationalAI #DarwixAI",
+    "images": [
+      "posts/b2/d62c-01.jpg",
+      "posts/b2/d62c-02.jpg",
+      "posts/b2/d62c-03.jpg",
+      "posts/b2/d62c-04.jpg",
+      "posts/b2/d62c-05.jpg",
+      "posts/b2/d62c-06.jpg",
+      "posts/b2/d62c-07.jpg"
+    ],
+    "media_id": null,
+    "published_at": null,
+    "meta": {
+      "pillar": "Video PIVC",
+      "topic": "One Video. Five Layers of Assurance.",
+      "hook": "One video call. Five layers of proof.",
+      "direction": "",
+      "cta": "Save",
+      "slides": [],
+      "flags": [],
+      "generated_by": "custom"
+    }
+  },
+  {
+    "id": "d62s",
+    "publish_at": "2026-11-17T14:00:00.000Z",
+    "approved": true,
+    "status": "draft",
+    "caption": "Matching a face is layer 1. Knowing what the customer understood is layers 2 to 5.\n\nA \"yes\" on camera is not proof of understanding. Darwix Video PIVC treats identity as where assurance starts, then goes on to policy understanding, mis-selling and discrepancy checks, informed consent and audit evidence.\n\nShare this with the person who owns your PIVC process. 📤\n\nLearn more at darwix.ai (link in bio).\n\n#VideoPIVC #Insurance #LifeInsurance #Compliance #BFSI #AIinBanking #DigitalLending #InsurTech #FinTechIndia #ConversationalAI #DarwixAI",
+    "images": [
+      "posts/b2/d62s-01.jpg"
+    ],
+    "media_id": null,
+    "published_at": null,
+    "meta": {
+      "pillar": "Video PIVC",
+      "topic": "Identity Is Layer 1, Not the Whole Job",
+      "hook": "Matching a face is layer 1.",
+      "direction": "",
+      "cta": "Share",
+      "slides": [],
+      "flags": [],
+      "generated_by": "custom"
+    }
+  },
+  {
+    "id": "d63c",
+    "publish_at": "2026-11-18T07:00:00.000Z",
+    "approved": true,
+    "status": "draft",
+    "caption": "Most tools flag every mismatch. Darwix tells you what it means. 🔍\n\nTwo sources can differ in seven ways, and only one of them is a real conflict:\nAgrees. Contextual. Conflict. Stale / Newer. Enriched. Missing / Quality. Subsequent event.\n\nSwipe for a one-line BFSI example of each.\n\nClassify the difference before deciding what it means. Save this. 🔖\n\nIllustrative examples. Product screens are synthetic recreations.\n\n#EvidenceIntelligence #Underwriting #CreditOps #DocumentVerification #BFSI #AIinBanking #DigitalLending #InsurTech #FinTechIndia #ConversationalAI #DarwixAI",
+    "images": [
+      "posts/b2/d63c-01.jpg",
+      "posts/b2/d63c-02.jpg",
+      "posts/b2/d63c-03.jpg",
+      "posts/b2/d63c-04.jpg",
+      "posts/b2/d63c-05.jpg",
+      "posts/b2/d63c-06.jpg",
+      "posts/b2/d63c-07.jpg",
+      "posts/b2/d63c-08.jpg",
+      "posts/b2/d63c-09.jpg"
+    ],
+    "media_id": null,
+    "published_at": null,
+    "meta": {
+      "pillar": "Evidence Intelligence",
+      "topic": "7 Ways Two Sources Can Differ",
+      "hook": "Most tools flag every mismatch.",
+      "direction": "",
+      "cta": "Save this",
+      "slides": [],
+      "flags": [],
+      "generated_by": "custom"
+    }
+  },
+  {
+    "id": "d63s",
+    "publish_at": "2026-11-18T14:00:00.000Z",
+    "approved": true,
+    "status": "draft",
+    "caption": "Not every difference is a conflict.\n\nMost mismatches have an explanation: different wording, a newer document, extra detail, a payment made after the statement date. Classify the difference before deciding what it means.\n\nShare this with your credit or underwriting team. 📤\n\nLearn more at darwix.ai (link in bio).\n\n#EvidenceIntelligence #Underwriting #CreditOps #DocumentVerification #BFSI #AIinBanking #DigitalLending #InsurTech #FinTechIndia #ConversationalAI #DarwixAI",
+    "images": [
+      "posts/b2/d63s-01.jpg"
+    ],
+    "media_id": null,
+    "published_at": null,
+    "meta": {
+      "pillar": "Evidence Intelligence",
+      "topic": "Not Every Difference Is a Conflict",
+      "hook": "Not every difference is a conflict.",
+      "direction": "",
+      "cta": "Share",
+      "slides": [],
+      "flags": [],
+      "generated_by": "custom"
+    }
+  },
+  {
+    "id": "d64c",
+    "publish_at": "2026-11-19T07:00:00.000Z",
+    "approved": true,
+    "status": "draft",
+    "caption": "Find the inconsistency while the customer is still on the call. 📞\n\nFive contradictions Proposal Automation can raise before submission:\nIncome. Tobacco. Existing cover. Occupation. Minor nominee with no appointee.\n\nCaught before submission, not after an underwriting query. Save this. 🔖\n\nIllustrative values. Product screens are synthetic recreations.\n\n#ProposalAutomation #Insurance #LifeInsurance #Underwriting #BFSI #AIinBanking #DigitalLending #InsurTech #FinTechIndia #ConversationalAI #DarwixAI",
+    "images": [
+      "posts/b2/d64c-01.jpg",
+      "posts/b2/d64c-02.jpg",
+      "posts/b2/d64c-03.jpg",
+      "posts/b2/d64c-04.jpg",
+      "posts/b2/d64c-05.jpg",
+      "posts/b2/d64c-06.jpg",
+      "posts/b2/d64c-07.jpg"
+    ],
+    "media_id": null,
+    "published_at": null,
+    "meta": {
+      "pillar": "Proposal Automation",
+      "topic": "5 Contradictions Caught Before Submission",
+      "hook": "Find the inconsistency while the customer is still on the call.",
+      "direction": "",
+      "cta": "Save",
+      "slides": [],
+      "flags": [],
+      "generated_by": "custom"
+    }
+  },
+  {
+    "id": "d64s",
+    "publish_at": "2026-11-19T14:00:00.000Z",
+    "approved": true,
+    "status": "draft",
+    "caption": "The form is complete. Is the proposal ready?\n\nForm completed does not always mean proposal ready. The ready-to-submit gate checks mandatory fields, disclosures, nominee, medical, existing insurance, documents, declarations and any unresolved discrepancies.\n\nSave this checklist. 🔖\n\nLearn more at darwix.ai (link in bio).\n\n#ProposalAutomation #Insurance #LifeInsurance #Underwriting #BFSI #AIinBanking #DigitalLending #InsurTech #FinTechIndia #ConversationalAI #DarwixAI",
+    "images": [
+      "posts/b2/d64s-01.jpg"
+    ],
+    "media_id": null,
+    "published_at": null,
+    "meta": {
+      "pillar": "Proposal Automation",
+      "topic": "The Form Is Complete. Is the Proposal Ready?",
+      "hook": "The form is complete. Is the proposal ready?",
+      "direction": "",
+      "cta": "Save",
+      "slides": [],
+      "flags": [],
+      "generated_by": "custom"
+    }
+  },
+  {
+    "id": "d65c",
+    "publish_at": "2026-11-20T07:00:00.000Z",
+    "approved": true,
+    "status": "draft",
+    "caption": "Compliance. Discrepancy. Commitment. Complaint. Escalation. And five more. 🚨\n\nTen kinds of signals that hide inside customer conversations, shown as the call lines that trigger them. Swipe through all ten.\n\nMeaning, not keywords. Save this. 🔖\n\nIllustrative call lines. Product screens are synthetic recreations.\n\n#AlertIntelligence #CustomerConversations #CallAnalytics #ConversationIntelligence #BFSI #AIinBanking #DigitalLending #InsurTech #FinTechIndia #ConversationalAI #DarwixAI",
+    "images": [
+      "posts/b2/d65c-01.jpg",
+      "posts/b2/d65c-02.jpg",
+      "posts/b2/d65c-03.jpg",
+      "posts/b2/d65c-04.jpg",
+      "posts/b2/d65c-05.jpg",
+      "posts/b2/d65c-06.jpg",
+      "posts/b2/d65c-07.jpg",
+      "posts/b2/d65c-08.jpg",
+      "posts/b2/d65c-09.jpg",
+      "posts/b2/d65c-10.jpg",
+      "posts/b2/d65c-11.jpg",
+      "posts/b2/d65c-12.jpg"
+    ],
+    "media_id": null,
+    "published_at": null,
+    "meta": {
+      "pillar": "Alert Intelligence",
+      "topic": "10 Signals Your Systems Miss",
+      "hook": "Compliance. Discrepancy. Commitment. Complaint. Escalation. And five more.",
+      "direction": "",
+      "cta": "Save this",
+      "slides": [],
+      "flags": [],
+      "generated_by": "custom"
+    }
+  },
+  {
+    "id": "d65s",
+    "publish_at": "2026-11-20T14:00:00.000Z",
+    "approved": true,
+    "status": "draft",
+    "caption": "An alert is not a finding of fraud. The decision stays with your people.\n\nAn alert is an indicator that requires the configured next step, with a human owner assigned. It is a signal, not a verdict.\n\nShare this with your risk and compliance team. 📤\n\nLearn more at darwix.ai (link in bio).\n\n#AlertIntelligence #Compliance #RiskManagement #ConversationIntelligence #BFSI #AIinBanking #DigitalLending #InsurTech #FinTechIndia #ConversationalAI #DarwixAI",
+    "images": [
+      "posts/b2/d65s-01.jpg"
+    ],
+    "media_id": null,
+    "published_at": null,
+    "meta": {
+      "pillar": "Alert Intelligence",
+      "topic": "An Alert Is a Signal, Not a Verdict",
+      "hook": "An alert is not a finding of fraud.",
+      "direction": "",
+      "cta": "Share",
+      "slides": [],
+      "flags": [],
+      "generated_by": "custom"
+    }
   }
 ]
