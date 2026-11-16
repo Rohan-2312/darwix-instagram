@@ -1431,5 +1431,152 @@
       "flags": [],
       "generated_by": "custom"
     }
+  },
+  {
+    "id": "d61r1",
+    "publish_at": "2026-11-16T11:30:00.000Z",
+    "approved": true,
+    "status": "draft",
+    "caption": "Every PD starts with a blank form. It does not have to. 📝\n\nType one Application ID and the form opens already filled: applicant, co-applicant, amount, declared income, obligations, property and KYC status, pulled from your LOS and CRM.\n\nSo the conversation starts with confirmation, not questions you already have answers to.\n\n👀 Watch till the end.\n💬 Comment PD and we will show you the full flow.\n\nProduct visuals are synthetic recreations. Data is illustrative.\n\n#BFSI #AIinBanking #FinTechIndia #AutoPD #LoanOrigination #HomeLoan #CreditUnderwriting #DarwixAI",
+    "images": [],
+    "video": "reels/d61r1.mp4",
+    "media_id": null,
+    "published_at": null,
+    "meta": {
+      "pillar": "reel",
+      "topic": "Enter the Application ID",
+      "hook": "Every PD starts with a blank form. It does not have to.",
+      "direction": "30s motion-graphic reel, Reel Design System v1.0",
+      "cta": "Watch till the end",
+      "slides": [],
+      "flags": [],
+      "generated_by": "custom"
+    }
+  },
+  {
+    "id": "d61r2",
+    "publish_at": "2026-11-16T15:30:00.000Z",
+    "approved": true,
+    "status": "draft",
+    "caption": "A PD form that is never blank. Here is how we designed it. 🎨\n\nThree colours. One honest form.\n🟣 Pre-filled from LOS: what the lender already knows is confirmed, not re-asked\n🟢 Captured from borrower: what they say in conversation lands in its own state\n🟠 Flagged: anything that does not match the application, while the borrower is still there\n\n➕ Follow Darwix AI for more from the design desk.\n\nProduct visuals are synthetic recreations. Data is illustrative.\n\n#BFSI #AIinBanking #FinTechIndia #AutoPD #ProductDesign #BuildInPublic #LendingTech #DarwixAI",
+    "images": [],
+    "video": "reels/d61r2.mp4",
+    "media_id": null,
+    "published_at": null,
+    "meta": {
+      "pillar": "reel",
+      "topic": "Designing a PD that is never blank",
+      "hook": "A PD form that is never blank. Here is how we designed it.",
+      "direction": "30s motion-graphic reel, Reel Design System v1.0",
+      "cta": "Follow Darwix AI",
+      "slides": [],
+      "flags": [],
+      "generated_by": "custom"
+    }
+  },
+  {
+    "id": "d62r1",
+    "publish_at": "2026-11-17T03:30:00.000Z",
+    "approved": true,
+    "status": "draft",
+    "caption": "Before we check the policy, we check the person. 🎥\n\nVideo PIVC from Darwix AI confirms presence and liveness, and matches the face to the approved reference where configured.\n\nIf someone else steps into the frame, it becomes an explicit event. Low-confidence results are never silently ignored.\n\n🔎 Learn more at darwix.ai\n\nProduct visuals are synthetic recreations. Data is illustrative.\n\n#BFSI #AIinBanking #FinTechIndia #VideoPIVC #InsurTech #IdentityVerification #Insurance #DarwixAI",
+    "images": [],
+    "video": "reels/d62r1.mp4",
+    "media_id": null,
+    "published_at": null,
+    "meta": {
+      "pillar": "reel",
+      "topic": "Who is actually on the call?",
+      "hook": "Before we check the policy, we check the person.",
+      "direction": "30s motion-graphic reel, Reel Design System v1.0",
+      "cta": "Learn more",
+      "slides": [],
+      "flags": [],
+      "generated_by": "custom"
+    }
+  },
+  {
+    "id": "d62r2",
+    "publish_at": "2026-11-17T11:30:00.000Z",
+    "approved": true,
+    "status": "draft",
+    "caption": "What happens when a second face walks into the PIVC frame? 🧪\n\nWe tried to break our own identity checks. Bad lighting. A second face. Someone leaving the frame.\n\nEvery edge case becomes a recorded event. No guessing.\n\n🎬 Want more behind the scenes? Follow along.\n\nProduct visuals are synthetic recreations. Data is illustrative.\n\n#BFSI #AIinBanking #FinTechIndia #VideoPIVC #BehindTheScenes #InsurTech #BuildInPublic #DarwixAI",
+    "images": [],
+    "video": "reels/d62r2.mp4",
+    "media_id": null,
+    "published_at": null,
+    "meta": {
+      "pillar": "reel",
+      "topic": "Breaking our own identity checks",
+      "hook": "What happens when a second face walks into the PIVC frame?",
+      "direction": "30s motion-graphic reel, Reel Design System v1.0",
+      "cta": "Want more BTS?",
+      "slides": [],
+      "flags": [],
+      "generated_by": "custom"
+    }
+  },
+  {
+    "id": "d63r1",
+    "publish_at": "2026-11-18T03:30:00.000Z",
+    "approved": true,
+    "status": "draft",
+    "caption": "Tape says ₹24.8L. Statement says ₹24.1L. It is not an error. 🧾\n\nA recovery of ₹70,000 was posted before the statement date. The difference is a later event, not a mismatch.\n\nEvidence Intelligence labels it Stale / Newer and explains it with evidence, instead of raising a false alarm.\n\n▶️ Watch the timeline.\n\nProduct visuals are synthetic recreations. Data is illustrative.\n\n#BFSI #AIinBanking #FinTechIndia #EvidenceIntelligence #CreditOps #Collections #DarwixAI",
+    "images": [],
+    "video": "reels/d63r1.mp4",
+    "media_id": null,
+    "published_at": null,
+    "meta": {
+      "pillar": "reel",
+      "topic": "The ₹70,000 mismatch that was not",
+      "hook": "Tape says ₹24.8L. Statement says ₹24.1L. It is not an error.",
+      "direction": "30s motion-graphic reel, Reel Design System v1.0",
+      "cta": "Watch",
+      "slides": [],
+      "flags": [],
+      "generated_by": "custom"
+    }
+  },
+  {
+    "id": "d63r2",
+    "publish_at": "2026-11-18T11:30:00.000Z",
+    "approved": true,
+    "status": "draft",
+    "caption": "Gross salary ₹1.10L. Net ₹82,000. Is that a conflict? 🤔\n\nNo. It is contextual: related, but different concepts.\n\nDarwix classifies every difference into one of seven classes before deciding what it means, so reviewers stop chasing false alarms.\n\n💬 Comment your answer. Would you have flagged it?\n\nProduct visuals are synthetic recreations. Data is illustrative.\n\n#BFSI #AIinBanking #FinTechIndia #EvidenceIntelligence #CreditUnderwriting #DarwixAI",
+    "images": [],
+    "video": "reels/d63r2.mp4",
+    "media_id": null,
+    "published_at": null,
+    "meta": {
+      "pillar": "reel",
+      "topic": "False alarm vs real alarm",
+      "hook": "Gross salary ₹1.10L. Net ₹82,000. Is that a conflict?",
+      "direction": "30s motion-graphic reel, Reel Design System v1.0",
+      "cta": "Comment your answer",
+      "slides": [],
+      "flags": [],
+      "generated_by": "custom"
+    }
+  },
+  {
+    "id": "d64r1",
+    "publish_at": "2026-11-19T03:30:00.000Z",
+    "approved": true,
+    "status": "draft",
+    "caption": "The advisor entered ₹18L. The customer said ₹13L. The ITR said ₹12.7L. 💼\n\nDarwix Proposal Automation keeps all three values with their sources, flags the Income Disclosure Mismatch, and lets the final value follow your insurer review process.\n\nNothing is silently overwritten.\n\n🔎 Learn more at darwix.ai\n\nProduct visuals are synthetic recreations. Data is illustrative.\n\n#BFSI #AIinBanking #FinTechIndia #ProposalAutomation #InsurTech #LifeInsurance #Underwriting #DarwixAI",
+    "images": [],
+    "video": "reels/d64r1.mp4",
+    "media_id": null,
+    "published_at": null,
+    "meta": {
+      "pillar": "reel",
+      "topic": "Income said three ways",
+      "hook": "The advisor entered ₹18L. The customer said ₹13L. The ITR said ₹12.7L.",
+      "direction": "30s motion-graphic reel, Reel Design System v1.0",
+      "cta": "Learn more",
+      "slides": [],
+      "flags": [],
+      "generated_by": "custom"
+    }
   }
 ]
