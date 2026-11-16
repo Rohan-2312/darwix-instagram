@@ -973,9 +973,10 @@
       "generated_by": "custom"
     },
     "approved": true,
-    "status": "draft",
+    "status": "failed",
     "media_id": null,
-    "published_at": null
+    "published_at": null,
+    "error": "carousel needs 2-10 images"
   },
   {
     "id": "d62c",
