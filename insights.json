@@ -1,5 +1,5 @@
 {
-  "updated": "2026-11-16T05:33:08.000Z",
+  "updated": "2026-11-16T15:13:08.276Z",
   "posts": [
     {
       "id": "real-time-pd-001",
@@ -139,8 +139,8 @@
     {
       "id": "diwali-001",
       "media_id": "17977722513068683",
-      "like_count": null,
-      "comments_count": null,
+      "like_count": 9,
+      "comments_count": 0,
       "reach": null,
       "saved": null,
       "shares": null
@@ -149,6 +149,24 @@
       "id": "diwali-reel-001",
       "media_id": "17979857220139906",
       "like_count": 10,
+      "comments_count": 0,
+      "reach": null,
+      "saved": null,
+      "shares": null
+    },
+    {
+      "id": "d61-carousel",
+      "media_id": "18112113815348879",
+      "like_count": 2,
+      "comments_count": 0,
+      "reach": null,
+      "saved": null,
+      "shares": null
+    },
+    {
+      "id": "d61r1",
+      "media_id": "17968174767239077",
+      "like_count": 0,
       "comments_count": 0,
       "reach": null,
       "saved": null,
