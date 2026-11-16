@@ -1971,5 +1971,341 @@
       "flags": [],
       "generated_by": "custom"
     }
+  },
+  {
+    "id": "d68r1",
+    "publish_at": "2026-11-23T03:30:00.000Z",
+    "approved": true,
+    "status": "draft",
+    "caption": "Before the doctor joins, the intake is already done. 🩺\n\nThe patient answers a short intake in their own language. The doctor sees a structured summary, clearly marked as patient-reported, with the report attached.\n\nThe consultation starts prepared, not replaced.\n\n🔎 Learn more at darwix.ai\n\nProduct visuals are synthetic recreations. Data is illustrative.\n\n#BFSI #AIinBanking #FinTechIndia #VideoTeleMedicine #HealthTech #Telemedicine #ConversationalAI #DarwixAI",
+    "images": [],
+    "video": "reels/d68r1.mp4",
+    "media_id": null,
+    "published_at": null,
+    "meta": {
+      "pillar": "reel",
+      "topic": "Waiting room, used well",
+      "hook": "Before the doctor joins, the intake is already done. 🩺",
+      "direction": "30s motion-graphic reel, Reel Design System v1.0",
+      "cta": "🔎 Learn more at darwix.ai",
+      "slides": [],
+      "flags": [],
+      "generated_by": "custom"
+    }
+  },
+  {
+    "id": "d68r2",
+    "publish_at": "2026-11-23T11:30:00.000Z",
+    "approved": true,
+    "status": "draft",
+    "caption": "Slanted scans, mixed report formats, tiny print. The hard test set. 🧪\n\nDarwix extracts test name, result, unit and reference range. The team checks every extraction against the original and fixes the rule when it misses.\n\nExtraction is for the doctor. Interpretation stays with them.\n\n🎬 Want more behind the scenes? Follow along.\n\nProduct visuals are synthetic recreations. Data is illustrative.\n\n#BFSI #AIinBanking #FinTechIndia #VideoTeleMedicine #HealthTech #BehindTheScenes #BuildInPublic #DarwixAI",
+    "images": [],
+    "video": "reels/d68r2.mp4",
+    "media_id": null,
+    "published_at": null,
+    "meta": {
+      "pillar": "reel",
+      "topic": "Teaching AI to read messy medical reports",
+      "hook": "Slanted scans, mixed report formats, tiny print. The hard test set. 🧪",
+      "direction": "30s motion-graphic reel, Reel Design System v1.0",
+      "cta": "🎬 Want more behind the scenes? Follow along.",
+      "slides": [],
+      "flags": [],
+      "generated_by": "custom"
+    }
+  },
+  {
+    "id": "d69r1",
+    "publish_at": "2026-11-24T03:30:00.000Z",
+    "approved": true,
+    "status": "draft",
+    "caption": "Application: self-owned residence. Borrower: \"Ye house mere father ke naam pe hai.\" 🏠\n\nDarwix flags the Residence Ownership Mismatch while the borrower is still there, keeps both values, and nudges the officer to capture the ownership document.\n\n👀 Watch till the end.\n\nProduct visuals are synthetic recreations. Data is illustrative.\n\n#BFSI #AIinBanking #FinTechIndia #AutoPD #HomeLoan #LendingTech #DarwixAI",
+    "images": [],
+    "video": "reels/d69r1.mp4",
+    "media_id": null,
+    "published_at": null,
+    "meta": {
+      "pillar": "reel",
+      "topic": "The house is in his father's name",
+      "hook": "Application: self-owned residence. Borrower: \"Ye house mere father ke naam pe hai.\" 🏠",
+      "direction": "30s motion-graphic reel, Reel Design System v1.0",
+      "cta": "👀 Watch till the end.",
+      "slides": [],
+      "flags": [],
+      "generated_by": "custom"
+    }
+  },
+  {
+    "id": "d69r2",
+    "publish_at": "2026-11-24T11:30:00.000Z",
+    "approved": true,
+    "status": "draft",
+    "caption": "Co-applicant income on file: ₹45,000. In the room: \"I stopped working three months ago.\" 💬\n\nDarwix flags the Co-Applicant Income Mismatch and nudges the officer to capture current income and contribution to repayment. The application value is kept, not overwritten.\n\n🔁 Share this with a credit colleague.\n\nProduct visuals are synthetic recreations. Data is illustrative.\n\n#BFSI #AIinBanking #FinTechIndia #AutoPD #CreditUnderwriting #LendingTech #DarwixAI",
+    "images": [],
+    "video": "reels/d69r2.mp4",
+    "media_id": null,
+    "published_at": null,
+    "meta": {
+      "pillar": "reel",
+      "topic": "She stopped working three months ago",
+      "hook": "Co-applicant income on file: ₹45,000. In the room: \"I stopped working three months ago.\" 💬",
+      "direction": "30s motion-graphic reel, Reel Design System v1.0",
+      "cta": "🔁 Share this with a credit colleague.",
+      "slides": [],
+      "flags": [],
+      "generated_by": "custom"
+    }
+  },
+  {
+    "id": "d70r1",
+    "publish_at": "2026-11-25T03:30:00.000Z",
+    "approved": true,
+    "status": "draft",
+    "caption": "Different policies need different questions. 📋\n\nOne PIVC, four policy types. For a ULIP, Darwix verifies market-linked risk, charges and lock-in. For savings plans, guaranteed versus non-guaranteed benefits. For pensions, the annuity option and liquidity limits.\n\n🔎 Learn more at darwix.ai\n\nProduct visuals are synthetic recreations. Data is illustrative.\n\n#BFSI #AIinBanking #FinTechIndia #VideoPIVC #ULIP #InsurTech #LifeInsurance #DarwixAI",
+    "images": [],
+    "video": "reels/d70r1.mp4",
+    "media_id": null,
+    "published_at": null,
+    "meta": {
+      "pillar": "reel",
+      "topic": "A ULIP is not an FD",
+      "hook": "Different policies need different questions. 📋",
+      "direction": "30s motion-graphic reel, Reel Design System v1.0",
+      "cta": "🔎 Learn more at darwix.ai",
+      "slides": [],
+      "flags": [],
+      "generated_by": "custom"
+    }
+  },
+  {
+    "id": "d70r2",
+    "publish_at": "2026-11-25T11:30:00.000Z",
+    "approved": true,
+    "status": "draft",
+    "caption": "A generic script cannot ask about a rider the customer never wanted. 🎯\n\nDarwix verifies the exact policy on the proposal. When the customer says they never asked for the rider, it flags the Rider Consent Mismatch and asks an approved follow-up.\n\nSame policy. Same controls.\n\n🔁 Share this with your compliance team.\n\nProduct visuals are synthetic recreations. Data is illustrative.\n\n#BFSI #AIinBanking #FinTechIndia #VideoPIVC #InsurTech #Compliance #Insurance #DarwixAI",
+    "images": [],
+    "video": "reels/d70r2.mp4",
+    "media_id": null,
+    "published_at": null,
+    "meta": {
+      "pillar": "reel",
+      "topic": "Why generic script PIVC fails",
+      "hook": "A generic script cannot ask about a rider the customer never wanted. 🎯",
+      "direction": "30s motion-graphic reel, Reel Design System v1.0",
+      "cta": "🔁 Share this with your compliance team.",
+      "slides": [],
+      "flags": [],
+      "generated_by": "custom"
+    }
+  },
+  {
+    "id": "d71r1",
+    "publish_at": "2026-11-26T03:30:00.000Z",
+    "approved": true,
+    "status": "draft",
+    "caption": "Application: no loans. Bank statement: ₹18,500 debit. PD: \"Car ka EMI hai.\" 🚗\n\nDarwix connects the application, the bank statement and the conversation into one finding: Undeclared Obligation, supported by three sources, each one click from its evidence.\n\n▶️ Watch the finding.\n\nProduct visuals are synthetic recreations. Data is illustrative.\n\n#BFSI #AIinBanking #FinTechIndia #EvidenceIntelligence #CreditUnderwriting #LendingTech #DarwixAI",
+    "images": [],
+    "video": "reels/d71r1.mp4",
+    "media_id": null,
+    "published_at": null,
+    "meta": {
+      "pillar": "reel",
+      "topic": "Three sources agree: he has a car EMI",
+      "hook": "Application: no loans. Bank statement: ₹18,500 debit. PD: \"Car ka EMI hai.\" 🚗",
+      "direction": "30s motion-graphic reel, Reel Design System v1.0",
+      "cta": "▶️ Watch the finding.",
+      "slides": [],
+      "flags": [],
+      "generated_by": "custom"
+    }
+  },
+  {
+    "id": "d71r2",
+    "publish_at": "2026-11-26T11:30:00.000Z",
+    "approved": true,
+    "status": "draft",
+    "caption": "A customer’s own words can be compared to the file. 🎙️\n\nMost reconciliation stops at documents. But the richest source is what people said: the PD, the video verification, the tele-medical call, the agent call.\n\nDarwix puts the customer’s own words in the case, next to the file, so you can compare them.\n\n💬 Comment: which conversation do you wish you could search?\n\nProduct visuals are synthetic recreations. Data is illustrative.\n\n#BFSI #AIinBanking #FinTechIndia #EvidenceIntelligence #ConversationalAI #DarwixAI",
+    "images": [],
+    "video": "reels/d71r2.mp4",
+    "media_id": null,
+    "published_at": null,
+    "meta": {
+      "pillar": "reel",
+      "topic": "Your call recordings are evidence nobody reads",
+      "hook": "A customer’s own words can be compared to the file. 🎙️",
+      "direction": "30s motion-graphic reel, Reel Design System v1.0",
+      "cta": "💬 Comment: which conversation do you wish you could search?",
+      "slides": [],
+      "flags": [],
+      "generated_by": "custom"
+    }
+  },
+  {
+    "id": "d72r1",
+    "publish_at": "2026-11-27T03:30:00.000Z",
+    "approved": true,
+    "status": "draft",
+    "caption": "No ITR on the phone? Darwix marks it pending and sends the upload link. 📲\n\nWhen the ITR arrives, Darwix classifies it, extracts ₹12.7L and maps it to the income field. The requirement closes and the comparison runs.\n\n🔎 Learn more at darwix.ai\n\nProduct visuals are synthetic recreations. Data is illustrative.\n\n#BFSI #AIinBanking #FinTechIndia #ProposalAutomation #InsurTech #DocumentAI #Underwriting #DarwixAI",
+    "images": [],
+    "video": "reels/d72r1.mp4",
+    "media_id": null,
+    "published_at": null,
+    "meta": {
+      "pillar": "reel",
+      "topic": "ITR abhi phone mein nahi hai",
+      "hook": "No ITR on the phone? Darwix marks it pending and sends the upload link. 📲",
+      "direction": "30s motion-graphic reel, Reel Design System v1.0",
+      "cta": "🔎 Learn more at darwix.ai",
+      "slides": [],
+      "flags": [],
+      "generated_by": "custom"
+    }
+  },
+  {
+    "id": "d72r2",
+    "publish_at": "2026-11-27T11:30:00.000Z",
+    "approved": true,
+    "status": "draft",
+    "caption": "Every document type points to specific proposal fields. We drew all of them. 🗺️\n\nPAN, ITR, Form 16, bank statement, existing policy, lab reports. The map of which document proves which field is what makes upload automatic.\n\n➕ Follow Darwix AI for more from the build.\n\nProduct visuals are synthetic recreations. Data is illustrative.\n\n#BFSI #AIinBanking #FinTechIndia #ProposalAutomation #BuildInPublic #InsurTech #DocumentAI #DarwixAI",
+    "images": [],
+    "video": "reels/d72r2.mp4",
+    "media_id": null,
+    "published_at": null,
+    "meta": {
+      "pillar": "reel",
+      "topic": "Building the document-to-field map",
+      "hook": "Every document type points to specific proposal fields. We drew all of them. 🗺️",
+      "direction": "30s motion-graphic reel, Reel Design System v1.0",
+      "cta": "➕ Follow Darwix AI for more from the build.",
+      "slides": [],
+      "flags": [],
+      "generated_by": "custom"
+    }
+  },
+  {
+    "id": "d73r1",
+    "publish_at": "2026-11-28T03:30:00.000Z",
+    "approved": true,
+    "status": "draft",
+    "caption": "What happened. Why it matters. Where is the proof. Who owns it. 🚨\n\nA good alert names what happened, why it matters, the evidence, the severity, the owner, the next action and the clock.\n\n▶️ Watch the anatomy.\n\nProduct visuals are synthetic recreations. Data is illustrative.\n\n#BFSI #AIinBanking #FinTechIndia #AlertIntelligence #Compliance #DarwixAI",
+    "images": [],
+    "video": "reels/d73r1.mp4",
+    "media_id": null,
+    "published_at": null,
+    "meta": {
+      "pillar": "reel",
+      "topic": "Anatomy of an alert",
+      "hook": "What happened. Why it matters. Where is the proof. Who owns it. 🚨",
+      "direction": "30s motion-graphic reel, Reel Design System v1.0",
+      "cta": "▶️ Watch the anatomy.",
+      "slides": [],
+      "flags": [],
+      "generated_by": "custom"
+    }
+  },
+  {
+    "id": "d73r2",
+    "publish_at": "2026-11-28T11:30:00.000Z",
+    "approved": true,
+    "status": "draft",
+    "caption": "Never ask anyone to trust an alert they cannot verify. 🔔\n\nTeams stop trusting alerts they cannot trace. Darwix attaches the proof to each alert, the transcript line, the ledger entry, the document page, and groups related signals into one.\n\n🔁 Share this with your risk team.\n\nProduct visuals are synthetic recreations. Data is illustrative.\n\n#BFSI #AIinBanking #FinTechIndia #AlertIntelligence #AlertFatigue #Compliance #DarwixAI",
+    "images": [],
+    "video": "reels/d73r2.mp4",
+    "media_id": null,
+    "published_at": null,
+    "meta": {
+      "pillar": "reel",
+      "topic": "Would you trust an alert you cannot verify?",
+      "hook": "Never ask anyone to trust an alert they cannot verify. 🔔",
+      "direction": "30s motion-graphic reel, Reel Design System v1.0",
+      "cta": "🔁 Share this with your risk team.",
+      "slides": [],
+      "flags": [],
+      "generated_by": "custom"
+    }
+  },
+  {
+    "id": "d74r1",
+    "publish_at": "2026-11-29T03:30:00.000Z",
+    "approved": true,
+    "status": "draft",
+    "caption": "Address already verified. Nominee already captured. Do not ask again. 🧭\n\nThe Pre-Meet brief tells the officer what not to repeat, so the customer is not asked to repeat themselves, and the questions asked are the ones that move the case forward.\n\n🔎 Learn more at darwix.ai\n\nProduct visuals are synthetic recreations. Data is illustrative.\n\n#BFSI #AIinBanking #FinTechIndia #PreMeetIntelligence #CustomerExperience #FieldSales #DarwixAI",
+    "images": [],
+    "video": "reels/d74r1.mp4",
+    "media_id": null,
+    "published_at": null,
+    "meta": {
+      "pillar": "reel",
+      "topic": "The question not to ask twice",
+      "hook": "Address already verified. Nominee already captured. Do not ask again. 🧭",
+      "direction": "30s motion-graphic reel, Reel Design System v1.0",
+      "cta": "🔎 Learn more at darwix.ai",
+      "slides": [],
+      "flags": [],
+      "generated_by": "custom"
+    }
+  },
+  {
+    "id": "d74r2",
+    "publish_at": "2026-11-29T11:30:00.000Z",
+    "approved": true,
+    "status": "draft",
+    "caption": "The customer repeating themselves. Again. 😮‍💨\n\nOne thing came up again and again in what frontline teams told us. So the brief now says what not to ask again. A small block. A big difference.\n\n➕ Follow Darwix AI for more from the design desk.\n\nProduct visuals are synthetic recreations. Data is illustrative.\n\n#BFSI #AIinBanking #FinTechIndia #PreMeetIntelligence #UserResearch #BuildInPublic #FieldSales #DarwixAI",
+    "images": [],
+    "video": "reels/d74r2.mp4",
+    "media_id": null,
+    "published_at": null,
+    "meta": {
+      "pillar": "reel",
+      "topic": "What frontline officers hate most",
+      "hook": "The customer repeating themselves. Again. 😮‍💨",
+      "direction": "30s motion-graphic reel, Reel Design System v1.0",
+      "cta": "➕ Follow Darwix AI for more from the design desk.",
+      "slides": [],
+      "flags": [],
+      "generated_by": "custom"
+    }
+  },
+  {
+    "id": "d75r1",
+    "publish_at": "2026-11-30T03:30:00.000Z",
+    "approved": true,
+    "status": "draft",
+    "caption": "5,000 accounts. Seven segments. Experts only where it matters. 🗂️\n\nDarwix sorts a retail pool by what the evidence says: low exception, financial reconciliation, security review, valuation review, legal review, seller clarification and high evidence gap.\n\nThen from pool to account to the exact page, in a few clicks. Illustrative numbers.\n\n▶️ Watch the drill-down.\n\nProduct visuals are synthetic recreations. Data is illustrative.\n\n#BFSI #AIinBanking #FinTechIndia #RetailAssetEvidence #ARC #AssetReconstruction #Diligence #DarwixAI",
+    "images": [],
+    "video": "reels/d75r1.mp4",
+    "media_id": null,
+    "published_at": null,
+    "meta": {
+      "pillar": "reel",
+      "topic": "Triage a pool in minutes",
+      "hook": "5,000 accounts. Seven segments. Experts only where it matters. 🗂️",
+      "direction": "30s motion-graphic reel, Reel Design System v1.0",
+      "cta": "▶️ Watch the drill-down.",
+      "slides": [],
+      "flags": [],
+      "generated_by": "custom"
+    }
+  },
+  {
+    "id": "d75r2",
+    "publish_at": "2026-11-30T11:30:00.000Z",
+    "approved": true,
+    "status": "draft",
+    "caption": "Teams sample a handful of files and hope the rest are clean. 🔍\n\nIn a short bid window, manual review reaches a fraction of the pool. Whatever is not checked stays a risk.\n\nDarwix checks every file, so experts spend their time where it matters.\n\n💬 Comment: how many files does your team really check?\n\nProduct visuals are synthetic recreations. Data is illustrative.\n\n#BFSI #AIinBanking #FinTechIndia #RetailAssetEvidence #ARC #AssetReconstruction #DueDiligence #DarwixAI",
+    "images": [],
+    "video": "reels/d75r2.mp4",
+    "media_id": null,
+    "published_at": null,
+    "meta": {
+      "pillar": "reel",
+      "topic": "Why sampling misses",
+      "hook": "Teams sample a handful of files and hope the rest are clean. 🔍",
+      "direction": "30s motion-graphic reel, Reel Design System v1.0",
+      "cta": "▶️ Watch the drill-down.",
+      "slides": [],
+      "flags": [],
+      "generated_by": "custom"
+    }
   }
 ]
