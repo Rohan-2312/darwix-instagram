@@ -925,5 +925,56 @@
       "flags": [],
       "generated_by": "custom"
     }
+  },
+  {
+    "id": "d61-carousel",
+    "publish_at": "2026-11-16T07:00:00.000Z",
+    "caption": "From Application ID to a review-ready PD, in one conversation. 🧭\n\nSwipe through the 6 steps of Darwix Auto PD:\n1. Pre-fetch: the case is pulled from your LOS\n2. Converse: the officer talks to the borrower naturally\n3. Structure: answers land in the PD fields, in any order\n4. Verify: what the borrower said, checked against the application\n5. Evidence: value plus source kept for every field\n6. Act: flags and follow-ups routed to the officer\n\nThe officer reviews. Then it goes into the LOS.\n\nSave this for your next PD process review. 🔖\n\nProduct screens are synthetic recreations. Data is illustrative.\n\n#BFSI #LendingTech #DigitalLending #LoanOrigination #CreditUnderwriting #HomeLoan #NBFC #FinTechIndia #AIinBanking #ConversationalAI #AutoPD #DarwixAI",
+    "images": [
+      "posts/b1/d61c-01.jpg",
+      "posts/b1/d61c-02.jpg",
+      "posts/b1/d61c-03.jpg",
+      "posts/b1/d61c-04.jpg",
+      "posts/b1/d61c-05.jpg",
+      "posts/b1/d61c-06.jpg",
+      "posts/b1/d61c-07.jpg",
+      "posts/b1/d61c-08.jpg"
+    ],
+    "meta": {
+      "pillar": "Auto PD",
+      "topic": "6 Steps from Application ID to a Review-Ready PD",
+      "hook": "From Application ID to a review-ready PD, in one conversation.",
+      "direction": "Six-step flow carousel",
+      "cta": "Save this",
+      "slides": [],
+      "flags": [],
+      "generated_by": "custom"
+    },
+    "approved": true,
+    "status": "draft",
+    "media_id": null,
+    "published_at": null
+  },
+  {
+    "id": "d61-single",
+    "publish_at": "2026-11-16T14:00:00.000Z",
+    "caption": "Home Loan. ₹42 lakh. Self-employed. 10 years of vintage.\n\nAll of it already on screen before the officer says hello.\n\nNo re-asking what you already know. Auto PD pulls the case from your LOS and CRM, so the conversation starts with confirmation, not questions you already have answers to.\n\nLearn more at darwix.ai (link in bio).\n\nSynthetic recreation of the product page.\n\n#BFSI #LendingTech #DigitalLending #LoanOrigination #CreditUnderwriting #HomeLoan #NBFC #FinTechIndia #AIinBanking #ConversationalAI #AutoPD #DarwixAI",
+    "images": [
+      "posts/b1/d61s-01.jpg"
+    ],
+    "meta": {
+      "pillar": "Auto PD",
+      "topic": "What Gets Pre-Fetched",
+      "hook": "Already on screen before the officer says hello.",
+      "direction": "UI card",
+      "cta": "Learn more",
+      "slides": [],
+      "flags": [],
+      "generated_by": "custom"
+    },
+    "approved": true,
+    "status": "draft",
+    "media_id": null,
+    "published_at": null
   }
 ]
