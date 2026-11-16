@@ -951,9 +951,9 @@
       "generated_by": "custom"
     },
     "approved": true,
-    "status": "draft",
-    "media_id": null,
-    "published_at": null
+    "status": "published",
+    "media_id": "18112113815348879",
+    "published_at": "2026-11-16T07:07:02.696Z"
   },
   {
     "id": "d61-single",
