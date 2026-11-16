@@ -1136,18 +1136,13 @@
     "status": "draft",
     "caption": "Compliance. Discrepancy. Commitment. Complaint. Escalation. And five more. 🚨\n\nTen kinds of signals that hide inside customer conversations, shown as the call lines that trigger them. Swipe through all ten.\n\nMeaning, not keywords. Save this. 🔖\n\nIllustrative call lines. Product screens are synthetic recreations.\n\n#AlertIntelligence #CustomerConversations #CallAnalytics #ConversationIntelligence #BFSI #AIinBanking #DigitalLending #InsurTech #FinTechIndia #ConversationalAI #DarwixAI",
     "images": [
-      "posts/b2/d65c-01.jpg",
-      "posts/b2/d65c-02.jpg",
-      "posts/b2/d65c-03.jpg",
-      "posts/b2/d65c-04.jpg",
-      "posts/b2/d65c-05.jpg",
-      "posts/b2/d65c-06.jpg",
-      "posts/b2/d65c-07.jpg",
-      "posts/b2/d65c-08.jpg",
-      "posts/b2/d65c-09.jpg",
-      "posts/b2/d65c-10.jpg",
-      "posts/b2/d65c-11.jpg",
-      "posts/b2/d65c-12.jpg"
+      "posts/b3/d65v2-01.jpg",
+      "posts/b3/d65v2-02.jpg",
+      "posts/b3/d65v2-03.jpg",
+      "posts/b3/d65v2-04.jpg",
+      "posts/b3/d65v2-05.jpg",
+      "posts/b3/d65v2-06.jpg",
+      "posts/b3/d65v2-07.jpg"
     ],
     "media_id": null,
     "published_at": null,
@@ -1179,6 +1174,259 @@
       "hook": "An alert is not a finding of fraud.",
       "direction": "",
       "cta": "Share",
+      "slides": [],
+      "flags": [],
+      "generated_by": "custom"
+    }
+  },
+  {
+    "id": "d66c",
+    "publish_at": "2026-11-21T07:00:00.000Z",
+    "approved": true,
+    "status": "draft",
+    "caption": "If nothing changed, don't make the user reread it. 🧾\n\nA pre-meet brief should open with what is new since the last touchpoint, ranked by recency and impact. Swipe for the 13 changes Darwix detects:\nPayment received or missed. New overdue amount. Renewal approaching. Document uploaded or rejected. Valuation or legal check completed. Proposal value corrected. Medical requirement raised. Claim moved a stage. Service request breached SLA. Complaint opened. New offer approved. New discrepancy. Commitment breached.\n\nThe brief tells you what changed since the last touch. Save this. 🔖\n\nIllustrative content. Product screens are synthetic recreations.\n\n#PreMeetIntelligence #FieldSales #CollectionsOps #RelationshipManagement #BFSI #AIinBanking #DigitalLending #InsurTech #FinTechIndia #ConversationalAI #DarwixAI",
+    "images": [
+      "posts/b3/d66c-01.jpg",
+      "posts/b3/d66c-02.jpg",
+      "posts/b3/d66c-03.jpg",
+      "posts/b3/d66c-04.jpg",
+      "posts/b3/d66c-05.jpg",
+      "posts/b3/d66c-06.jpg"
+    ],
+    "media_id": null,
+    "published_at": null,
+    "meta": {
+      "pillar": "Pre Meet Intelligence",
+      "topic": "13 Things a Brief Notices Before You Do",
+      "hook": "If nothing changed, do not make the user reread it.",
+      "direction": "",
+      "cta": "Save",
+      "slides": [],
+      "flags": [],
+      "generated_by": "custom"
+    }
+  },
+  {
+    "id": "d66s",
+    "publish_at": "2026-11-21T14:00:00.000Z",
+    "approved": true,
+    "status": "draft",
+    "caption": "Stale data gets said out loud.\n\nBefore a customer meeting, honesty about data age matters. If the underlying data is stale, the Pre Meet Intelligence brief says so, and weights the latest transactions, conversations and documents above old history.\n\nLearn more at darwix.ai (link in bio).\n\nSynthetic recreation of the product page.\n\n#PreMeetIntelligence #FieldSales #CollectionsOps #RelationshipManagement #BFSI #AIinBanking #DigitalLending #InsurTech #FinTechIndia #ConversationalAI #DarwixAI",
+    "images": [
+      "posts/b3/d66s-01.jpg"
+    ],
+    "media_id": null,
+    "published_at": null,
+    "meta": {
+      "pillar": "Pre Meet Intelligence",
+      "topic": "Stale Data Gets Said Out Loud",
+      "hook": "Stale data gets said out loud.",
+      "direction": "",
+      "cta": "Learn more",
+      "slides": [],
+      "flags": [],
+      "generated_by": "custom"
+    }
+  },
+  {
+    "id": "d67c",
+    "publish_at": "2026-11-22T07:00:00.000Z",
+    "approved": true,
+    "status": "draft",
+    "caption": "Each document looks fine alone. The problem is between them. 📄\n\nEight findings Retail Asset Evidence Intelligence can surface across one loan file: name variant, flat mismatch, secured amount below sanction, rate mismatch, date sequence, missing guarantee, notice vs ledger, missing annexure.\n\nThese are findings for review, not conclusions. The ARC team decides what each one means. Save this. 🔖\n\nSynthetic documents and data.\n\n#RetailAssetEvidence #ARC #AssetReconstruction #Diligence #BFSI #AIinBanking #DigitalLending #InsurTech #FinTechIndia #ConversationalAI #DarwixAI",
+    "images": [
+      "posts/b3/d67c-01.jpg",
+      "posts/b3/d67c-02.jpg",
+      "posts/b3/d67c-03.jpg",
+      "posts/b3/d67c-04.jpg",
+      "posts/b3/d67c-05.jpg",
+      "posts/b3/d67c-06.jpg",
+      "posts/b3/d67c-07.jpg",
+      "posts/b3/d67c-08.jpg",
+      "posts/b3/d67c-09.jpg",
+      "posts/b3/d67c-10.jpg"
+    ],
+    "media_id": null,
+    "published_at": null,
+    "meta": {
+      "pillar": "Retail Asset Evidence",
+      "topic": "One Loan File, Eight Discrepancies",
+      "hook": "Each document looks fine alone. The problem is between them.",
+      "direction": "",
+      "cta": "Save this",
+      "slides": [],
+      "flags": [],
+      "generated_by": "custom"
+    }
+  },
+  {
+    "id": "d67s",
+    "publish_at": "2026-11-22T14:00:00.000Z",
+    "approved": true,
+    "status": "draft",
+    "caption": "Mortgage executed before sanction?\n\nSecurity created on 4 March. Loan sanctioned on 11 March. A date sequence anomaly like this is a finding for review, not a conclusion. The ARC team decides what it means.\n\nShare this with your diligence team. 📤\n\nLearn more at darwix.ai (link in bio).\n\nSynthetic example.\n\n#RetailAssetEvidence #ARC #AssetReconstruction #Diligence #BFSI #AIinBanking #DigitalLending #InsurTech #FinTechIndia #ConversationalAI #DarwixAI",
+    "images": [
+      "posts/b3/d67s-01.jpg"
+    ],
+    "media_id": null,
+    "published_at": null,
+    "meta": {
+      "pillar": "Retail Asset Evidence",
+      "topic": "Mortgage Executed Before Sanction?",
+      "hook": "Mortgage executed before sanction?",
+      "direction": "",
+      "cta": "Share",
+      "slides": [],
+      "flags": [],
+      "generated_by": "custom"
+    }
+  },
+  {
+    "id": "d68c",
+    "publish_at": "2026-11-23T07:00:00.000Z",
+    "approved": true,
+    "status": "draft",
+    "caption": "The doctor gets the values, not a PDF to hunt through. 🩺\n\nSwipe to see a lab report as the patient uploaded it, the same report as structured rows, and the abnormal values highlighted in the doctor's view.\n\nInterpretation stays with the doctor.\n\nLearn more at darwix.ai (link in bio).\n\nSynthetic report. Illustrative data.\n\n#TeleMedicine #VideoTeleMedicine #LifeInsurance #Underwriting #BFSI #AIinBanking #DigitalLending #InsurTech #FinTechIndia #ConversationalAI #DarwixAI",
+    "images": [
+      "posts/b3/d68c-01.jpg",
+      "posts/b3/d68c-02.jpg",
+      "posts/b3/d68c-03.jpg",
+      "posts/b3/d68c-04.jpg",
+      "posts/b3/d68c-05.jpg"
+    ],
+    "media_id": null,
+    "published_at": null,
+    "meta": {
+      "pillar": "Video Tele-Medicine",
+      "topic": "From PDF to Values the Doctor Can Use",
+      "hook": "The doctor gets the values, not a PDF to hunt through.",
+      "direction": "",
+      "cta": "Learn more",
+      "slides": [],
+      "flags": [],
+      "generated_by": "custom"
+    }
+  },
+  {
+    "id": "d68s",
+    "publish_at": "2026-11-23T14:00:00.000Z",
+    "approved": true,
+    "status": "draft",
+    "caption": "Intake prepares. It doesn't diagnose.\n\nIntake prepares information for the doctor. It does not decide if a teleconsult is appropriate. TeleMedi Assist turns the intake into a structured, doctor-ready summary, and the doctor decides.\n\nShare this with your medical underwriting team. 📤\n\nLearn more at darwix.ai (link in bio).\n\nSynthetic recreation of the product page.\n\n#TeleMedicine #VideoTeleMedicine #LifeInsurance #Underwriting #BFSI #AIinBanking #DigitalLending #InsurTech #FinTechIndia #ConversationalAI #DarwixAI",
+    "images": [
+      "posts/b3/d68s-01.jpg"
+    ],
+    "media_id": null,
+    "published_at": null,
+    "meta": {
+      "pillar": "Video Tele-Medicine",
+      "topic": "Intake Prepares. It Does Not Diagnose.",
+      "hook": "Intake prepares. It does not diagnose.",
+      "direction": "",
+      "cta": "Share",
+      "slides": [],
+      "flags": [],
+      "generated_by": "custom"
+    }
+  },
+  {
+    "id": "d69c",
+    "publish_at": "2026-11-24T07:00:00.000Z",
+    "approved": true,
+    "status": "draft",
+    "caption": "Don't bury contradictions in a transcript. Surface them as credit-ready exceptions. 🏠\n\nEight things a borrower says that can change the file, each shown as Application says, Borrower says, Darwix flags: income, existing loans, business vintage, residence, property use, loan purpose, co-applicant income and shop rent.\n\nBoth values are kept. Nothing is overwritten. Save this. 🔖\n\nSynthetic, illustrative values.\n\n#AutoPD #HomeLoan #CreditUnderwriting #HFC #BFSI #AIinBanking #DigitalLending #InsurTech #FinTechIndia #ConversationalAI #DarwixAI",
+    "images": [
+      "posts/b3/d69c-01.jpg",
+      "posts/b3/d69c-02.jpg",
+      "posts/b3/d69c-03.jpg",
+      "posts/b3/d69c-04.jpg",
+      "posts/b3/d69c-05.jpg",
+      "posts/b3/d69c-06.jpg",
+      "posts/b3/d69c-07.jpg",
+      "posts/b3/d69c-08.jpg",
+      "posts/b3/d69c-09.jpg",
+      "posts/b3/d69c-10.jpg"
+    ],
+    "media_id": null,
+    "published_at": null,
+    "meta": {
+      "pillar": "Auto PD",
+      "topic": "8 Things a Borrower Says That Change the File",
+      "hook": "Do not bury contradictions in a transcript.",
+      "direction": "",
+      "cta": "Save",
+      "slides": [],
+      "flags": [],
+      "generated_by": "custom"
+    }
+  },
+  {
+    "id": "d69s",
+    "publish_at": "2026-11-24T14:00:00.000Z",
+    "approved": true,
+    "status": "draft",
+    "caption": "Rent agreement says ₹22,000. Shop rent stated: ₹15,000.\n\nAuto PD flags the Premises Rent Mismatch while the borrower is still there. The statement and the document are both preserved, and the officer decides.\n\nLearn more at darwix.ai (link in bio).\n\nSynthetic, illustrative values.\n\n#AutoPD #HomeLoan #CreditUnderwriting #HFC #BFSI #AIinBanking #DigitalLending #InsurTech #FinTechIndia #ConversationalAI #DarwixAI",
+    "images": [
+      "posts/b3/d69s-01.jpg"
+    ],
+    "media_id": null,
+    "published_at": null,
+    "meta": {
+      "pillar": "Auto PD",
+      "topic": "Rent Agreement Says 22,000",
+      "hook": "Rent agreement says ₹22,000.",
+      "direction": "",
+      "cta": "Save",
+      "slides": [],
+      "flags": [],
+      "generated_by": "custom"
+    }
+  },
+  {
+    "id": "d70c",
+    "publish_at": "2026-11-25T07:00:00.000Z",
+    "approved": true,
+    "status": "draft",
+    "caption": "One PIVC platform. Verification logic that changes with the policy. ✅\n\nSwipe to see what Video PIVC verifies, product by product: term insurance, savings and endowment, ULIPs, pension and annuity, and risk-based enhanced verification.\n\nSave this for your next PIVC review. 🔖\n\nIllustrative content. Product screens are synthetic recreations.\n\n#VideoPIVC #Insurance #LifeInsurance #Compliance #BFSI #AIinBanking #DigitalLending #InsurTech #FinTechIndia #ConversationalAI #DarwixAI",
+    "images": [
+      "posts/b3/d70c-01.jpg",
+      "posts/b3/d70c-02.jpg",
+      "posts/b3/d70c-03.jpg",
+      "posts/b3/d70c-04.jpg",
+      "posts/b3/d70c-05.jpg",
+      "posts/b3/d70c-06.jpg",
+      "posts/b3/d70c-07.jpg"
+    ],
+    "media_id": null,
+    "published_at": null,
+    "meta": {
+      "pillar": "Video PIVC",
+      "topic": "What We Verify, Product by Product",
+      "hook": "One PIVC platform. Verification logic that changes with the policy.",
+      "direction": "",
+      "cta": "Save",
+      "slides": [],
+      "flags": [],
+      "generated_by": "custom"
+    }
+  },
+  {
+    "id": "d70s",
+    "publish_at": "2026-11-25T14:00:00.000Z",
+    "approved": true,
+    "status": "draft",
+    "caption": "Enhanced verification, risk-based.\n\nHigh-value policy? Material medical declaration? High-risk occupation? Prior PIVC failure? Identity exception? Extra scrutiny kicks in. Scrutiny follows risk, not a blanket rule.\n\nLearn more at darwix.ai (link in bio).\n\n#VideoPIVC #Insurance #LifeInsurance #Compliance #BFSI #AIinBanking #DigitalLending #InsurTech #FinTechIndia #ConversationalAI #DarwixAI",
+    "images": [
+      "posts/b3/d70s-01.jpg"
+    ],
+    "media_id": null,
+    "published_at": null,
+    "meta": {
+      "pillar": "Video PIVC",
+      "topic": "Enhanced Verification, Risk-Based",
+      "hook": "Enhanced verification, risk-based.",
+      "direction": "",
+      "cta": "Learn more",
       "slides": [],
       "flags": [],
       "generated_by": "custom"
