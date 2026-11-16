@@ -1578,5 +1578,398 @@
       "flags": [],
       "generated_by": "custom"
     }
+  },
+  {
+    "id": "d64r2",
+    "publish_at": "2026-11-19T11:30:00.000Z",
+    "approved": true,
+    "status": "draft",
+    "caption": "Occupation: Engineer. Customer: \"I work on the machines on the floor.\" 🏭\n\nDarwix flags Occupation Detail Required, opens the insurer follow-up questionnaire, and records the answer with its source: the customer.\n\n🔁 Share this with someone in insurance operations.\n\nProduct visuals are synthetic recreations. Data is illustrative.\n\n#BFSI #AIinBanking #FinTechIndia #ProposalAutomation #InsurTech #Underwriting #DarwixAI",
+    "images": [],
+    "video": "reels/d64r2.mp4",
+    "media_id": null,
+    "published_at": null,
+    "meta": {
+      "pillar": "reel",
+      "topic": "Engineer or plant-floor work?",
+      "hook": "Occupation: Engineer. Customer: \"I work on the machines on the floor.\" 🏭",
+      "direction": "30s motion-graphic reel, Reel Design System v1.0",
+      "cta": "🔁 Share this with someone in insurance operations.",
+      "slides": [],
+      "flags": [],
+      "generated_by": "custom"
+    }
+  },
+  {
+    "id": "d65r1",
+    "publish_at": "2026-11-20T03:30:00.000Z",
+    "approved": true,
+    "status": "draft",
+    "caption": "\"Third time I am calling.\" No keyword. Still a complaint. 📞\n\nThree customer sentences, no keywords: a repeat complaint, a mis-selling signal and an escalation request.\n\nAlert Intelligence checks each against customer, product, stage and history before it alerts anyone, then routes it to the right owner.\n\n▶️ Watch how it works.\n\nProduct visuals are synthetic recreations. Data is illustrative.\n\n#BFSI #AIinBanking #FinTechIndia #AlertIntelligence #CustomerExperience #Compliance #DarwixAI",
+    "images": [],
+    "video": "reels/d65r1.mp4",
+    "media_id": null,
+    "published_at": null,
+    "meta": {
+      "pillar": "reel",
+      "topic": "Nobody says the magic word",
+      "hook": "\"Third time I am calling.\" No keyword. Still a complaint. 📞",
+      "direction": "30s motion-graphic reel, Reel Design System v1.0",
+      "cta": "▶️ Watch how it works.",
+      "slides": [],
+      "flags": [],
+      "generated_by": "custom"
+    }
+  },
+  {
+    "id": "d65r2",
+    "publish_at": "2026-11-20T11:30:00.000Z",
+    "approved": true,
+    "status": "draft",
+    "caption": "\"I will pay on Friday\" means three different things. 🗣️\n\nA first promise. The third broken promise. A partial commitment past the escalation date.\n\nSame sentence, different alert. That is the difference between keyword spotting and understanding.\n\n🔁 Share this with your collections lead.\n\nProduct visuals are synthetic recreations. Data is illustrative.\n\n#BFSI #AIinBanking #FinTechIndia #AlertIntelligence #Collections #ConversationalAI #DarwixAI",
+    "images": [],
+    "video": "reels/d65r2.mp4",
+    "media_id": null,
+    "published_at": null,
+    "meta": {
+      "pillar": "reel",
+      "topic": "Keyword spotting vs understanding",
+      "hook": "\"I will pay on Friday\" means three different things. 🗣️",
+      "direction": "30s motion-graphic reel, Reel Design System v1.0",
+      "cta": "🔁 Share this with your collections lead.",
+      "slides": [],
+      "flags": [],
+      "generated_by": "custom"
+    }
+  },
+  {
+    "id": "d66r1",
+    "publish_at": "2026-11-21T03:30:00.000Z",
+    "approved": true,
+    "status": "draft",
+    "caption": "20 Sep came and went. The officer already knows no payment landed. 🚗\n\nBefore the knock, the Pre-Meet brief shows the last interaction, the ₹25,000 promise, the missing payment and the open charge dispute, with the questions to ask.\n\nThe officer walks in knowing the account, the promise and the objection.\n\n🔎 Learn more at darwix.ai\n\nProduct visuals are synthetic recreations. Data is illustrative.\n\n#BFSI #AIinBanking #FinTechIndia #PreMeetIntelligence #FieldCollections #Collections #DarwixAI",
+    "images": [],
+    "video": "reels/d66r1.mp4",
+    "media_id": null,
+    "published_at": null,
+    "meta": {
+      "pillar": "reel",
+      "topic": "The promise passed Friday",
+      "hook": "20 Sep came and went. The officer already knows no payment landed. 🚗",
+      "direction": "30s motion-graphic reel, Reel Design System v1.0",
+      "cta": "🔎 Learn more at darwix.ai",
+      "slides": [],
+      "flags": [],
+      "generated_by": "custom"
+    }
+  },
+  {
+    "id": "d66r2",
+    "publish_at": "2026-11-21T11:30:00.000Z",
+    "approved": true,
+    "status": "draft",
+    "caption": "Field officers get minutes between visits. So the brief leads with what is new. ✍️\n\nOur design rules for the Pre-Meet brief: lead with what changed, ranked. Say so when data is stale. If nothing changed, do not make them reread it.\n\n➕ Follow Darwix AI for more from the design desk.\n\nProduct visuals are synthetic recreations. Data is illustrative.\n\n#BFSI #AIinBanking #FinTechIndia #PreMeetIntelligence #ProductDesign #BuildInPublic #FieldSales #DarwixAI",
+    "images": [],
+    "video": "reels/d66r2.mp4",
+    "media_id": null,
+    "published_at": null,
+    "meta": {
+      "pillar": "reel",
+      "topic": "Pre-Meet brief design rules",
+      "hook": "Field officers get minutes between visits. So the brief leads with what is new. ✍️",
+      "direction": "30s motion-graphic reel, Reel Design System v1.0",
+      "cta": "➕ Follow Darwix AI for more from the design desk.",
+      "slides": [],
+      "flags": [],
+      "generated_by": "custom"
+    }
+  },
+  {
+    "id": "d67r1",
+    "publish_at": "2026-11-22T03:30:00.000Z",
+    "approved": true,
+    "status": "draft",
+    "caption": "The mortgage says Flat 402. The valuation says Flat 204. Which flat is the security? 🏢\n\nRetail Asset Evidence reads both documents, finds the Property Description Mismatch, rates it High because two of three sources agree, and links the exact pages for legal and valuation review.\n\n▶️ Watch the finding.\n\nProduct visuals are synthetic recreations. Data is illustrative.\n\n#BFSI #AIinBanking #FinTechIndia #RetailAssetEvidence #MortgageLending #LegalReview #Valuation #DarwixAI",
+    "images": [],
+    "video": "reels/d67r1.mp4",
+    "media_id": null,
+    "published_at": null,
+    "meta": {
+      "pillar": "reel",
+      "topic": "Flat 402 or Flat 204?",
+      "hook": "The mortgage says Flat 402. The valuation says Flat 204. Which flat is the security? 🏢",
+      "direction": "30s motion-graphic reel, Reel Design System v1.0",
+      "cta": "▶️ Watch the finding.",
+      "slides": [],
+      "flags": [],
+      "generated_by": "custom"
+    }
+  },
+  {
+    "id": "d67r2",
+    "publish_at": "2026-11-22T11:30:00.000Z",
+    "approved": true,
+    "status": "draft",
+    "caption": "A name variant is low risk. A different party is not. 🔍\n\nRakesh K. Sharma and Rakesh Kumar Sharma are likely the same party: a Name Variant, Low. Rajesh Sharma might be a different person: a review, High.\n\nDarwix ranks findings by consequence.\n\n💬 Comment your take. Would you treat these differently?\n\nProduct visuals are synthetic recreations. Data is illustrative.\n\n#BFSI #AIinBanking #FinTechIndia #RetailAssetEvidence #KYC #MortgageLending #DarwixAI",
+    "images": [],
+    "video": "reels/d67r2.mp4",
+    "media_id": null,
+    "published_at": null,
+    "meta": {
+      "pillar": "reel",
+      "topic": "Rakesh Sharma or Rajesh Sharma?",
+      "hook": "A name variant is low risk. A different party is not. 🔍",
+      "direction": "30s motion-graphic reel, Reel Design System v1.0",
+      "cta": "💬 Comment your take. Would you treat these differently?",
+      "slides": [],
+      "flags": [],
+      "generated_by": "custom"
+    }
+  },
+  {
+    "id": "d71c",
+    "publish_at": "2026-11-26T07:00:00.000Z",
+    "approved": true,
+    "status": "draft",
+    "caption": "One case view connects the form, the document and the conversation. 🧩\n\nThree journeys, one pattern. Swipe through lending PD, an insurance tele-medical call and insurance income documents. In each, source A, source B and source C land in one case view, and the finding links back to all three.\n\nFindings are for review. People decide.\n\nIllustrative content. Product screens are synthetic recreations.\n\n#EvidenceIntelligence #CreditUnderwriting #LifeInsurance #Underwriting #BFSI #AIinBanking #FinTechIndia #ConversationalAI #DarwixAI",
+    "images": [
+      "posts/b4/d71c-01.jpg",
+      "posts/b4/d71c-02.jpg",
+      "posts/b4/d71c-03.jpg",
+      "posts/b4/d71c-04.jpg",
+      "posts/b4/d71c-05.jpg",
+      "posts/b4/d71c-06.jpg"
+    ],
+    "media_id": null,
+    "published_at": null,
+    "meta": {
+      "pillar": "Evidence Intelligence",
+      "topic": "Reconcile What People Said With What Documents Show",
+      "hook": "One case view connects the form, the document and the conversation. 🧩",
+      "direction": "",
+      "cta": "Save this. 🔖",
+      "slides": [],
+      "flags": [],
+      "generated_by": "custom"
+    }
+  },
+  {
+    "id": "d71s",
+    "publish_at": "2026-11-26T14:00:00.000Z",
+    "approved": true,
+    "status": "draft",
+    "caption": "Proposal says no diabetes. The call says daily diabetes medicine. The lab says elevated HbA1c. 🧪\n\nProposal says no diabetes. The call says daily diabetes medicine. The lab says elevated HbA1c.\n\nEvidence Intelligence lines up the three rows and raises a Material Disclosure Conflict for review, with each source one click away.\n\nIllustrative content. Product screens are synthetic recreations.\n\n#EvidenceIntelligence #LifeInsurance #Underwriting #MedicalUnderwriting #BFSI #AIinBanking #FinTechIndia #ConversationalAI #DarwixAI",
+    "images": [
+      "posts/b4/d71s-01.jpg"
+    ],
+    "media_id": null,
+    "published_at": null,
+    "meta": {
+      "pillar": "Evidence Intelligence",
+      "topic": "Proposal: No Diabetes. Tele-Medical: Daily Medicine.",
+      "hook": "Proposal says no diabetes. The call says daily diabetes medicine. The lab says elevated HbA1c. 🧪",
+      "direction": "",
+      "cta": "Share this with your underwriting team. 📤",
+      "slides": [],
+      "flags": [],
+      "generated_by": "custom"
+    }
+  },
+  {
+    "id": "d72c",
+    "publish_at": "2026-11-27T07:00:00.000Z",
+    "approved": true,
+    "status": "draft",
+    "caption": "Diabetes disclosed? Recent surgery? Darwix knows what to ask for next. 📋\n\nThe disclosure decides the next evidence step. In Life Proposal Automation, diabetes triggers a request for the latest investigation, recent surgery triggers a discharge summary, and a missing ITR triggers a pending requirement with an upload link.\n\nSwipe for all three. Save this. 🔖\n\nIllustrative content. Product screens are synthetic recreations.\n\n#ProposalAutomation #LifeInsurance #Underwriting #InsurTech #BFSI #AIinBanking #FinTechIndia #ConversationalAI #DarwixAI",
+    "images": [
+      "posts/b4/d72c-01.jpg",
+      "posts/b4/d72c-02.jpg",
+      "posts/b4/d72c-03.jpg",
+      "posts/b4/d72c-04.jpg",
+      "posts/b4/d72c-05.jpg",
+      "posts/b4/d72c-06.jpg"
+    ],
+    "media_id": null,
+    "published_at": null,
+    "meta": {
+      "pillar": "Proposal Automation",
+      "topic": "Let the Disclosure Decide the Next Evidence Step",
+      "hook": "Diabetes disclosed? Recent surgery? Darwix knows what to ask for next. 📋",
+      "direction": "",
+      "cta": "Save this. 🔖",
+      "slides": [],
+      "flags": [],
+      "generated_by": "custom"
+    }
+  },
+  {
+    "id": "d72s",
+    "publish_at": "2026-11-27T14:00:00.000Z",
+    "approved": true,
+    "status": "draft",
+    "caption": "Flag the file before anyone relies on it. 🗂️\n\nDuplicates, missing pages and unreadable scans are easy to miss and expensive to find late. Darwix checks each upload and flags the file before anyone relies on it.\n\nSave this for your document checklist. 🔖\n\nIllustrative content. Product screens are synthetic recreations.\n\n#ProposalAutomation #DocumentAI #InsurTech #Underwriting #BFSI #AIinBanking #FinTechIndia #ConversationalAI #DarwixAI",
+    "images": [
+      "posts/b4/d72s-01.jpg"
+    ],
+    "media_id": null,
+    "published_at": null,
+    "meta": {
+      "pillar": "Proposal Automation",
+      "topic": "Documents Flagged: Duplicates, Missing Pages, Unreadable",
+      "hook": "Flag the file before anyone relies on it. 🗂️",
+      "direction": "",
+      "cta": "Save this. 🔖",
+      "slides": [],
+      "flags": [],
+      "generated_by": "custom"
+    }
+  },
+  {
+    "id": "d73c",
+    "publish_at": "2026-11-28T07:00:00.000Z",
+    "approved": true,
+    "status": "draft",
+    "caption": "The alert is the summary. The evidence is always behind it. 🔎\n\nAn alert nobody can explain is an alert nobody trusts. Swipe for the 8 fields of an explainable alert: what happened, why it matters, evidence, context, severity and confidence, owner, next action, and SLA and status.\n\nSave this. 🔖\n\nIllustrative content. Product screens are synthetic recreations.\n\n#AlertIntelligence #Compliance #RiskManagement #BFSI #AIinBanking #FinTechIndia #ConversationalAI #DarwixAI",
+    "images": [
+      "posts/b4/d73c-01.jpg",
+      "posts/b4/d73c-02.jpg",
+      "posts/b4/d73c-03.jpg",
+      "posts/b4/d73c-04.jpg",
+      "posts/b4/d73c-05.jpg",
+      "posts/b4/d73c-06.jpg"
+    ],
+    "media_id": null,
+    "published_at": null,
+    "meta": {
+      "pillar": "Alert Intelligence",
+      "topic": "The 8 Fields of an Explainable Alert",
+      "hook": "The alert is the summary. The evidence is always behind it. 🔎",
+      "direction": "",
+      "cta": "Save this. 🔖",
+      "slides": [],
+      "flags": [],
+      "generated_by": "custom"
+    }
+  },
+  {
+    "id": "d73s",
+    "publish_at": "2026-11-28T14:00:00.000Z",
+    "approved": true,
+    "status": "draft",
+    "caption": "Transcript line. Audio timestamp. Document page. Ledger entry. System event. Visual. Previous alert. 📍\n\nEvidence can point to seven places: a transcript line, an audio timestamp, a document page, a ledger entry, a system event, a visual, or a previous alert.\n\nNever ask anyone to trust an alert they cannot verify. Save this. 🔖\n\nIllustrative content. Product screens are synthetic recreations.\n\n#AlertIntelligence #Compliance #RiskManagement #BFSI #AIinBanking #FinTechIndia #ConversationalAI #DarwixAI",
+    "images": [
+      "posts/b4/d73s-01.jpg"
+    ],
+    "media_id": null,
+    "published_at": null,
+    "meta": {
+      "pillar": "Alert Intelligence",
+      "topic": "Evidence Can Point To Seven Places",
+      "hook": "Transcript line. Audio timestamp. Document page. Ledger entry. System event. Visual. Previous alert. 📍",
+      "direction": "",
+      "cta": "Save this. 🔖",
+      "slides": [],
+      "flags": [],
+      "generated_by": "custom"
+    }
+  },
+  {
+    "id": "d74c",
+    "publish_at": "2026-11-29T07:00:00.000Z",
+    "approved": true,
+    "status": "draft",
+    "caption": "A conversation plan, not a data dump. 🗒️\n\nA good Pre-Meet brief is a conversation plan, not a data dump: Ask this. Verify that. Do not repeat that. Do not say that.\n\nSwipe for examples across lending, insurance, collections and wealth. Save this. 🔖\n\nIllustrative content. Product screens are synthetic recreations.\n\n#PreMeetIntelligence #FieldSales #CustomerExperience #BFSI #AIinBanking #FinTechIndia #ConversationalAI #DarwixAI",
+    "images": [
+      "posts/b4/d74c-01.jpg",
+      "posts/b4/d74c-02.jpg",
+      "posts/b4/d74c-03.jpg",
+      "posts/b4/d74c-04.jpg",
+      "posts/b4/d74c-05.jpg",
+      "posts/b4/d74c-06.jpg"
+    ],
+    "media_id": null,
+    "published_at": null,
+    "meta": {
+      "pillar": "Pre-Meet Intelligence",
+      "topic": "Ask This. Verify That. Don't Repeat That. Don't Say That.",
+      "hook": "A conversation plan, not a data dump. 🗒️",
+      "direction": "",
+      "cta": "Save this. 🔖",
+      "slides": [],
+      "flags": [],
+      "generated_by": "custom"
+    }
+  },
+  {
+    "id": "d74s",
+    "publish_at": "2026-11-29T14:00:00.000Z",
+    "approved": true,
+    "status": "draft",
+    "caption": "Known policy boundaries, before the customer asks. 🚫\n\nDo not state a loan as approved before sanction.\n\nThe Pre Meet brief surfaces known policy boundaries, where configured, before the customer asks: guaranteed approval, unsupported returns, settlement terms outside authority.\n\nShare this with your frontline team. 📤\n\nIllustrative content. Product screens are synthetic recreations.\n\n#PreMeetIntelligence #Compliance #FieldSales #BFSI #AIinBanking #FinTechIndia #ConversationalAI #DarwixAI",
+    "images": [
+      "posts/b4/d74s-01.jpg"
+    ],
+    "media_id": null,
+    "published_at": null,
+    "meta": {
+      "pillar": "Pre-Meet Intelligence",
+      "topic": "Don't State a Loan as Approved Before Sanction",
+      "hook": "Known policy boundaries, before the customer asks. 🚫",
+      "direction": "",
+      "cta": "Share this. 📤",
+      "slides": [],
+      "flags": [],
+      "generated_by": "custom"
+    }
+  },
+  {
+    "id": "d75c",
+    "publish_at": "2026-11-30T07:00:00.000Z",
+    "approved": true,
+    "status": "draft",
+    "caption": "₹8.2 crore exposure. 214 accounts. One account. One page. 🔬\n\n₹8.2 crore exposure. 214 accounts. One account. One page.\n\nAn illustrative drill-down in Retail Asset Evidence Intelligence: pool finding, accounts, HL-241872 (tape ₹72L vs latest ₹61L), report page 17, and the review status.\n\nSynthetic data. Save this. 🔖\n\nIllustrative content. Product screens are synthetic recreations.\n\n#RetailAssetEvidence #ARC #AssetReconstruction #Diligence #BFSI #AIinBanking #FinTechIndia #ConversationalAI #DarwixAI",
+    "images": [
+      "posts/b4/d75c-01.jpg",
+      "posts/b4/d75c-02.jpg",
+      "posts/b4/d75c-03.jpg",
+      "posts/b4/d75c-04.jpg",
+      "posts/b4/d75c-05.jpg",
+      "posts/b4/d75c-06.jpg",
+      "posts/b4/d75c-07.jpg"
+    ],
+    "media_id": null,
+    "published_at": null,
+    "meta": {
+      "pillar": "Retail Asset Evidence",
+      "topic": "Drill Down From Pool to Page",
+      "hook": "₹8.2 crore exposure. 214 accounts. One account. One page. 🔬",
+      "direction": "",
+      "cta": "Save this. 🔖",
+      "slides": [],
+      "flags": [],
+      "generated_by": "custom"
+    }
+  },
+  {
+    "id": "d75s",
+    "publish_at": "2026-11-30T14:00:00.000Z",
+    "approved": true,
+    "status": "draft",
+    "caption": "Review every file, not a sample. 🗃️\n\nReview every file. Explain every finding.\n\nSampling misses what it does not sample. Retail Asset Evidence Intelligence reviews every file in the pool and explains every finding with evidence.\n\nSynthetic data. Share this with your diligence team. 📤\n\nIllustrative content. Product screens are synthetic recreations.\n\n#RetailAssetEvidence #ARC #AssetReconstruction #Diligence #BFSI #AIinBanking #FinTechIndia #ConversationalAI #DarwixAI",
+    "images": [
+      "posts/b4/d75s-01.jpg"
+    ],
+    "media_id": null,
+    "published_at": null,
+    "meta": {
+      "pillar": "Retail Asset Evidence",
+      "topic": "Review Every File. Explain Every Finding.",
+      "hook": "Review every file, not a sample. 🗃️",
+      "direction": "",
+      "cta": "Share this. 📤",
+      "slides": [],
+      "flags": [],
+      "generated_by": "custom"
+    }
   }
 ]
