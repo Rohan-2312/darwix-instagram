@@ -1010,7 +1010,7 @@
     "id": "d62s",
     "publish_at": "2026-11-17T14:00:00.000Z",
     "approved": true,
-    "status": "draft",
+    "status": "failed",
     "caption": "Matching a face is layer 1. Knowing what the customer understood is layers 2 to 5.\n\nA \"yes\" on camera is not proof of understanding. Darwix Video PIVC treats identity as where assurance starts, then goes on to policy understanding, mis-selling and discrepancy checks, informed consent and audit evidence.\n\nShare this with the person who owns your PIVC process. 📤\n\nLearn more at darwix.ai (link in bio).\n\n#VideoPIVC #Insurance #LifeInsurance #Compliance #BFSI #AIinBanking #DigitalLending #InsurTech #FinTechIndia #ConversationalAI #DarwixAI",
     "images": [
       "posts/b2/d62s-01.jpg"
@@ -1026,7 +1026,8 @@
       "slides": [],
       "flags": [],
       "generated_by": "custom"
-    }
+    },
+    "error": "carousel needs 2-10 images"
   },
   {
     "id": "d63c",
