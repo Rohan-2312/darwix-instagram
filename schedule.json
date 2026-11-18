@@ -1033,7 +1033,7 @@
     "id": "d63c",
     "publish_at": "2026-11-18T07:00:00.000Z",
     "approved": true,
-    "status": "draft",
+    "status": "published",
     "caption": "Most tools flag every mismatch. Darwix tells you what it means. 🔍\n\nTwo sources can differ in seven ways, and only one of them is a real conflict:\nAgrees. Contextual. Conflict. Stale / Newer. Enriched. Missing / Quality. Subsequent event.\n\nSwipe for a one-line BFSI example of each.\n\nClassify the difference before deciding what it means. Save this. 🔖\n\nIllustrative examples. Product screens are synthetic recreations.\n\n#EvidenceIntelligence #Underwriting #CreditOps #DocumentVerification #BFSI #AIinBanking #DigitalLending #InsurTech #FinTechIndia #ConversationalAI #DarwixAI",
     "images": [
       "posts/b2/d63c-01.jpg",
@@ -1046,8 +1046,8 @@
       "posts/b2/d63c-08.jpg",
       "posts/b2/d63c-09.jpg"
     ],
-    "media_id": null,
-    "published_at": null,
+    "media_id": "17913459585570063",
+    "published_at": "2026-11-18T07:01:12.761Z",
     "meta": {
       "pillar": "Evidence Intelligence",
       "topic": "7 Ways Two Sources Can Differ",
