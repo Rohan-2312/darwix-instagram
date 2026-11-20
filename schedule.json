@@ -1137,7 +1137,7 @@
     "id": "d65c",
     "publish_at": "2026-11-20T07:00:00.000Z",
     "approved": true,
-    "status": "draft",
+    "status": "published",
     "caption": "Compliance. Discrepancy. Commitment. Complaint. Escalation. And five more. 🚨\n\nTen kinds of signals that hide inside customer conversations, shown as the call lines that trigger them. Swipe through all ten.\n\nMeaning, not keywords. Save this. 🔖\n\nIllustrative call lines. Product screens are synthetic recreations.\n\n#AlertIntelligence #CustomerConversations #CallAnalytics #ConversationIntelligence #BFSI #AIinBanking #DigitalLending #InsurTech #FinTechIndia #ConversationalAI #DarwixAI",
     "images": [
       "posts/b3/d65v2-01.jpg",
@@ -1148,8 +1148,8 @@
       "posts/b3/d65v2-06.jpg",
       "posts/b3/d65v2-07.jpg"
     ],
-    "media_id": null,
-    "published_at": null,
+    "media_id": "18123894742986762",
+    "published_at": "2026-11-20T07:02:02.169Z",
     "meta": {
       "pillar": "Alert Intelligence",
       "topic": "10 Signals Your Systems Miss",
