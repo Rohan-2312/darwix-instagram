@@ -1188,7 +1188,7 @@
     "id": "d66c",
     "publish_at": "2026-11-21T07:00:00.000Z",
     "approved": true,
-    "status": "draft",
+    "status": "published",
     "caption": "If nothing changed, don't make the user reread it. 🧾\n\nA pre-meet brief should open with what is new since the last touchpoint, ranked by recency and impact. Swipe for the 13 changes Darwix detects:\nPayment received or missed. New overdue amount. Renewal approaching. Document uploaded or rejected. Valuation or legal check completed. Proposal value corrected. Medical requirement raised. Claim moved a stage. Service request breached SLA. Complaint opened. New offer approved. New discrepancy. Commitment breached.\n\nThe brief tells you what changed since the last touch. Save this. 🔖\n\nIllustrative content. Product screens are synthetic recreations.\n\n#PreMeetIntelligence #FieldSales #CollectionsOps #RelationshipManagement #BFSI #AIinBanking #DigitalLending #InsurTech #FinTechIndia #ConversationalAI #DarwixAI",
     "images": [
       "posts/b3/d66c-01.jpg",
@@ -1198,8 +1198,8 @@
       "posts/b3/d66c-05.jpg",
       "posts/b3/d66c-06.jpg"
     ],
-    "media_id": null,
-    "published_at": null,
+    "media_id": "18131385271892773",
+    "published_at": "2026-11-21T07:01:33.322Z",
     "meta": {
       "pillar": "Pre Meet Intelligence",
       "topic": "13 Things a Brief Notices Before You Do",
