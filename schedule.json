@@ -1238,7 +1238,7 @@
     "id": "d67c",
     "publish_at": "2026-11-22T07:00:00.000Z",
     "approved": true,
-    "status": "draft",
+    "status": "published",
     "caption": "Each document looks fine alone. The problem is between them. 📄\n\nEight findings Retail Asset Evidence Intelligence can surface across one loan file: name variant, flat mismatch, secured amount below sanction, rate mismatch, date sequence, missing guarantee, notice vs ledger, missing annexure.\n\nThese are findings for review, not conclusions. The ARC team decides what each one means. Save this. 🔖\n\nSynthetic documents and data.\n\n#RetailAssetEvidence #ARC #AssetReconstruction #Diligence #BFSI #AIinBanking #DigitalLending #InsurTech #FinTechIndia #ConversationalAI #DarwixAI",
     "images": [
       "posts/b3/d67c-01.jpg",
@@ -1252,8 +1252,8 @@
       "posts/b3/d67c-09.jpg",
       "posts/b3/d67c-10.jpg"
     ],
-    "media_id": null,
-    "published_at": null,
+    "media_id": "17991123945074550",
+    "published_at": "2026-11-22T07:00:55.554Z",
     "meta": {
       "pillar": "Retail Asset Evidence",
       "topic": "One Loan File, Eight Discrepancies",
