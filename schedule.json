@@ -1395,7 +1395,7 @@
     "id": "d70c",
     "publish_at": "2026-11-25T07:00:00.000Z",
     "approved": true,
-    "status": "draft",
+    "status": "published",
     "caption": "One PIVC platform. Verification logic that changes with the policy. ✅\n\nSwipe to see what Video PIVC verifies, product by product: term insurance, savings and endowment, ULIPs, pension and annuity, and risk-based enhanced verification.\n\nSave this for your next PIVC review. 🔖\n\nIllustrative content. Product screens are synthetic recreations.\n\n#VideoPIVC #Insurance #LifeInsurance #Compliance #BFSI #AIinBanking #DigitalLending #InsurTech #FinTechIndia #ConversationalAI #DarwixAI",
     "images": [
       "posts/b3/d70c-01.jpg",
@@ -1406,8 +1406,8 @@
       "posts/b3/d70c-06.jpg",
       "posts/b3/d70c-07.jpg"
     ],
-    "media_id": null,
-    "published_at": null,
+    "media_id": "18134530229492066",
+    "published_at": "2026-11-25T07:01:14.562Z",
     "meta": {
       "pillar": "Video PIVC",
       "topic": "What We Verify, Product by Product",
