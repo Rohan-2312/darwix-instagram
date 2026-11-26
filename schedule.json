@@ -1740,7 +1740,7 @@
     "id": "d71c",
     "publish_at": "2026-11-26T07:00:00.000Z",
     "approved": true,
-    "status": "draft",
+    "status": "published",
     "caption": "One case view connects the form, the document and the conversation. 🧩\n\nThree journeys, one pattern. Swipe through lending PD, an insurance tele-medical call and insurance income documents. In each, source A, source B and source C land in one case view, and the finding links back to all three.\n\nFindings are for review. People decide.\n\nIllustrative content. Product screens are synthetic recreations.\n\n#EvidenceIntelligence #CreditUnderwriting #LifeInsurance #Underwriting #BFSI #AIinBanking #FinTechIndia #ConversationalAI #DarwixAI",
     "images": [
       "posts/b4/d71c-01.jpg",
@@ -1750,8 +1750,8 @@
       "posts/b4/d71c-05.jpg",
       "posts/b4/d71c-06.jpg"
     ],
-    "media_id": null,
-    "published_at": null,
+    "media_id": "17921295675523966",
+    "published_at": "2026-11-26T07:01:12.385Z",
     "meta": {
       "pillar": "Evidence Intelligence",
       "topic": "Reconcile What People Said With What Documents Show",
