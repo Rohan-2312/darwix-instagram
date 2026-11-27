@@ -1790,7 +1790,7 @@
     "id": "d72c",
     "publish_at": "2026-11-27T07:00:00.000Z",
     "approved": true,
-    "status": "draft",
+    "status": "published",
     "caption": "Diabetes disclosed? Recent surgery? Darwix knows what to ask for next. 📋\n\nThe disclosure decides the next evidence step. In Life Proposal Automation, diabetes triggers a request for the latest investigation, recent surgery triggers a discharge summary, and a missing ITR triggers a pending requirement with an upload link.\n\nSwipe for all three. Save this. 🔖\n\nIllustrative content. Product screens are synthetic recreations.\n\n#ProposalAutomation #LifeInsurance #Underwriting #InsurTech #BFSI #AIinBanking #FinTechIndia #ConversationalAI #DarwixAI",
     "images": [
       "posts/b4/d72c-01.jpg",
@@ -1800,8 +1800,8 @@
       "posts/b4/d72c-05.jpg",
       "posts/b4/d72c-06.jpg"
     ],
-    "media_id": null,
-    "published_at": null,
+    "media_id": "18148887793565345",
+    "published_at": "2026-11-27T07:00:36.162Z",
     "meta": {
       "pillar": "Proposal Automation",
       "topic": "Let the Disclosure Decide the Next Evidence Step",
