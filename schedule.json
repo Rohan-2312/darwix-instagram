@@ -1840,7 +1840,7 @@
     "id": "d73c",
     "publish_at": "2026-11-28T07:00:00.000Z",
     "approved": true,
-    "status": "draft",
+    "status": "published",
     "caption": "The alert is the summary. The evidence is always behind it. 🔎\n\nAn alert nobody can explain is an alert nobody trusts. Swipe for the 8 fields of an explainable alert: what happened, why it matters, evidence, context, severity and confidence, owner, next action, and SLA and status.\n\nSave this. 🔖\n\nIllustrative content. Product screens are synthetic recreations.\n\n#AlertIntelligence #Compliance #RiskManagement #BFSI #AIinBanking #FinTechIndia #ConversationalAI #DarwixAI",
     "images": [
       "posts/b4/d73c-01.jpg",
@@ -1850,8 +1850,8 @@
       "posts/b4/d73c-05.jpg",
       "posts/b4/d73c-06.jpg"
     ],
-    "media_id": null,
-    "published_at": null,
+    "media_id": "18010305500792510",
+    "published_at": "2026-11-28T07:00:35.208Z",
     "meta": {
       "pillar": "Alert Intelligence",
       "topic": "The 8 Fields of an Explainable Alert",
